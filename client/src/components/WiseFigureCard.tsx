@@ -1,0 +1,86 @@
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ThumbsUp } from "lucide-react";
+import { useState } from "react";
+
+interface WiseFigureCardProps {
+  id: string;
+  name: string;
+  era: string;
+  title: string;
+  bio: string;
+  votes: number;
+  imageUrl: string;
+  rank?: number;
+}
+
+export default function WiseFigureCard({ 
+  id, 
+  name, 
+  era, 
+  title, 
+  bio, 
+  votes: initialVotes, 
+  imageUrl,
+  rank
+}: WiseFigureCardProps) {
+  const [votes, setVotes] = useState(initialVotes);
+  const [hasVoted, setHasVoted] = useState(false);
+
+  const handleVote = () => {
+    if (!hasVoted) {
+      setVotes(votes + 1);
+      setHasVoted(true);
+      console.log(`Voted for ${name}`);
+    }
+  };
+
+  return (
+    <Card className="overflow-hidden hover-elevate transition-all duration-300" data-testid={`card-wise-figure-${id}`}>
+      <div className="relative">
+        {rank && (
+          <Badge className="absolute top-3 left-3 z-10 bg-primary text-primary-foreground">
+            #{rank}
+          </Badge>
+        )}
+        <div className="aspect-square overflow-hidden bg-muted">
+          <img 
+            src={imageUrl} 
+            alt={name}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+      
+      <div className="p-6 space-y-4">
+        <div>
+          <h3 className="text-2xl font-semibold mb-1" data-testid={`text-figure-name-${id}`}>{name}</h3>
+          <p className="text-sm text-muted-foreground">{era}</p>
+          <p className="text-base font-medium text-foreground/80 mt-1">{title}</p>
+        </div>
+        
+        <p className="text-sm text-muted-foreground line-clamp-3 font-serif">
+          {bio}
+        </p>
+        
+        <div className="flex items-center justify-between gap-3 pt-2">
+          <Button
+            variant={hasVoted ? "secondary" : "default"}
+            size="default"
+            onClick={handleVote}
+            disabled={hasVoted}
+            className="flex-1"
+            data-testid={`button-vote-${id}`}
+          >
+            <ThumbsUp className="mr-2 h-4 w-4" />
+            {hasVoted ? 'Voted' : 'Vote'}
+          </Button>
+          <Badge variant="outline" className="px-3 py-1.5" data-testid={`text-votes-${id}`}>
+            {votes.toLocaleString()} votes
+          </Badge>
+        </div>
+      </div>
+    </Card>
+  );
+}

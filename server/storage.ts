@@ -1,37 +1,56 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { type WiseFigure, type InsertWiseFigure, type Vote, type InsertVote } from "@shared/schema";
 import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
-
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getWiseFigures(): Promise<WiseFigure[]>;
+  getWiseFigure(id: string): Promise<WiseFigure | undefined>;
+  createWiseFigure(figure: InsertWiseFigure): Promise<WiseFigure>;
+  voteForFigure(figureId: string, sessionId: string): Promise<boolean>;
+  getVotesBySession(sessionId: string): Promise<Vote[]>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private wiseFigures: Map<string, WiseFigure>;
+  private votes: Map<string, Vote>;
 
   constructor() {
-    this.users = new Map();
+    this.wiseFigures = new Map();
+    this.votes = new Map();
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getWiseFigures(): Promise<WiseFigure[]> {
+    return Array.from(this.wiseFigures.values()).sort((a, b) => b.votes - a.votes);
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getWiseFigure(id: string): Promise<WiseFigure | undefined> {
+    return this.wiseFigures.get(id);
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async createWiseFigure(insertFigure: InsertWiseFigure): Promise<WiseFigure> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const figure: WiseFigure = { ...insertFigure, id, votes: 0 };
+    this.wiseFigures.set(id, figure);
+    return figure;
+  }
+
+  async voteForFigure(figureId: string, sessionId: string): Promise<boolean> {
+    const figure = this.wiseFigures.get(figureId);
+    if (!figure) return false;
+
+    const voteId = randomUUID();
+    const vote: Vote = { id: voteId, figureId, sessionId };
+    this.votes.set(voteId, vote);
+
+    figure.votes += 1;
+    this.wiseFigures.set(figureId, figure);
+
+    return true;
+  }
+
+  async getVotesBySession(sessionId: string): Promise<Vote[]> {
+    return Array.from(this.votes.values()).filter(
+      (vote) => vote.sessionId === sessionId,
+    );
   }
 }
 
