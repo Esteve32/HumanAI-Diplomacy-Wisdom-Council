@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,24 +18,23 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
       <nav className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="text-2xl font-bold text-primary">Green Elephant</div>
+          <div className="flex items-center gap-3">
+            <img 
+              src={logoImage} 
+              alt="Green Elephant" 
+              className="h-8 w-8 rounded-full invert"
+              data-testid="logo-greenelephant"
+            />
+            <span className="text-xs text-muted-foreground">powered by Green Elephant</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
             <Button 
               variant="ghost" 
-              onClick={() => scrollToSection('voting')}
-              data-testid="nav-vote"
+              onClick={() => scrollToSection('pathways')}
+              data-testid="nav-pathways"
             >
-              Vote
-            </Button>
-            <Button 
-              variant="ghost" 
-              onClick={() => scrollToSection('integrate')}
-              data-testid="nav-integrate"
-            >
-              Integrate
+              Pathways
             </Button>
             <Button 
               variant="ghost" 
@@ -68,18 +68,10 @@ export default function Header() {
             <Button 
               variant="ghost" 
               className="w-full justify-start"
-              onClick={() => scrollToSection('voting')}
-              data-testid="nav-mobile-vote"
+              onClick={() => scrollToSection('pathways')}
+              data-testid="nav-mobile-pathways"
             >
-              Vote
-            </Button>
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start"
-              onClick={() => scrollToSection('integrate')}
-              data-testid="nav-mobile-integrate"
-            >
-              Integrate
+              Pathways
             </Button>
             <Button 
               variant="ghost" 

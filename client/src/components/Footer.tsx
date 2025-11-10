@@ -2,22 +2,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Twitter, Linkedin, Github } from "lucide-react";
+import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Newsletter subscription:', email);
+  const handleSubscribe = () => {
+    console.log('Subscribe:', email);
     setEmail("");
   };
 
   return (
-    <footer className="bg-card border-t py-16 px-6">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-muted/30 border-t">
+      <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="md:col-span-1">
-            <h3 className="text-xl font-bold mb-4 text-primary">Green Elephant</h3>
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src={logoImage} 
+                alt="Green Elephant" 
+                className="h-10 w-10 rounded-full invert"
+              />
+              <div>
+                <div className="font-bold">Wisdom AI</div>
+                <div className="text-xs text-muted-foreground">by Green Elephant</div>
+              </div>
+            </div>
             <p className="text-sm text-muted-foreground mb-4">
               Wisdom from the past for growth in the future.
             </p>
@@ -104,21 +114,24 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Stay Connected</h4>
             <p className="text-sm text-muted-foreground mb-4">
-              Weekly wisdom insights and new figure announcements.
+              Get weekly wisdom insights in your inbox
             </p>
-            <form onSubmit={handleSubscribe} className="space-y-2">
+            <div className="flex gap-2">
               <Input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
-                data-testid="input-newsletter"
+                data-testid="input-newsletter-email"
+                className="flex-1"
               />
-              <Button type="submit" className="w-full" data-testid="button-subscribe">
+              <Button 
+                onClick={handleSubscribe}
+                data-testid="button-subscribe"
+              >
                 Subscribe
               </Button>
-            </form>
+            </div>
           </div>
         </div>
 

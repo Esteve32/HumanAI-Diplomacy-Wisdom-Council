@@ -1,8 +1,7 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import VotingSection from "@/components/VotingSection";
-import ConceptSection from "@/components/ConceptSection";
-import IntegrationGuides from "@/components/IntegrationGuides";
+import PathwaysSection from "@/components/PathwaysSection";
 import SharingSection from "@/components/SharingSection";
 import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -14,8 +13,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <VotingSection />
-      <ConceptSection />
-      <IntegrationGuides />
+      <PathwaysSection />
       <SharingSection />
       <PricingSection />
       <TestimonialsSection />
