@@ -12,7 +12,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
       
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
-        <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight">
+        <h1 className="font-display text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight">
           Ancient Wisdom<br />Modern Minds
         </h1>
         <p className="text-2xl md:text-3xl mb-12 text-white/90 font-light leading-relaxed max-w-3xl mx-auto">

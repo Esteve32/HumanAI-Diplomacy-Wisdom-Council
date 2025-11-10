@@ -39,7 +39,7 @@ const chat = await wisdom.chat({
     <section className="py-32 px-6" id="pathways">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="font-display text-5xl md:text-6xl font-bold mb-6">
             Choose Your Path
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -53,7 +53,7 @@ const chat = await wisdom.chat({
             <div className="bg-primary/10 p-6 rounded-full mb-8">
               <Sparkles className="h-12 w-12 text-primary" />
             </div>
-            <h3 className="text-3xl font-bold mb-4">
+            <h3 className="font-display text-3xl font-bold mb-4">
               Free Windows to Wisdom
             </h3>
             <p className="text-lg text-muted-foreground max-w-xl mb-8">
@@ -137,7 +137,7 @@ const chat = await wisdom.chat({
             <div className="bg-primary/10 p-6 rounded-full mb-8">
               <Blocks className="h-12 w-12 text-primary" />
             </div>
-            <h3 className="text-3xl font-bold mb-4">
+            <h3 className="font-display text-3xl font-bold mb-4">
               Workflow Lego Builders
             </h3>
             <p className="text-lg text-muted-foreground max-w-xl mb-8">
@@ -213,7 +213,7 @@ const chat = await wisdom.chat({
             <div className="bg-primary/10 p-6 rounded-full mb-8">
               <Cloud className="h-12 w-12 text-primary" />
             </div>
-            <h3 className="text-3xl font-bold mb-4">
+            <h3 className="font-display text-3xl font-bold mb-4">
               Developer Access
             </h3>
             <p className="text-lg text-muted-foreground max-w-xl mb-8">

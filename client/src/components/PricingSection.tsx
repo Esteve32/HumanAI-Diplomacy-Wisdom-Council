@@ -7,7 +7,7 @@ export default function PricingSection() {
     <section className="py-20 px-6 bg-background" id="pricing">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
             Simple, Transparent Pricing
           </h2>
           <p className="text-xl text-muted-foreground font-serif max-w-2xl mx-auto">
