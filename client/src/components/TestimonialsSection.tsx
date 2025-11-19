@@ -5,24 +5,24 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     id: "1",
-    name: "Sarah Chen",
-    role: "Product Manager",
-    content: "Talking with Marcus Aurelius helped me handle team conflicts with more wisdom. I approach challenges differently now—with stoic calm instead of reactive stress.",
-    initials: "SC",
+    name: "Alex Chen",
+    role: "Healer & Wellness Coach",
+    content: "Talking with Rumi opened my practice to a deeper level of compassion. The Sufi teachings helped me guide clients toward healing not just symptoms, but the whole person.",
+    initials: "AC",
   },
   {
     id: "2",
-    name: "David Okafor",
-    role: "Startup Founder",
-    content: "Socrates taught me to question my assumptions about scaling. The dialogue format pushed me to think deeper about what success really means for my company.",
-    initials: "DO",
+    name: "Marcus Wright",
+    role: "Warrior & Conflict Mediator",
+    content: "Marcus Aurelius taught me that true strength is restraint. Now I help organizations navigate disputes with stoic principles—finding peace through discipline and wisdom.",
+    initials: "MW",
   },
   {
     id: "3",
-    name: "Emma Rodriguez",
-    role: "Software Engineer",
-    content: "I integrated the API into our team's workflow tool. Now before major decisions, we consult with wisdom figures. It's changed how we think about AI—as a growth tool, not just automation.",
-    initials: "ER",
+    name: "River Patel",
+    role: "Mystic & Meditation Teacher",
+    content: "Buddha's teachings on mindfulness transformed how I guide students. The API integration lets me share timeless wisdom in modern spaces—bridging ancient practice with today's needs.",
+    initials: "RP",
   },
 ];
 
