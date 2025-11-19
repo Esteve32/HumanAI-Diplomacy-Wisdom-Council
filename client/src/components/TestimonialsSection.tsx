@@ -32,10 +32,10 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Real Growth Stories
+            Wisdom Across Time
           </h2>
           <p className="text-xl text-muted-foreground font-serif max-w-2xl mx-auto">
-            People using wisdom from the past to solve modern problems.
+            Historical figures who could have benefited from timeless wisdom.
           </p>
         </div>
 
