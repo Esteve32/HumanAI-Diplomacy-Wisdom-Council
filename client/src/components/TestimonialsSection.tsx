@@ -5,24 +5,24 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     id: "1",
-    name: "Alex Chen",
-    role: "Healer & Wellness Coach",
-    content: "Talking with Rumi opened my practice to a deeper level of compassion. The Sufi teachings helped me guide clients toward healing not just symptoms, but the whole person.",
-    initials: "AC",
+    name: "Florence Nightingale",
+    role: "Healer & Pioneer of Nursing",
+    content: "Through dialogue with ancient healers, I discovered that caring for the soul is as vital as tending to the body. True healing requires both compassion and systematic wisdom.",
+    initials: "FN",
   },
   {
     id: "2",
-    name: "Marcus Wright",
-    role: "Warrior & Conflict Mediator",
-    content: "Marcus Aurelius taught me that true strength is restraint. Now I help organizations navigate disputes with stoic principles—finding peace through discipline and wisdom.",
-    initials: "MW",
+    name: "Miyamoto Musashi",
+    role: "Warrior & Master Strategist",
+    content: "Conversing with Marcus Aurelius revealed that the greatest battle is within. Stoic discipline sharpened my understanding that victory comes from mastering oneself, not just the opponent.",
+    initials: "MM",
   },
   {
     id: "3",
-    name: "River Patel",
-    role: "Mystic & Meditation Teacher",
-    content: "Buddha's teachings on mindfulness transformed how I guide students. The API integration lets me share timeless wisdom in modern spaces—bridging ancient practice with today's needs.",
-    initials: "RP",
+    name: "Hildegard of Bingen",
+    role: "Mystic, Healer & Composer",
+    content: "Speaking with the wisdom keepers illuminated how divine light flows through all healing arts. My visions deepened when I learned to listen—not just to the heavens, but to ancient voices across time.",
+    initials: "HB",
   },
 ];
 
