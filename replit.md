@@ -106,7 +106,24 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (November 20, 2025)
 
-### ChatGPT URL Placeholders (COMPLETE - Latest)
+### Navigation & Ordering Improvements (COMPLETE - Latest)
+- ✅ Reverted vintage/sepia image treatment - restored original portrait images
+- ✅ Fixed ConversationsSection buttons to link to internal pages instead of external ChatGPT URLs
+- ✅ Socrates button navigates to /chat/2 (working internal chat)
+- ✅ Rumi and Marcus Aurelius buttons scroll to voting section (backend support pending)
+- ✅ "+ 50 More" button scrolls to voting section
+- ✅ Reordered voting section to prioritize running GPTs at top:
+  1. Rosa Parks
+  2. Socrates
+  3. Maria Montessori
+  4. Mary Wollstonecraft
+  5. Bell Hooks
+  6. Simone de Beauvoir
+  7. Jesus Christ
+  8. Rumi
+- 📝 Note: Changed ExternalLink icons to MessageSquare for internal navigation buttons
+
+### ChatGPT URL Placeholders (COMPLETE)
 - ✅ Set up placeholder ChatGPT URLs for all 51 wise figures
 - ✅ All figures now have `chatReady: true` and display "Chat with [Name]" buttons
 - ✅ Using Jesus ACIM GPT URL (`https://chatgpt.com/g/g-1vf04chMP-jesus-acim`) as universal placeholder
