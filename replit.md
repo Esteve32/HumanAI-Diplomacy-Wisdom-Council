@@ -51,8 +51,10 @@ Preferred communication style: Simple, everyday language.
 **Database Schema** (via Drizzle ORM):
 - **wise_figures table**: Stores historical figures with fields for id, name, era, title, bio, sample questions, ChatGPT links, vote counts, and image URLs
 - **votes table**: Tracks user votes with figure_id and session_id for vote deduplication
-- **conversations table**: Stores chat conversations with id, figureId (numeric 1-51), sessionId, and createdAt
-- **messages table**: Stores individual messages with id, conversationId, role (user/assistant), content, and createdAt
+- **conversations table**: Stores user-to-AI chat conversations with id, figureId (numeric 1-51), sessionId, and createdAt
+- **messages table**: Stores individual user/AI messages with id, conversationId, role (user/assistant), content, and createdAt
+- **aiDialogues table**: Stores AI-to-AI dialogue sessions with id, persona1Id, persona2Id, topic, sessionId, and createdAt
+- **dialogueMessages table**: Stores AI-to-AI dialogue messages with id, dialogueId, personaId, content, and createdAt
 
 **ORM**: Drizzle ORM configured for PostgreSQL with schema validation using Zod. The configuration expects a `DATABASE_URL` environment variable and outputs migrations to the `./migrations` directory.
 
@@ -103,6 +105,28 @@ Preferred communication style: Simple, everyday language.
 **Asset Management**: Static assets stored in `attached_assets` directory with generated images for each wise figure portrait.
 
 ## Recent Changes (November 20, 2025)
+
+### Visual Harmonization (COMPLETE - Latest)
+- ✅ Applied consistent vintage/sepia treatment to all 51 wise figure portraits using ImageMagick
+- ✅ Processing includes: 40% saturation reduction, 15% warm sepia overlay (#C89858), subtle vignette
+- ✅ Creates cohesive "Wisdom from the Past" aesthetic while preserving individual character
+- ✅ Documented reproduction workflow in PORTRAIT_HARMONIZATION.md
+- ✅ Maintains original unprocessed portraits in `attached_assets/generated_images_original/`
+- ✅ Harmonized portraits served from `attached_assets/generated_images/`
+
+### AI-to-AI Dialogue Feature (COMPLETE - Latest)
+- ✅ Extended schema with aiDialogues and dialogueMessages tables
+- ✅ Implemented backend API to orchestrate conversations between two AI personas
+- ✅ POST /api/ai-dialogues generates 5-exchange conversation between selected personas
+- ✅ GET /api/ai-dialogues/:id/messages retrieves full conversation history
+- ✅ Created frontend page (/ai-dialogue) with persona selection dropdowns and topic input
+- ✅ Added "Watch AI Dialogue" CTA button in hero section for easy discovery
+- ✅ Generates substantive philosophical exchanges using OpenAI GPT-5 (90-second generation time)
+- ✅ Displays alternating messages with persona avatars, names, eras, and content
+- ✅ "New Dialogue" button resets form for staging additional conversations
+- ✅ End-to-end testing passed: navigation, selection, generation, display, reset
+- ✅ Currently supports 3 personas: Simone de Beauvoir (1), Socrates (2), Jesus Christ (3)
+- ⚠️ Known limitation: Persona metadata duplicated (frontend availablePersonas vs backend personaDatabase)
 
 ### Phase 2: Chat System Implementation (COMPLETE)
 - ✅ Integrated OpenAI GPT-5 via Replit AI Integrations for persona-specific conversations
@@ -165,6 +189,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Routes
 - `/` - Homepage with all sections
-- `/chat/:figureId` - Individual chat pages for personas
+- `/chat/:figureId` - Individual user-to-AI chat pages for personas
+- `/ai-dialogue` - AI-to-AI dialogue staging and viewing page
 - `/terms` - Terms of Service (with beta disclaimers)
 - `/privacy` - Privacy Policy (with GDPR/CCPA compliance)
+
+### Future Improvements (from Architect Review)
+- Centralize persona metadata to eliminate frontend/backend duplication and ID drift
+- Enhance AI dialogue UX with progress indicators and better error handling for long-running generations
+- Expand persona roster from 3 to all 51 figures in personaDatabase
+- Consider PostgreSQL migration for production persistence
