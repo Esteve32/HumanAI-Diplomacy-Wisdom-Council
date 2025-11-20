@@ -34,7 +34,7 @@ export default function Terms() {
 
           <h2>1. Service Description</h2>
           <p>
-            Wisdom from the Past ("we", "our", or "us") is developing an AI-powered platform that enables conversations with historical wisdom figures. This service is currently in active development and beta testing.
+            Wisdom Council ("we", "our", or "us") is developing an AI-powered platform that enables conversations with historical wisdom figures. This service is currently in active development and beta testing.
           </p>
 
           <h3>1.1 Current Status</h3>
@@ -152,7 +152,7 @@ export default function Terms() {
 
           <h2>11. Governing Law</h2>
           <p>
-            These terms shall be governed by the laws of [Your Jurisdiction], without regard to conflict of law principles.
+            These terms shall be governed by applicable laws of the jurisdiction where Green Elephant operates, without regard to conflict of law principles. Any disputes will be resolved through good faith negotiation or, if necessary, binding arbitration.
           </p>
 
           <h2>12. Contact</h2>
@@ -160,14 +160,18 @@ export default function Terms() {
             Questions about these terms? Contact us at:
           </p>
           <p>
-            <strong>Email:</strong> legal@greenelephant.com (placeholder)<br />
-            <strong>Support:</strong> support@wisdomfromthepast.com (placeholder)
+            <strong>Email:</strong>{" "}
+            <a href="mailto:esteve@greenelephant.org" className="text-primary hover:underline">
+              esteve@greenelephant.org
+            </a><br />
+            <strong>Organization:</strong> Green Elephant<br />
+            <strong>Website:</strong> wisdom.greenelephant.org
           </p>
 
           <div className="bg-muted p-6 rounded-lg mt-8">
             <p className="font-semibold mb-2">Summary for Non-Lawyers:</p>
             <p className="mb-0">
-              This is a beta test. Features you see aren't all ready yet. Signing up is just joining a waitlist, not buying anything. We'll ask for payment only when we can actually deliver the service. We're not responsible if the AI says something weird. We can change or cancel things. Use common sense.
+              This is a beta test. Features you see aren't all ready yet. Signing up is just joining a waitlist, not buying anything. We'll ask for payment only when we can actually deliver the service. We're not responsible if the AI says something weird. We can change or cancel things. Use common sense. Contact esteve@greenelephant.org with any questions.
             </p>
           </div>
         </div>

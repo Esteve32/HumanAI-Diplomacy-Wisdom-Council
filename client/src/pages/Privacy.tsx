@@ -218,7 +218,7 @@ export default function Privacy() {
 
           <h2>8. International Data Transfers</h2>
           <p>
-            Our servers are located in [Server Location]. If you access our service from outside this region, your data may be transferred internationally. We ensure appropriate safeguards are in place for such transfers.
+            Our service is hosted on Replit's infrastructure with servers distributed globally. If you access our service from outside the hosting region, your data may be transferred internationally. We ensure appropriate safeguards are in place for such transfers in compliance with GDPR and CCPA requirements.
           </p>
 
           <h2>9. Changes to This Policy</h2>
@@ -236,15 +236,18 @@ export default function Privacy() {
             Questions or requests regarding your privacy?
           </p>
           <p>
-            <strong>Email:</strong> privacy@greenelephant.com (placeholder)<br />
-            <strong>Data Protection Officer:</strong> dpo@greenelephant.com (placeholder)<br />
-            <strong>Mail:</strong> Green Elephant, [Address TBD]
+            <strong>Email:</strong>{" "}
+            <a href="mailto:esteve@greenelephant.org" className="text-primary hover:underline">
+              esteve@greenelephant.org
+            </a><br />
+            <strong>Organization:</strong> Green Elephant<br />
+            <strong>Website:</strong> wisdom.greenelephant.org
           </p>
 
           <div className="bg-muted p-6 rounded-lg mt-8">
             <p className="font-semibold mb-2">Summary for Humans:</p>
             <p className="mb-0">
-              We collect your email if you sign up, and we track basic usage to improve the site. We don't sell your data to anyone. You can see, change, or delete your data anytime. We use standard security practices. We're based in [Location] but accessible globally. If you have questions, just email us.
+              We collect your email if you sign up, and we track basic usage to improve the site. We don't sell your data to anyone. You can see, change, or delete your data anytime. We use standard security practices. We're accessible globally through Replit's infrastructure. If you have questions, email esteve@greenelephant.org.
             </p>
           </div>
         </div>
