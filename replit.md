@@ -74,14 +74,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (November 20, 2025)
 
-### Suggest Persona Feature (COMPLETE - Latest)
-- ✅ Added "Suggest a New Wisdom Persona" call-to-action section
-- ✅ Positioned just before the final CTA in ConversationsSection
-- ✅ Opens pre-filled email to esteve@greenelephant.org
-- ✅ Email template includes:
-  - Subject: "New Wisdom Persona Suggestion"
-  - Pre-filled body with fields for: Name, Why valuable, What topics
-  - User can fill in details and send directly from their email client
+### UI Reorganization & Collapsible Sections (COMPLETE - Latest)
+- ✅ Moved "Suggest a New Wisdom Persona" into the Free Conversations section
+- ✅ Replaced the 4 figure buttons (Socrates, Marcus Aurelius, Rumi, + 50 More) with suggest persona form
+- ✅ Made "Workflow Integration" section collapsible to reduce visual clutter
+- ✅ Both Workflow Integration and Developer Access now use expandable/collapsible pattern
+- ✅ Email form opens pre-filled message to esteve@greenelephant.org with suggestion template
+- ✅ Cleaner, less busy visual layout for the Conversations section
 
 ### Domain & Branding Update (COMPLETE)
 - ✅ Updated domain from wisdom.greenelephant.ai to **wisdom.greenelephant.org**
