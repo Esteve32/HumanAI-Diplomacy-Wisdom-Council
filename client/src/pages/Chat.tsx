@@ -29,40 +29,54 @@ export default function Chat() {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const personasMap: Record<string, Persona> = {
-    "simone-de-beauvoir": {
-      id: 1,
-      name: "Simone de Beauvoir",
-      era: "1908-1986 CE",
-      title: "Existentialist Feminist",
-      description: "One is not born, but rather becomes, a woman. Groundbreaking philosopher who challenged gender roles."
+    "rosa-parks": {
+      id: 4,
+      name: "Rosa Parks",
+      era: "1913-2005 CE",
+      title: "Mother of the Civil Rights Movement",
+      description: "Ask about courage, civil rights, freedom, and what it means to stand firm in your convictions."
     },
     "socrates": {
       id: 2,
       name: "Socrates",
       era: "469-399 BCE",
       title: "Father of Western Philosophy",
-      description: "The unexamined life is not worth living. Known for the Socratic method of questioning."
+      description: "Ask about wisdom, the examined life, philosophy, and the power of questioning."
+    },
+    "maria-montessori": {
+      id: 6,
+      name: "Maria Montessori",
+      era: "1870-1952 CE",
+      title: "Revolutionary Educator",
+      description: "Ask about education, childhood development, learning, and the potential within every child."
+    },
+    "bell-hooks": {
+      id: 7,
+      name: "Bell Hooks",
+      era: "1952-2021 CE",
+      title: "Intersectional Feminist",
+      description: "Ask about love as practice, feminism, identity, and transformative engagement with the world."
+    },
+    "simone-de-beauvoir": {
+      id: 1,
+      name: "Simone de Beauvoir",
+      era: "1908-1986 CE",
+      title: "Existentialist Feminist",
+      description: "Ask about freedom, becoming, existence, and the philosophy of what it means to be human."
     },
     "jesus-christ": {
       id: 3,
       name: "Jesus of Nazareth",
       era: "c. 4 BCE - 30 CE",
       title: "Teacher of Compassion",
-      description: "Love your neighbor as yourself. Spiritual teacher whose message of love, forgiveness, and compassion transformed civilization."
-    },
-    "rosa-parks": {
-      id: 4,
-      name: "Rosa Parks",
-      era: "1913-2005 CE",
-      title: "Mother of the Civil Rights Movement",
-      description: "I would like to be remembered as a person who wanted to be free. Her refusal to give up her bus seat sparked the Montgomery Bus Boycott."
+      description: "Ask about love, compassion, forgiveness, faith, and spiritual transformation."
     },
     "rumi": {
       id: 5,
       name: "Rumi",
       era: "1207-1273 CE",
       title: "Sufi Mystic & Poet",
-      description: "The wound is the place where light enters you. Persian poet of love, spirituality, and unity."
+      description: "Ask about love, spirituality, unity, poetry, and the mystical path of the soul."
     }
   };
 
@@ -157,8 +171,14 @@ export default function Chat() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background">
-      <header className="border-b bg-card">
+    <div className="flex flex-col h-screen bg-background relative">
+      {/* Fireplace background */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+        backgroundImage: `radial-gradient(ellipse at 20% 80%, rgba(255, 140, 0, 0.3) 0%, transparent 50%),
+                          radial-gradient(ellipse at 80% 20%, rgba(255, 69, 0, 0.2) 0%, transparent 50%)`,
+      }} />
+      
+      <header className="border-b bg-card/95 backdrop-blur relative z-10">
         <div className="container mx-auto px-4 py-4 flex items-center gap-4">
           <Link href="/">
             <Button variant="ghost" size="icon" data-testid="button-back">
@@ -176,13 +196,26 @@ export default function Chat() {
         </div>
       </header>
 
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden relative z-20">
         <div className="container mx-auto px-4 h-full py-6">
-          <Card className="h-full flex flex-col">
+          <Card className="h-full flex flex-col shadow-lg">
             <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
               {isLoadingMessages ? (
-                <div className="flex items-center justify-center h-full">
-                  <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="space-y-6 flex flex-col items-center">
+                    <div className="relative w-24 h-24">
+                      <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
+                      <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse'}} />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-4xl opacity-20">🔥</div>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-muted-foreground">
+                        Stoking the fires of wisdom...
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ) : messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center px-4">
@@ -192,10 +225,10 @@ export default function Chat() {
                     </AvatarFallback>
                   </Avatar>
                   <h2 className="text-2xl font-bold mb-2 font-heading">
-                    Welcome to your fireside chat
+                    A Fireside Chat with {persona.name}
                   </h2>
                   <p className="text-muted-foreground max-w-md">
-                    Ask {persona.name} anything about {persona.description.toLowerCase()}
+                    {persona.description}
                   </p>
                 </div>
               ) : (

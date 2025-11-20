@@ -71,8 +71,14 @@ export default function AiDialogue() {
   const getPersonaById = (id: number) => availablePersonas.find(p => p.id === id);
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
+    <div className="min-h-screen bg-background relative">
+      {/* Fireplace background glow */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+        backgroundImage: `radial-gradient(ellipse at 20% 80%, rgba(255, 140, 0, 0.3) 0%, transparent 50%),
+                          radial-gradient(ellipse at 80% 20%, rgba(255, 69, 0, 0.2) 0%, transparent 50%)`,
+      }} />
+      
+      <header className="border-b bg-card/95 backdrop-blur relative z-10">
         <div className="container mx-auto px-4 py-4 flex items-center gap-4">
           <Link href="/">
             <Button variant="ghost" size="icon" data-testid="button-back-home">
@@ -82,19 +88,19 @@ export default function AiDialogue() {
           <div className="flex-1">
             <h1 className="text-2xl font-bold font-heading flex items-center gap-2">
               <Sparkles className="h-6 w-6" />
-              AI Dialogue
+              Fireside Dialogue
             </h1>
             <p className="text-sm text-muted-foreground">
-              Watch two wise figures converse
+              Watch two wise figures engage in conversation
             </p>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-8 max-w-4xl relative z-20">
         {!dialogueId ? (
-          <Card className="p-8">
-            <h2 className="text-2xl font-bold mb-6 font-heading">Stage a Conversation</h2>
+          <Card className="p-8 shadow-lg">
+            <h2 className="text-2xl font-bold mb-6 font-heading">Stage a Fireside Conversation</h2>
             
             <div className="space-y-6">
               <div>
@@ -177,13 +183,22 @@ export default function AiDialogue() {
             </Card>
 
             {isLoadingMessages || isCreatingDialogue ? (
-              <Card className="p-12">
-                <ThinkingAnimation />
-                <p className="text-center text-muted-foreground mt-4">
-                  Generating a profound conversation between {persona1?.name} and {persona2?.name}...
-                  <br />
-                  <span className="text-sm">(This may take 30-60 seconds)</span>
-                </p>
+              <Card className="p-12 shadow-lg">
+                <div className="flex flex-col items-center justify-center space-y-6">
+                  <div className="relative w-24 h-24">
+                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
+                    <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse'}} />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-4xl opacity-20">🔥</div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-muted-foreground">
+                      Kindling a conversation between {persona1?.name} and {persona2?.name}...
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-2">(This may take 30-60 seconds)</p>
+                  </div>
+                </div>
               </Card>
             ) : (
               <div className="space-y-6">
@@ -192,7 +207,7 @@ export default function AiDialogue() {
                   if (!speaker) return null;
 
                   return (
-                    <Card key={message.id} className="p-6" data-testid={`dialogue-message-${index}`}>
+                    <Card key={message.id} className="p-6 shadow-md hover:shadow-lg transition-shadow" data-testid={`dialogue-message-${index}`}>
                       <div className="flex gap-4">
                         <Avatar className="h-12 w-12 flex-shrink-0">
                           <AvatarFallback className="text-lg">
