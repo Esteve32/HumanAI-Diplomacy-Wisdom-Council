@@ -517,7 +517,7 @@ const wiseFigures = [
     votes: 23456,
     imageUrl: jesusImage,
     chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-JESUS-ID",
+    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
   },
   {
     id: "sun-tzu",

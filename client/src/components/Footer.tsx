@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Twitter, Linkedin, Github } from "lucide-react";
+import { Link } from "wouter";
 import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
 
 export default function Footer() {
@@ -137,15 +138,15 @@ export default function Footer() {
 
         <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <div>
-            © 2024 Green Elephant. All rights reserved.
+            © 2025 Green Elephant. All rights reserved.
           </div>
           <div className="flex gap-6">
-            <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-privacy">
+            <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-privacy">
               Privacy Policy
-            </button>
-            <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-terms">
+            </Link>
+            <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-terms">
               Terms of Service
-            </button>
+            </Link>
             <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-contact">
               Contact
             </button>
