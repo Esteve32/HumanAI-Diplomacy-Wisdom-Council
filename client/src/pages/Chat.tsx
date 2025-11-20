@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Loader2, Send, ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
+import ThinkingAnimation from "@/components/ThinkingAnimation";
 import type { Message } from "@shared/schema";
 
 interface Persona {
@@ -217,15 +218,8 @@ export default function Chat() {
                     </div>
                   ))}
                   {isSendingMessage && (
-                    <div className="flex gap-4">
-                      <Avatar className="h-10 w-10 flex-shrink-0">
-                        <AvatarFallback>
-                          {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="rounded-lg px-4 py-3 bg-muted">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      </div>
+                    <div className="flex justify-center w-full">
+                      <ThinkingAnimation />
                     </div>
                   )}
                 </div>
