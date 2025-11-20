@@ -213,10 +213,13 @@ export default function Chat() {
                     </div>
                     <div className="text-center max-w-md">
                       <p className="text-base font-medium text-foreground mb-2">
-                        Bridging {Math.abs(new Date().getFullYear() - parseInt(persona.era.match(/\d+/)?.[0] || "0"))} years of space and time...
+                        Temporal bridge warming...
                       </p>
-                      <p className="text-xs text-muted-foreground">
-                        Warming the fireside for your conversation across the centuries. This might take a moment! ✨
+                      <p className="text-sm text-muted-foreground mb-1">
+                        Preparing your fireside conversation with {persona.name}
+                      </p>
+                      <p className="text-xs text-muted-foreground italic">
+                        ✨ Bridging centuries takes a moment. Your patience transcends time!
                       </p>
                     </div>
                   </div>

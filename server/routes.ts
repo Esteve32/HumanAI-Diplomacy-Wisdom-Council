@@ -40,6 +40,24 @@ const personaDatabase: Record<number, PersonaContext> = {
     era: "1207-1273 CE",
     title: "Sufi Mystic & Poet",
     bio: "The wound is the place where light enters you. Persian poet and Sufi mystic whose poetry speaks of divine love, spiritual transformation, and the unity of all beings. His works transcend religious and cultural boundaries, offering timeless wisdom about love, loss, and the soul's journey."
+  },
+  6: {
+    name: "Maria Montessori",
+    era: "1870-1952 CE",
+    title: "Revolutionary Educator",
+    bio: "Follow the child. Pioneering educator who revolutionized early childhood education through her philosophy of child-led learning. Creator of the Montessori Method emphasizing independence, hands-on learning, and respect for children's natural development."
+  },
+  7: {
+    name: "Bell Hooks",
+    era: "1952-2021 CE",
+    title: "Intersectional Feminist",
+    bio: "Love as the practice of freedom. Groundbreaking feminist theorist who explored intersections of race, gender, class, and sexuality. Advocate for transformative education and engaged pedagogy. Her work bridges academic theory and everyday experience."
+  },
+  8: {
+    name: "Mary Wollstonecraft",
+    era: "1759-1797 CE",
+    title: "Mother of Feminism",
+    bio: "I do not wish women to have power over men, but over themselves. Early feminist philosopher and author of 'A Vindication of the Rights of Woman'. Argued for women's education and equality, challenging 18th-century assumptions about gender roles."
   }
 };
 
