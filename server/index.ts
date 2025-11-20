@@ -48,7 +48,12 @@ app.use((req, res, next) => {
 
 (async () => {
   try {
+    console.log("Initializing server...");
+    console.log("NODE_ENV:", process.env.NODE_ENV);
+    console.log("PORT:", process.env.PORT);
+    
     const server = await registerRoutes(app);
+    console.log("Routes registered successfully");
 
     // importantly only setup vite in development and after
     // setting up all the other routes so the catch-all route
@@ -56,10 +61,12 @@ app.use((req, res, next) => {
     const isProduction = process.env.NODE_ENV === "production";
     
     if (!isProduction) {
+      console.log("Setting up Vite for development...");
       await setupVite(app, server);
     } else {
-      log("Starting in production mode");
+      console.log("Starting in production mode, serving static files...");
       serveStatic(app);
+      console.log("Static file serving configured");
     }
 
     // Error handling middleware should be last
@@ -77,12 +84,26 @@ app.use((req, res, next) => {
     // It is the only port that is not firewalled.
     const port = parseInt(process.env.PORT || '5000', 10);
     
+    console.log(`Attempting to listen on port ${port} with host 0.0.0.0...`);
+    
     server.listen(port, "0.0.0.0", () => {
-      log(`Server started successfully on port ${port} (${isProduction ? 'production' : 'development'} mode)`);
+      const msg = `Server started successfully on port ${port} (${isProduction ? 'production' : 'development'} mode)`;
+      console.log(msg);
+      log(msg);
+    });
+
+    server.on('error', (error: any) => {
+      console.error("Server error event:", error);
+      if (error.code === 'EADDRINUSE') {
+        console.error(`Port ${port} is already in use`);
+      }
+      process.exit(1);
     });
   } catch (error) {
-    console.error("Failed to start server:", error);
+    console.error("FATAL: Failed to start server");
+    console.error("Error:", error);
     if (error instanceof Error) {
+      console.error("Error message:", error.message);
       console.error("Error stack:", error.stack);
     }
     process.exit(1);
