@@ -32,10 +32,10 @@ export default function Header() {
             <Button 
               variant="ghost"
               className="min-h-11"
-              onClick={() => scrollToSection('pathways')}
-              data-testid="nav-pathways"
+              onClick={() => scrollToSection('conversations')}
+              data-testid="nav-conversations"
             >
-              Pathways
+              Conversations
             </Button>
             <Button 
               variant="ghost"
@@ -71,10 +71,10 @@ export default function Header() {
             <Button 
               variant="ghost" 
               className="w-full justify-start min-h-11"
-              onClick={() => scrollToSection('pathways')}
-              data-testid="nav-mobile-pathways"
+              onClick={() => scrollToSection('conversations')}
+              data-testid="nav-mobile-conversations"
             >
-              Pathways
+              Conversations
             </Button>
             <Button 
               variant="ghost" 

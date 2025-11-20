@@ -16,20 +16,20 @@ export default function HeroSection() {
           Ancient Wisdom<br />Modern Minds
         </h1>
         <p className="text-2xl md:text-3xl mb-12 text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
-          Conversations with history's greatest minds
+          Have conversations with AI embodiments of history's wisest figures—from Socrates to Simone de Beauvoir
         </p>
         <Button 
           size="lg" 
           className="text-xl px-12 py-8 bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
           data-testid="button-start-journey"
           onClick={() => {
-            const element = document.getElementById('pathways');
+            const element = document.getElementById('conversations');
             if (element) {
               element.scrollIntoView({ behavior: 'smooth' });
             }
           }}
         >
-          Begin Your Journey
+          Start a Conversation
           <ArrowRight className="ml-3 h-6 w-6" />
         </Button>
       </div>
