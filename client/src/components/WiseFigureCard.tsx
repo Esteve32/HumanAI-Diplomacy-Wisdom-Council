@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ThumbsUp, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import { useLocation } from "wouter";
 import {
   Tooltip,
   TooltipContent,
@@ -36,6 +37,7 @@ export default function WiseFigureCard({
 }: WiseFigureCardProps) {
   const [votes, setVotes] = useState(initialVotes);
   const [hasVoted, setHasVoted] = useState(false);
+  const [, setLocation] = useLocation();
 
   const handleVote = () => {
     if (!hasVoted) {
@@ -46,8 +48,8 @@ export default function WiseFigureCard({
   };
 
   const handleChat = () => {
-    if (chatReady && chatUrl) {
-      window.open(chatUrl, '_blank', 'noopener,noreferrer');
+    if (chatReady) {
+      setLocation(`/chat/${id}`);
     }
   };
 
