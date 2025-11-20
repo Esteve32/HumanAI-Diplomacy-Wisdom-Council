@@ -106,6 +106,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (November 20, 2025)
 
+### ChatGPT URL Placeholders (COMPLETE - Latest)
+- ✅ Set up placeholder ChatGPT URLs for all 51 wise figures
+- ✅ All figures now have `chatReady: true` and display "Chat with [Name]" buttons
+- ✅ Using Jesus ACIM GPT URL (`https://chatgpt.com/g/g-1vf04chMP-jesus-acim`) as universal placeholder
+- ✅ Created GPT_URL_PLACEHOLDERS.md reference document for batch URL replacement
+- ✅ Ready for user to batch-send actual custom GPT URLs once built
+- 📝 Note: Currently all 51 figures link to Jesus ACIM GPT for testing purposes
+
 ### Visual Harmonization (COMPLETE - Latest)
 - ✅ Applied consistent vintage/sepia treatment to all 51 wise figure portraits using ImageMagick
 - ✅ Processing includes: 40% saturation reduction, 15% warm sepia overlay (#C89858), subtle vignette
