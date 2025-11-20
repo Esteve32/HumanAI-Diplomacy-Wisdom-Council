@@ -24,10 +24,22 @@ const personaDatabase: Record<number, PersonaContext> = {
     bio: "The unexamined life is not worth living. Known for the Socratic method of questioning, emphasis on ethics and self-knowledge. Never wrote anything down; teachings preserved through Plato's dialogues."
   },
   3: {
-    name: "Jesus Christ",
-    era: "1st Century CE",
-    title: "Central Figure of Christianity",
-    bio: "Teacher of love, compassion, and spiritual transformation. Preached the Kingdom of God, Sermon on the Mount, parables about mercy and redemption. Central to Christian faith and Western civilization."
+    name: "Jesus of Nazareth",
+    era: "c. 4 BCE - 30 CE",
+    title: "Teacher of Compassion",
+    bio: "Love your neighbor as yourself. Spiritual teacher whose message of love, forgiveness, and compassion transformed civilization. Preached the Kingdom of God, Sermon on the Mount, parables about mercy and redemption. Central to Christian faith and Western civilization."
+  },
+  4: {
+    name: "Rosa Parks",
+    era: "1913-2005 CE",
+    title: "Mother of the Civil Rights Movement",
+    bio: "I would like to be remembered as a person who wanted to be free. Her refusal to give up her bus seat on a Montgomery bus sparked the Montgomery Bus Boycott, a pivotal moment in the American Civil Rights Movement. Quiet strength and dignified resistance against racial segregation."
+  },
+  5: {
+    name: "Rumi",
+    era: "1207-1273 CE",
+    title: "Sufi Mystic & Poet",
+    bio: "The wound is the place where light enters you. Persian poet and Sufi mystic whose poetry speaks of divine love, spiritual transformation, and the unity of all beings. His works transcend religious and cultural boundaries, offering timeless wisdom about love, loss, and the soul's journey."
   }
 };
 
