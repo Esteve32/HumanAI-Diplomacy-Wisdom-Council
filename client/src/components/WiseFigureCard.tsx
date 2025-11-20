@@ -1,8 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ThumbsUp } from "lucide-react";
+import { ThumbsUp, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface WiseFigureCardProps {
   id: string;
@@ -13,6 +18,8 @@ interface WiseFigureCardProps {
   votes: number;
   imageUrl: string;
   rank?: number;
+  chatReady?: boolean;
+  chatUrl?: string;
 }
 
 export default function WiseFigureCard({ 
@@ -23,7 +30,9 @@ export default function WiseFigureCard({
   bio, 
   votes: initialVotes, 
   imageUrl,
-  rank
+  rank,
+  chatReady = false,
+  chatUrl
 }: WiseFigureCardProps) {
   const [votes, setVotes] = useState(initialVotes);
   const [hasVoted, setHasVoted] = useState(false);
@@ -33,6 +42,12 @@ export default function WiseFigureCard({
       setVotes(votes + 1);
       setHasVoted(true);
       console.log(`Voted for ${name}`);
+    }
+  };
+
+  const handleChat = () => {
+    if (chatReady && chatUrl) {
+      window.open(chatUrl, '_blank');
     }
   };
 
@@ -64,21 +79,43 @@ export default function WiseFigureCard({
           {bio}
         </p>
         
-        <div className="flex items-center justify-between gap-3 pt-2">
-          <Button
-            variant={hasVoted ? "secondary" : "default"}
-            size="default"
-            onClick={handleVote}
-            disabled={hasVoted}
-            className="flex-1 min-h-11"
-            data-testid={`button-vote-${id}`}
-          >
-            <ThumbsUp className="mr-2 h-4 w-4" />
-            {hasVoted ? 'Voted' : 'Vote'}
-          </Button>
-          <Badge variant="outline" className="px-3 py-1.5" data-testid={`text-votes-${id}`}>
-            {votes.toLocaleString()} votes
-          </Badge>
+        <div className="space-y-3 pt-2">
+          <div className="flex items-center gap-2">
+            <Button
+              variant={hasVoted ? "secondary" : "default"}
+              size="default"
+              onClick={handleVote}
+              disabled={hasVoted}
+              className="flex-1 min-h-11"
+              data-testid={`button-vote-${id}`}
+            >
+              <ThumbsUp className="mr-2 h-4 w-4" />
+              {hasVoted ? 'Voted' : 'Vote'}
+            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={chatReady ? "default" : "outline"}
+                  size="default"
+                  onClick={handleChat}
+                  disabled={!chatReady}
+                  className="flex-1 min-h-11"
+                  data-testid={`button-chat-${id}`}
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Chat
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{chatReady ? `Start a conversation with ${name}` : 'GPT not yet ready'}</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <div className="flex items-center justify-center">
+            <Badge variant="outline" className="px-3 py-1.5" data-testid={`text-votes-${id}`}>
+              {votes.toLocaleString()} votes
+            </Badge>
+          </div>
         </div>
       </div>
     </Card>
