@@ -75,6 +75,7 @@ const wiseFigures = [
     votes: 17234,
     imageUrl: socratesImage,
     chatReady: true,
+    chatUrl: "https://chatgpt.com/g/g-691f906a64888191aa0a6050f7bd862d-socrates",
   },
   {
     id: "maria-montessori",
@@ -84,7 +85,8 @@ const wiseFigures = [
     bio: "The child is both a hope and a promise. First Italian female physician who revolutionized early childhood education.",
     votes: 4321,
     imageUrl: montessoriImage,
-    chatReady: false,
+    chatReady: true,
+    chatUrl: "https://chatgpt.com/g/g-691f985c844c8191ae09982635082266-maria-montessori",
   },
   {
     id: "mary-wollstonecraft",
@@ -104,7 +106,8 @@ const wiseFigures = [
     bio: "Love as the practice of freedom. Scholar who explored race, gender, and class in transformative ways.",
     votes: 18765,
     imageUrl: bellImage,
-    chatReady: false,
+    chatReady: true,
+    chatUrl: "https://chatgpt.com/g/g-691f97131c908191a64b36bc5d0c0181-bell-hooks",
   },
   {
     id: "simone-de-beauvoir",
