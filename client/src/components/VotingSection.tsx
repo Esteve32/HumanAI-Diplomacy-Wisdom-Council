@@ -48,6 +48,12 @@ import platoImage from "@assets/generated_images/Plato_Greek_philosopher_3a2dd69
 import zoraImage from "@assets/generated_images/Zora_Neale_Hurston_anthropologist_434fa109.png";
 import avicennaImage from "@assets/generated_images/Avicenna_Persian_polymath_physician_c6075135.png";
 import dorothyImage from "@assets/generated_images/Dorothy_Day_social_activist_d7a628f2.png";
+import sunTzuImage from "@assets/generated_images/sun_tzu_wise_strategist.png";
+import jesusImage from "@assets/generated_images/jesus_christ_spiritual_teacher.png";
+import pythagorasImage from "@assets/generated_images/pythagoras_mathematician_philosopher_portrait.png";
+import mosesImage from "@assets/generated_images/moses_hebrew_prophet_portrait.png";
+import krishnaImage from "@assets/generated_images/krishna_hindu_teacher_portrait.png";
+import hermesImage from "@assets/generated_images/hermes_trismegistus_wisdom_keeper.png";
 
 const wiseFigures = [
   {
@@ -454,6 +460,60 @@ const wiseFigures = [
     bio: "We have all known the long loneliness. Journalist and activist who founded the Catholic Worker movement to serve the poor.",
     votes: 1876,
     imageUrl: dorothyImage,
+  },
+  {
+    id: "jesus-christ",
+    name: "Jesus Christ",
+    era: "c. 4 BCE - 30 CE",
+    title: "Teacher of Compassion",
+    bio: "Love your neighbor as yourself. Spiritual teacher whose message of love, forgiveness, and compassion transformed civilization.",
+    votes: 23456,
+    imageUrl: jesusImage,
+  },
+  {
+    id: "sun-tzu",
+    name: "Sun Tzu",
+    era: "544-496 BCE",
+    title: "Master Strategist",
+    bio: "Supreme excellence consists in breaking the enemy's resistance without fighting. Author of The Art of War, timeless wisdom on strategy.",
+    votes: 11987,
+    imageUrl: sunTzuImage,
+  },
+  {
+    id: "pythagoras",
+    name: "Pythagoras",
+    era: "c. 570-495 BCE",
+    title: "Sacred Mathematician",
+    bio: "Number rules the universe. Mystic philosopher who discovered mathematical harmony in music, geometry, and cosmos.",
+    votes: 8901,
+    imageUrl: pythagorasImage,
+  },
+  {
+    id: "moses",
+    name: "Moses",
+    era: "c. 13th century BCE",
+    title: "Lawgiver & Prophet",
+    bio: "Let my people go. Led the Israelites from slavery to freedom and received the Ten Commandments on Mount Sinai.",
+    votes: 16234,
+    imageUrl: mosesImage,
+  },
+  {
+    id: "krishna",
+    name: "Krishna",
+    era: "c. 3228-3102 BCE (traditional)",
+    title: "Divine Teacher",
+    bio: "Perform your duty, but do not be attached to the fruits. Central figure of the Bhagavad Gita teaching dharma and devotion.",
+    votes: 14987,
+    imageUrl: krishnaImage,
+  },
+  {
+    id: "hermes-trismegistus",
+    name: "Hermes Trismegistus",
+    era: "Legendary (Hellenistic period)",
+    title: "Thrice-Great Sage",
+    bio: "As above, so below. Legendary wisdom keeper combining Egyptian and Greek mysteries, father of alchemy and hermetic philosophy.",
+    votes: 7123,
+    imageUrl: hermesImage,
   },
 ];
 
