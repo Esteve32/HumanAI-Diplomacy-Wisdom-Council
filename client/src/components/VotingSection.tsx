@@ -12,16 +12,106 @@ import mayaImage from "@assets/generated_images/Maya_Angelou_portrait_illustrati
 import buddhaImage from "@assets/generated_images/Buddha_meditation_portrait_illustration_881a332f.png";
 import aristotleImage from "@assets/generated_images/Aristotle_philosopher_scholar_portrait_9d407529.png";
 import jungImage from "@assets/generated_images/Carl_Jung_psychologist_portrait_fc93a5bd.png";
+import simoneImage from "@assets/generated_images/Simone_de_Beauvoir_feminist_philosopher_5b8dce46.png";
+import virginiaImage from "@assets/generated_images/Virginia_Woolf_modernist_writer_9807c872.png";
+import maryWImage from "@assets/generated_images/Mary_Wollstonecraft_feminist_philosopher_e6032844.png";
+import bellImage from "@assets/generated_images/bell_hooks_feminist_scholar_8736b74d.png";
+import susanImage from "@assets/generated_images/Susan_B_Anthony_suffragist_59ba3490.png";
+import sojournerImage from "@assets/generated_images/Sojourner_Truth_abolitionist_activist_a5bd86a7.png";
+import fridaImage from "@assets/generated_images/Frida_Kahlo_Mexican_artist_c943a294.png";
+import marieImage from "@assets/generated_images/Marie_Curie_pioneering_scientist_83ca4bc2.png";
+import eleanorImage from "@assets/generated_images/Eleanor_Roosevelt_diplomat_activist_52f8df33.png";
+import joanImage from "@assets/generated_images/Joan_of_Arc_medieval_warrior_ae1e0b37.png";
+import harrietImage from "@assets/generated_images/Harriet_Tubman_freedom_fighter_f372d046.png";
+import rosaImage from "@assets/generated_images/Rosa_Parks_civil_rights_76d99a23.png";
+import teresaAvilaImage from "@assets/generated_images/Teresa_of_Ávila_mystic_700a6992.png";
+import audreImage from "@assets/generated_images/Audre_Lorde_feminist_poet_25f4fc76.png";
+import adaImage from "@assets/generated_images/Ada_Lovelace_mathematician_pioneer_3411dd60.png";
+import gandhiImage from "@assets/generated_images/Mahatma_Gandhi_independence_leader_6cebe43e.png";
+import leonardoImage from "@assets/generated_images/Leonardo_da_Vinci_Renaissance_genius_d0a068d8.png";
+import einsteinImage from "@assets/generated_images/Albert_Einstein_physicist_e3f0cb92.png";
+import mandelaImage from "@assets/generated_images/Nelson_Mandela_leader_activist_3ed85815.png";
+import montessoriImage from "@assets/generated_images/Maria_Montessori_educator_bde24972.png";
+import cleopatraImage from "@assets/generated_images/Cleopatra_Egyptian_pharaoh_queen_633c70d7.png";
+import malcolmImage from "@assets/generated_images/Malcolm_X_civil_rights_a0b99844.png";
+import emilyImage from "@assets/generated_images/Emily_Dickinson_poet_57183bfc.png";
+import teslaImage from "@assets/generated_images/Nikola_Tesla_inventor_genius_86e06b7d.png";
+import motherTeresaImage from "@assets/generated_images/Mother_Teresa_humanitarian_nun_e663a788.png";
+import douglassImage from "@assets/generated_images/Frederick_Douglass_abolitionist_orator_224ed171.png";
+import austenImage from "@assets/generated_images/Jane_Austen_novelist_36b95ecd.png";
+import vanGoghImage from "@assets/generated_images/Vincent_van_Gogh_painter_3e49748e.png";
+import hypatiaImage from "@assets/generated_images/Hypatia_philosopher_mathematician_7fc8c35b.png";
+import mlkImage from "@assets/generated_images/Martin_Luther_King_Jr_451f5e9f.png";
+import arendtImage from "@assets/generated_images/Hannah_Arendt_political_theorist_471a9a13.png";
+import sapphoImage from "@assets/generated_images/Sappho_ancient_Greek_poet_c1aac237.png";
+import platoImage from "@assets/generated_images/Plato_Greek_philosopher_3a2dd694.png";
+import zoraImage from "@assets/generated_images/Zora_Neale_Hurston_anthropologist_434fa109.png";
+import avicennaImage from "@assets/generated_images/Avicenna_Persian_polymath_physician_c6075135.png";
+import dorothyImage from "@assets/generated_images/Dorothy_Day_social_activist_d7a628f2.png";
 
 const wiseFigures = [
+  {
+    id: "simone-de-beauvoir",
+    name: "Simone de Beauvoir",
+    era: "1908-1986 CE",
+    title: "Existentialist Feminist",
+    bio: "One is not born, but rather becomes, a woman. Groundbreaking philosopher who challenged gender roles.",
+    votes: 18456,
+    imageUrl: simoneImage,
+  },
+  {
+    id: "virginia-woolf",
+    name: "Virginia Woolf",
+    era: "1882-1941 CE",
+    title: "Modernist Literary Icon",
+    bio: "A woman must have money and a room of her own. Pioneering feminist writer and stream-of-consciousness novelist.",
+    votes: 17892,
+    imageUrl: virginiaImage,
+  },
+  {
+    id: "mary-wollstonecraft",
+    name: "Mary Wollstonecraft",
+    era: "1759-1797 CE",
+    title: "Mother of Feminism",
+    bio: "Author of A Vindication of the Rights of Woman. Early advocate for women's education and equality.",
+    votes: 16754,
+    imageUrl: maryWImage,
+  },
+  {
+    id: "bell-hooks",
+    name: "bell hooks",
+    era: "1952-2021 CE",
+    title: "Intersectional Feminist",
+    bio: "Love as the practice of freedom. Scholar who explored race, gender, and class in transformative ways.",
+    votes: 16234,
+    imageUrl: bellImage,
+  },
   {
     id: "socrates",
     name: "Socrates",
     era: "469-399 BCE",
     title: "Father of Western Philosophy",
     bio: "The examined life is the only life worth living. Known for the Socratic method of questioning.",
-    votes: 15234,
+    votes: 15934,
     imageUrl: socratesImage,
+  },
+  {
+    id: "harriet-tubman",
+    name: "Harriet Tubman",
+    era: "1822-1913 CE",
+    title: "Freedom Fighter & Conductor",
+    bio: "I freed a thousand slaves. Led hundreds to freedom via the Underground Railroad with unwavering courage.",
+    votes: 15678,
+    imageUrl: harrietImage,
+  },
+  {
+    id: "marie-curie",
+    name: "Marie Curie",
+    era: "1867-1934 CE",
+    title: "Pioneer of Radioactivity",
+    bio: "First woman to win a Nobel Prize, and the only person to win in two sciences. Dedicated her life to discovery.",
+    votes: 15234,
+    imageUrl: marieImage,
   },
   {
     id: "marcus-aurelius",
@@ -33,6 +123,33 @@ const wiseFigures = [
     imageUrl: marcusImage,
   },
   {
+    id: "joan-of-arc",
+    name: "Joan of Arc",
+    era: "1412-1431 CE",
+    title: "Warrior Saint & Visionary",
+    bio: "I am not afraid. I was born to do this. Led French armies to victory while guided by divine visions.",
+    votes: 14567,
+    imageUrl: joanImage,
+  },
+  {
+    id: "martin-luther-king",
+    name: "Martin Luther King Jr.",
+    era: "1929-1968 CE",
+    title: "Civil Rights Prophet",
+    bio: "I have a dream. Nonviolent leader who transformed America through moral courage and powerful oratory.",
+    votes: 14234,
+    imageUrl: mlkImage,
+  },
+  {
+    id: "susan-b-anthony",
+    name: "Susan B. Anthony",
+    era: "1820-1906 CE",
+    title: "Suffragist Champion",
+    bio: "Failure is impossible. Dedicated her life to women's right to vote and gender equality in America.",
+    votes: 13987,
+    imageUrl: susanImage,
+  },
+  {
     id: "lao-tzu",
     name: "Lao Tzu",
     era: "6th century BCE",
@@ -40,6 +157,15 @@ const wiseFigures = [
     bio: "Author of the Tao Te Ching. Taught the way of water, effortless action, and natural harmony.",
     votes: 13756,
     imageUrl: laoTzuImage,
+  },
+  {
+    id: "eleanor-roosevelt",
+    name: "Eleanor Roosevelt",
+    era: "1884-1962 CE",
+    title: "Humanitarian Diplomat",
+    bio: "No one can make you feel inferior without your consent. Championed human rights and social justice globally.",
+    votes: 13456,
+    imageUrl: eleanorImage,
   },
   {
     id: "rumi",
@@ -51,6 +177,42 @@ const wiseFigures = [
     imageUrl: rumiImage,
   },
   {
+    id: "rosa-parks",
+    name: "Rosa Parks",
+    era: "1913-2005 CE",
+    title: "Mother of Civil Rights",
+    bio: "I would like to be remembered as a person who wanted to be free. Her quiet defiance sparked a movement.",
+    votes: 12765,
+    imageUrl: rosaImage,
+  },
+  {
+    id: "frida-kahlo",
+    name: "Frida Kahlo",
+    era: "1907-1954 CE",
+    title: "Surrealist Artist Icon",
+    bio: "I paint myself because I am so often alone. Mexican artist who transformed pain into powerful self-expression.",
+    votes: 12543,
+    imageUrl: fridaImage,
+  },
+  {
+    id: "mahatma-gandhi",
+    name: "Mahatma Gandhi",
+    era: "1869-1948 CE",
+    title: "Apostle of Nonviolence",
+    bio: "Be the change you wish to see in the world. Led India to independence through peaceful resistance.",
+    votes: 12234,
+    imageUrl: gandhiImage,
+  },
+  {
+    id: "maya-angelou",
+    name: "Maya Angelou",
+    era: "1928-2014 CE",
+    title: "Voice of Resilience",
+    bio: "Still I rise. Poet, author, and civil rights activist. Known for her powerful words on identity and perseverance.",
+    votes: 11923,
+    imageUrl: mayaImage,
+  },
+  {
     id: "confucius",
     name: "Confucius",
     era: "551-479 BCE",
@@ -60,13 +222,40 @@ const wiseFigures = [
     imageUrl: confuciusImage,
   },
   {
-    id: "maya-angelou",
-    name: "Maya Angelou",
-    era: "1928-2014 CE",
-    title: "Voice of Resilience",
-    bio: "Poet, author, and civil rights activist. Known for her powerful words on identity and perseverance.",
-    votes: 10923,
-    imageUrl: mayaImage,
+    id: "sojourner-truth",
+    name: "Sojourner Truth",
+    era: "1797-1883 CE",
+    title: "Abolitionist Orator",
+    bio: "Ain't I a woman? Escaped slavery to become a powerful voice for abolition and women's rights.",
+    votes: 11432,
+    imageUrl: sojournerImage,
+  },
+  {
+    id: "leonardo-da-vinci",
+    name: "Leonardo da Vinci",
+    era: "1452-1519 CE",
+    title: "Renaissance Polymath",
+    bio: "Learning never exhausts the mind. Artist, inventor, scientist—the ultimate Renaissance visionary.",
+    votes: 11234,
+    imageUrl: leonardoImage,
+  },
+  {
+    id: "audre-lorde",
+    name: "Audre Lorde",
+    era: "1934-1992 CE",
+    title: "Black Feminist Warrior Poet",
+    bio: "Your silence will not protect you. Poet and activist who spoke truth about intersecting oppressions.",
+    votes: 10987,
+    imageUrl: audreImage,
+  },
+  {
+    id: "nelson-mandela",
+    name: "Nelson Mandela",
+    era: "1918-2013 CE",
+    title: "Freedom & Reconciliation",
+    bio: "It always seems impossible until it's done. Led South Africa from apartheid to democracy with grace.",
+    votes: 10876,
+    imageUrl: mandelaImage,
   },
   {
     id: "buddha",
@@ -74,8 +263,35 @@ const wiseFigures = [
     era: "563-483 BCE",
     title: "The Enlightened One",
     bio: "Founder of Buddhism. Taught the path to end suffering through mindfulness and compassion.",
-    votes: 10456,
+    votes: 10756,
     imageUrl: buddhaImage,
+  },
+  {
+    id: "jane-austen",
+    name: "Jane Austen",
+    era: "1775-1817 CE",
+    title: "Master of Social Comedy",
+    bio: "I declare after all there is no enjoyment like reading. Novelist who brilliantly satirized Georgian society.",
+    votes: 10543,
+    imageUrl: austenImage,
+  },
+  {
+    id: "albert-einstein",
+    name: "Albert Einstein",
+    era: "1879-1955 CE",
+    title: "Theoretical Physics Icon",
+    bio: "Imagination is more important than knowledge. Revolutionized our understanding of space, time, and energy.",
+    votes: 10234,
+    imageUrl: einsteinImage,
+  },
+  {
+    id: "hypatia",
+    name: "Hypatia of Alexandria",
+    era: "350-415 CE",
+    title: "Ancient Philosopher & Mathematician",
+    bio: "Reserve your right to think. Brilliant scholar and teacher in ancient Alexandria's Great Library.",
+    votes: 9987,
+    imageUrl: hypatiaImage,
   },
   {
     id: "aristotle",
@@ -87,13 +303,157 @@ const wiseFigures = [
     imageUrl: aristotleImage,
   },
   {
+    id: "teresa-of-avila",
+    name: "Teresa of Ávila",
+    era: "1515-1582 CE",
+    title: "Mystic Reformer",
+    bio: "Let nothing disturb you. Spanish nun and mystic who reformed the Carmelite order and wrote spiritual classics.",
+    votes: 9654,
+    imageUrl: teresaAvilaImage,
+  },
+  {
+    id: "malcolm-x",
+    name: "Malcolm X",
+    era: "1925-1965 CE",
+    title: "Revolutionary Voice",
+    bio: "By any means necessary. Transformed from street hustler to powerful advocate for Black liberation.",
+    votes: 9543,
+    imageUrl: malcolmImage,
+  },
+  {
     id: "carl-jung",
     name: "Carl Jung",
     era: "1875-1961 CE",
     title: "Explorer of the Psyche",
     bio: "Pioneered analytical psychology. Explored archetypes, the collective unconscious, and individuation.",
-    votes: 9234,
+    votes: 9434,
     imageUrl: jungImage,
+  },
+  {
+    id: "ada-lovelace",
+    name: "Ada Lovelace",
+    era: "1815-1852 CE",
+    title: "First Computer Programmer",
+    bio: "The Analytical Engine weaves algebraic patterns. Visionary mathematician who pioneered computing concepts.",
+    votes: 9321,
+    imageUrl: adaImage,
+  },
+  {
+    id: "frederick-douglass",
+    name: "Frederick Douglass",
+    era: "1818-1895 CE",
+    title: "Abolitionist Statesman",
+    bio: "Knowledge makes a man unfit to be a slave. Escaped slavery to become America's greatest orator for freedom.",
+    votes: 9234,
+    imageUrl: douglassImage,
+  },
+  {
+    id: "maria-montessori",
+    name: "Maria Montessori",
+    era: "1870-1952 CE",
+    title: "Revolutionary Educator",
+    bio: "The child is both a hope and a promise. First Italian female physician who revolutionized education.",
+    votes: 9123,
+    imageUrl: montessoriImage,
+  },
+  {
+    id: "cleopatra",
+    name: "Cleopatra VII",
+    era: "69-30 BCE",
+    title: "Last Pharaoh of Egypt",
+    bio: "Brilliant multilingual ruler who commanded armies and negotiated with empires to preserve Egyptian independence.",
+    votes: 8987,
+    imageUrl: cleopatraImage,
+  },
+  {
+    id: "plato",
+    name: "Plato",
+    era: "428-348 BCE",
+    title: "Philosopher of Forms",
+    bio: "The beginning is the most important part of the work. Founded the Academy and explored ideal forms of reality.",
+    votes: 8876,
+    imageUrl: platoImage,
+  },
+  {
+    id: "mother-teresa",
+    name: "Mother Teresa",
+    era: "1910-1997 CE",
+    title: "Saint of the Gutters",
+    bio: "Not all of us can do great things. But we can do small things with great love. Served the poorest of the poor.",
+    votes: 8765,
+    imageUrl: motherTeresaImage,
+  },
+  {
+    id: "hannah-arendt",
+    name: "Hannah Arendt",
+    era: "1906-1975 CE",
+    title: "Political Philosopher",
+    bio: "The banality of evil. Explored totalitarianism, power, and the human condition in modern times.",
+    votes: 8654,
+    imageUrl: arendtImage,
+  },
+  {
+    id: "nikola-tesla",
+    name: "Nikola Tesla",
+    era: "1856-1943 CE",
+    title: "Inventor & Electrical Genius",
+    bio: "The present is theirs; the future is mine. Visionary inventor who pioneered AC electricity and wireless technology.",
+    votes: 8543,
+    imageUrl: teslaImage,
+  },
+  {
+    id: "sappho",
+    name: "Sappho",
+    era: "630-570 BCE",
+    title: "Poetess of Lesbos",
+    bio: "Love shook my heart like wind on a mountain. Ancient Greek lyric poet whose work inspired generations.",
+    votes: 8432,
+    imageUrl: sapphoImage,
+  },
+  {
+    id: "vincent-van-gogh",
+    name: "Vincent van Gogh",
+    era: "1853-1890 CE",
+    title: "Post-Impressionist Visionary",
+    bio: "I feel there is nothing more truly artistic than to love people. Transformed suffering into luminous beauty.",
+    votes: 8321,
+    imageUrl: vanGoghImage,
+  },
+  {
+    id: "emily-dickinson",
+    name: "Emily Dickinson",
+    era: "1830-1886 CE",
+    title: "Reclusive Poetic Genius",
+    bio: "I dwell in Possibility. Innovative poet who explored death, immortality, and nature in unconventional ways.",
+    votes: 8234,
+    imageUrl: emilyImage,
+  },
+  {
+    id: "zora-neale-hurston",
+    name: "Zora Neale Hurston",
+    era: "1891-1960 CE",
+    title: "Harlem Renaissance Luminary",
+    bio: "I have been in Sorrow's kitchen. Anthropologist and author who celebrated Black culture with brilliance.",
+    votes: 8123,
+    imageUrl: zoraImage,
+  },
+  {
+    id: "avicenna",
+    name: "Avicenna (Ibn Sina)",
+    era: "980-1037 CE",
+    title: "Persian Polymath Physician",
+    bio: "The knowledge of anything is not a sign of weakness. Father of early modern medicine and influential philosopher.",
+    votes: 8012,
+    imageUrl: avicennaImage,
+  },
+  {
+    id: "dorothy-day",
+    name: "Dorothy Day",
+    era: "1897-1980 CE",
+    title: "Catholic Worker Activist",
+    bio: "We have all known the long loneliness. Journalist and activist who served the poor and advocated for social justice.",
+    votes: 7901,
+    imageUrl: dorothyImage,
   },
 ];
 
