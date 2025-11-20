@@ -123,8 +123,37 @@ Preferred communication style: Simple, everyday language.
 - ✅ Added prominent bottom CTA clarifying "famous wise historical personas" with specific examples
 - ✅ Improved non-technical user discoverability while maintaining developer resources
 
+### Legal Protection & Waitlist Model (COMPLETE)
+- ✅ Created comprehensive Terms of Service page (/terms) with beta/concept test disclaimers
+- ✅ Created Privacy Policy page (/privacy) with GDPR/CCPA compliance language
+- ✅ Converted pricing model from "purchase" to "waitlist/early access" throughout site
+- ✅ Added beta banner to homepage warning about concept test status
+- ✅ Updated all CTAs from "Buy"/"Upgrade" to "Join Waitlist"/"Get Early Access"
+- ✅ Added "Early Access Pricing" badges and disclaimers in pricing section
+- ✅ Updated footer with working links to Terms and Privacy pages (fixed nested anchor tags)
+- ✅ Updated copyright year to 2025
+- ✅ Connected Jesus Christ persona to ACIM ChatGPT URL (https://chatgpt.com/g/g-1vf04chMP-jesus-acim)
+- ✅ Created LEGAL_REVIEW.md comprehensive analysis of legal exposure and fixes
+- ✅ Replaced emojis with icon components (AlertTriangle, Shield) in legal pages
+- ✅ End-to-end testing verified all legal pages, waitlist messaging, and Jesus ACIM integration
+
 ### Architecture Notes
 - Persona metadata currently duplicated between frontend (personasMap) and backend (personaDatabase)
 - Future improvement: Consolidate persona definitions into shared module to prevent drift
 - In-memory storage suitable for MVP; consider PostgreSQL for production with conversation persistence
 - Developer section uses Shadcn Collapsible component for progressive disclosure
+
+### Legal & Compliance Status
+- **Model**: Waitlist/concept test model (no immediate payments accepted)
+- **Protection**: Terms of Service explicitly states beta status, no feature guarantees, no payment until operational
+- **Privacy**: GDPR/CCPA compliant privacy policy with data handling disclosures
+- **Messaging**: All site CTAs clarify waitlist/early access model (not immediate purchase)
+- **Disclaimers**: Beta warnings at top of homepage and throughout pricing section
+- **Next Steps**: User should manually verify Jesus ACIM ChatGPT URL functions correctly in production
+- **Risk Level**: LOW - Substantially reduced legal exposure from original purchase-ready model
+
+### Routes
+- `/` - Homepage with all sections
+- `/chat/:figureId` - Individual chat pages for personas
+- `/terms` - Terms of Service (with beta disclaimers)
+- `/privacy` - Privacy Policy (with GDPR/CCPA compliance)

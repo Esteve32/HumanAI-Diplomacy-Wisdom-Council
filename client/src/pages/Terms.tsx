@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Terms() {
@@ -23,8 +23,9 @@ export default function Terms() {
           </p>
 
           <div className="bg-amber-50 dark:bg-amber-950/20 border-l-4 border-amber-500 p-6 mb-8">
-            <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-100 mt-0">
-              ⚠️ Beta Concept Test - Important Notice
+            <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-100 mt-0 flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5" />
+              Beta Concept Test - Important Notice
             </h3>
             <p className="text-amber-800 dark:text-amber-200 mb-0">
               This service is currently in <strong>beta/concept testing phase</strong>. Many features shown on our website are <strong>planned but not yet operational</strong>. By signing up, you are joining our waitlist for early access notification when features become available. No payment will be processed until services are fully operational and you explicitly opt in to a paid plan.

@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Privacy() {
@@ -23,8 +23,9 @@ export default function Privacy() {
           </p>
 
           <div className="bg-blue-50 dark:bg-blue-950/20 border-l-4 border-blue-500 p-6 mb-8">
-            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mt-0">
-              🔒 Your Privacy Matters
+            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mt-0 flex items-center gap-2">
+              <Shield className="h-5 w-5" />
+              Your Privacy Matters
             </h3>
             <p className="text-blue-800 dark:text-blue-200 mb-0">
               We're in beta testing and collect minimal data. We will never sell your personal information. This policy explains what we collect and why.
