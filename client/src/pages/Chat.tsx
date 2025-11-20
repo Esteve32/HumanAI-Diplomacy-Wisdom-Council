@@ -21,31 +21,31 @@ interface Persona {
 
 export default function Chat() {
   const [, params] = useRoute("/chat/:figureId");
-  const figureId = params?.figureId ? parseInt(params.figureId) : null;
+  const figureId = params?.figureId || null;
   
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [messageInput, setMessageInput] = useState("");
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  const personasMap: Record<number, Persona> = {
-    1: {
+  const personasMap: Record<string, Persona> = {
+    "simone-de-beauvoir": {
       id: 1,
       name: "Simone de Beauvoir",
-      era: "20th Century France, 1908-1986",
-      title: "Existentialist Philosopher and Feminist Pioneer",
-      description: "Author of 'The Second Sex', explored freedom, ethics, and women's oppression through existentialist lens."
+      era: "1908-1986 CE",
+      title: "Existentialist Feminist",
+      description: "One is not born, but rather becomes, a woman. Groundbreaking philosopher who challenged gender roles."
     },
-    2: {
+    "socrates": {
       id: 2,
       name: "Socrates",
-      era: "Ancient Greece, 470-399 BCE",
-      title: "Philosopher and Father of Western Philosophy",
-      description: "Known for the Socratic method of questioning, emphasis on ethics and self-knowledge."
+      era: "469-399 BCE",
+      title: "Father of Western Philosophy",
+      description: "The unexamined life is not worth living. Known for the Socratic method of questioning."
     },
-    3: {
+    "jesus-christ": {
       id: 3,
       name: "Jesus Christ",
-      era: "1st Century CE, Judea",
+      era: "1st Century CE",
       title: "Central Figure of Christianity",
       description: "Teacher of love, compassion, and spiritual transformation. Preached the Kingdom of God."
     }
@@ -55,12 +55,14 @@ export default function Chat() {
 
   const { mutate: createConversation, isPending: isCreatingConversation } = useMutation({
     mutationFn: async () => {
-      if (!figureId) throw new Error("No figure selected");
-      return await apiRequest("/api/conversations", {
+      if (!figureId || !persona) throw new Error("No figure selected");
+      const response = await fetch("/api/conversations", {
         method: "POST",
-        body: JSON.stringify({ figureId }),
+        body: JSON.stringify({ figureId: persona.id }),
         headers: { "Content-Type": "application/json" },
       });
+      if (!response.ok) throw new Error("Failed to create conversation");
+      return await response.json();
     },
     onSuccess: (data: any) => {
       setConversationId(data.id);
@@ -76,11 +78,13 @@ export default function Chat() {
   const { mutate: sendMessage, isPending: isSendingMessage } = useMutation({
     mutationFn: async (content: string) => {
       if (!conversationId) throw new Error("No conversation");
-      return await apiRequest(`/api/conversations/${conversationId}/messages`, {
+      const response = await fetch(`/api/conversations/${conversationId}/messages`, {
         method: "POST",
         body: JSON.stringify({ content }),
         headers: { "Content-Type": "application/json" },
       });
+      if (!response.ok) throw new Error("Failed to send message");
+      return await response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ 

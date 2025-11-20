@@ -17,7 +17,7 @@ export interface PersonaContext {
 export async function generatePersonaResponse(
   persona: PersonaContext,
   userMessage: string,
-  conversationHistory: Array<{ role: string; content: string }>
+  conversationHistory: Array<{ role: "user" | "assistant"; content: string }>
 ): Promise<string> {
   const systemPrompt = `You are ${persona.name}, ${persona.title} from ${persona.era}. 
 

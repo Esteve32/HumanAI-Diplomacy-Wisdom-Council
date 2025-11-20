@@ -1,14 +1,42 @@
-import type { Express } from "express";
+import type { Express, Request } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertConversationSchema, insertMessageSchema } from "@shared/schema";
-import { generatePersonaResponse } from "./openai";
+import { generatePersonaResponse, PersonaContext } from "./openai";
+
+interface SessionRequest extends Request {
+  session: {
+    id: string;
+  };
+}
+
+const personaDatabase: Record<number, PersonaContext> = {
+  1: {
+    name: "Simone de Beauvoir",
+    era: "1908-1986 CE",
+    title: "Existentialist Feminist",
+    bio: "One is not born, but rather becomes, a woman. Groundbreaking philosopher who challenged gender roles through existentialist lens. Author of 'The Second Sex', explored freedom, ethics, and women's oppression."
+  },
+  2: {
+    name: "Socrates",
+    era: "469-399 BCE",
+    title: "Father of Western Philosophy",
+    bio: "The unexamined life is not worth living. Known for the Socratic method of questioning, emphasis on ethics and self-knowledge. Never wrote anything down; teachings preserved through Plato's dialogues."
+  },
+  3: {
+    name: "Jesus Christ",
+    era: "1st Century CE",
+    title: "Central Figure of Christianity",
+    bio: "Teacher of love, compassion, and spiritual transformation. Preached the Kingdom of God, Sermon on the Mount, parables about mercy and redemption. Central to Christian faith and Western civilization."
+  }
+};
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/conversations", async (req, res) => {
+    const sessionReq = req as SessionRequest;
     try {
-      const data = insertConversationSchema.parse(req.body);
-      const sessionId = req.session.id;
+      const sessionId = sessionReq.session?.id || "default-session";
+      const data = insertConversationSchema.omit({ sessionId: true }).parse(sessionReq.body);
       
       const conversation = await storage.createConversation({
         ...data,
@@ -17,13 +45,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(conversation);
     } catch (error: any) {
+      console.error("Error creating conversation:", error);
       res.status(400).json({ error: error.message });
     }
   });
 
   app.get("/api/conversations", async (req, res) => {
+    const sessionReq = req as SessionRequest;
     try {
-      const sessionId = req.session.id;
+      const sessionId = sessionReq.session?.id || "default-session";
       const conversations = await storage.getConversationsBySession(sessionId);
       res.json(conversations);
     } catch (error: any) {
@@ -70,17 +100,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const userMessage = await storage.createMessage(data);
 
       const messages = await storage.getMessagesByConversation(conversationId);
-      const conversationHistory = messages.map(msg => ({
-        role: msg.role,
-        content: msg.content,
-      }));
+      const conversationHistory = messages
+        .filter(msg => msg.role === "user" || msg.role === "assistant")
+        .map(msg => ({
+          role: msg.role as "user" | "assistant",
+          content: msg.content,
+        }));
 
-      const personaContext = {
-        name: "Socrates",
-        era: "Ancient Greece, 470-399 BCE",
-        title: "Philosopher and Father of Western Philosophy",
-        bio: "Known for the Socratic method of questioning, emphasis on ethics and self-knowledge. Never wrote anything down; teachings preserved through Plato's dialogues.",
-      };
+      const personaContext = personaDatabase[conversation.figureId];
+      if (!personaContext) {
+        return res.status(404).json({ error: "Persona not found" });
+      }
 
       const aiResponse = await generatePersonaResponse(
         personaContext,

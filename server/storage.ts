@@ -48,7 +48,7 @@ export class MemStorage implements IStorage {
 
   async createWiseFigure(insertFigure: InsertWiseFigure): Promise<WiseFigure> {
     const id = randomUUID();
-    const figure: WiseFigure = { ...insertFigure, id, votes: 0 };
+    const figure: WiseFigure = { ...insertFigure, id, votes: 0, chatGptLink: insertFigure.chatGptLink ?? null };
     this.wiseFigures.set(id, figure);
     return figure;
   }
