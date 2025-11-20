@@ -66,3 +66,36 @@ export const insertMessageSchema = createInsertSchema(messages).omit({
 
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
 export type Message = typeof messages.$inferSelect;
+
+export const aiDialogues = pgTable("ai_dialogues", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  persona1Id: integer("persona1_id").notNull(),
+  persona2Id: integer("persona2_id").notNull(),
+  topic: text("topic").notNull(),
+  sessionId: text("session_id").notNull(),
+  createdAt: integer("created_at").notNull().$defaultFn(() => Date.now()),
+});
+
+export const insertAiDialogueSchema = createInsertSchema(aiDialogues).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertAiDialogue = z.infer<typeof insertAiDialogueSchema>;
+export type AiDialogue = typeof aiDialogues.$inferSelect;
+
+export const dialogueMessages = pgTable("dialogue_messages", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  dialogueId: varchar("dialogue_id").notNull(),
+  personaId: integer("persona_id").notNull(),
+  content: text("content").notNull(),
+  createdAt: integer("created_at").notNull().$defaultFn(() => Date.now()),
+});
+
+export const insertDialogueMessageSchema = createInsertSchema(dialogueMessages).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertDialogueMessage = z.infer<typeof insertDialogueMessageSchema>;
+export type DialogueMessage = typeof dialogueMessages.$inferSelect;

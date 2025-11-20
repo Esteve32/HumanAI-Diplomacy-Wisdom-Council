@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "wouter";
 import heroImage from "@assets/generated_images/Cozy_library_fireplace_hero_background_5001df1d.png";
 
 export default function HeroSection() {
@@ -18,20 +19,33 @@ export default function HeroSection() {
         <p className="text-2xl md:text-3xl mb-12 text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
           Have conversations with AI embodiments of history's wisest figures—from Socrates to Simone de Beauvoir
         </p>
-        <Button 
-          size="lg" 
-          className="text-xl px-12 py-8 bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
-          data-testid="button-start-journey"
-          onClick={() => {
-            const element = document.getElementById('conversations');
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-        >
-          Start a Conversation
-          <ArrowRight className="ml-3 h-6 w-6" />
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button 
+            size="lg" 
+            className="text-xl px-12 py-8 bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
+            data-testid="button-start-journey"
+            onClick={() => {
+              const element = document.getElementById('conversations');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
+            Start a Conversation
+            <ArrowRight className="ml-3 h-6 w-6" />
+          </Button>
+          <Link href="/ai-dialogue">
+            <Button 
+              size="lg"
+              variant="outline"
+              className="text-xl px-12 py-8 bg-primary/10 backdrop-blur-md border-primary/30 text-white hover:bg-primary/20"
+              data-testid="button-watch-dialogue"
+            >
+              <Sparkles className="mr-3 h-6 w-6" />
+              Watch AI Dialogue
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );

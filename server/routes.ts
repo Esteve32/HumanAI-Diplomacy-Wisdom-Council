@@ -1,8 +1,8 @@
 import type { Express, Request } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertConversationSchema, insertMessageSchema } from "@shared/schema";
-import { generatePersonaResponse, PersonaContext } from "./openai";
+import { insertConversationSchema, insertMessageSchema, insertAiDialogueSchema } from "@shared/schema";
+import { generatePersonaResponse, generateDialogueResponse, PersonaContext } from "./openai";
 
 interface SessionRequest extends Request {
   session: {
@@ -127,6 +127,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ userMessage, assistantMessage });
     } catch (error: any) {
       console.error("Error in message creation:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/ai-dialogues", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    try {
+      const sessionId = sessionReq.session?.id || "default-session";
+      const data = insertAiDialogueSchema.omit({ sessionId: true }).parse(req.body);
+      
+      const dialogue = await storage.createAiDialogue({
+        ...data,
+        sessionId,
+      });
+
+      const persona1 = personaDatabase[dialogue.persona1Id];
+      const persona2 = personaDatabase[dialogue.persona2Id];
+      
+      if (!persona1 || !persona2) {
+        return res.status(404).json({ error: "One or both personas not found" });
+      }
+
+      const conversationHistory: Array<{ personaId: number; content: string }> = [];
+      
+      for (let i = 0; i < 5; i++) {
+        const currentPersonaId = i % 2 === 0 ? dialogue.persona1Id : dialogue.persona2Id;
+        const currentPersona = i % 2 === 0 ? persona1 : persona2;
+        const otherPersonaId = i % 2 === 0 ? dialogue.persona2Id : dialogue.persona1Id;
+        const otherPersona = i % 2 === 0 ? persona2 : persona1;
+        
+        const response = await generateDialogueResponse(
+          currentPersonaId,
+          currentPersona,
+          otherPersonaId,
+          otherPersona,
+          dialogue.topic,
+          conversationHistory
+        );
+        
+        await storage.createDialogueMessage({
+          dialogueId: dialogue.id,
+          personaId: currentPersonaId,
+          content: response,
+        });
+        
+        conversationHistory.push({ personaId: currentPersonaId, content: response });
+      }
+      
+      res.json(dialogue);
+    } catch (error: any) {
+      console.error("Error creating AI dialogue:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/ai-dialogues/:id/messages", async (req, res) => {
+    try {
+      const messages = await storage.getDialogueMessages(req.params.id);
+      res.json(messages);
+    } catch (error: any) {
       res.status(500).json({ error: error.message });
     }
   });

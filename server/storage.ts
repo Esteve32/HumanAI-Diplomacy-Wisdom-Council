@@ -6,7 +6,11 @@ import {
   type Conversation,
   type InsertConversation,
   type Message,
-  type InsertMessage
+  type InsertMessage,
+  type AiDialogue,
+  type InsertAiDialogue,
+  type DialogueMessage,
+  type InsertDialogueMessage
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -23,6 +27,12 @@ export interface IStorage {
   
   createMessage(message: InsertMessage): Promise<Message>;
   getMessagesByConversation(conversationId: string): Promise<Message[]>;
+  
+  createAiDialogue(dialogue: InsertAiDialogue): Promise<AiDialogue>;
+  getAiDialogue(id: string): Promise<AiDialogue | undefined>;
+  
+  createDialogueMessage(message: InsertDialogueMessage): Promise<DialogueMessage>;
+  getDialogueMessages(dialogueId: string): Promise<DialogueMessage[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -30,12 +40,16 @@ export class MemStorage implements IStorage {
   private votes: Map<string, Vote>;
   private conversations: Map<string, Conversation>;
   private messages: Map<string, Message>;
+  private aiDialogues: Map<string, AiDialogue>;
+  private dialogueMessages: Map<string, DialogueMessage>;
 
   constructor() {
     this.wiseFigures = new Map();
     this.votes = new Map();
     this.conversations = new Map();
     this.messages = new Map();
+    this.aiDialogues = new Map();
+    this.dialogueMessages = new Map();
   }
 
   async getWiseFigures(): Promise<WiseFigure[]> {
@@ -100,6 +114,30 @@ export class MemStorage implements IStorage {
   async getMessagesByConversation(conversationId: string): Promise<Message[]> {
     return Array.from(this.messages.values())
       .filter((msg) => msg.conversationId === conversationId)
+      .sort((a, b) => a.createdAt - b.createdAt);
+  }
+
+  async createAiDialogue(insertDialogue: InsertAiDialogue): Promise<AiDialogue> {
+    const id = randomUUID();
+    const dialogue: AiDialogue = { ...insertDialogue, id, createdAt: Date.now() };
+    this.aiDialogues.set(id, dialogue);
+    return dialogue;
+  }
+
+  async getAiDialogue(id: string): Promise<AiDialogue | undefined> {
+    return this.aiDialogues.get(id);
+  }
+
+  async createDialogueMessage(insertMessage: InsertDialogueMessage): Promise<DialogueMessage> {
+    const id = randomUUID();
+    const message: DialogueMessage = { ...insertMessage, id, createdAt: Date.now() };
+    this.dialogueMessages.set(id, message);
+    return message;
+  }
+
+  async getDialogueMessages(dialogueId: string): Promise<DialogueMessage[]> {
+    return Array.from(this.dialogueMessages.values())
+      .filter((msg) => msg.dialogueId === dialogueId)
       .sort((a, b) => a.createdAt - b.createdAt);
   }
 }
