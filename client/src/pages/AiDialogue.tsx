@@ -19,9 +19,14 @@ interface Persona {
 }
 
 const availablePersonas: Persona[] = [
-  { id: 1, name: "Simone de Beauvoir", era: "1908-1986 CE", title: "Existentialist Feminist" },
+  { id: 4, name: "Rosa Parks", era: "1913-2005 CE", title: "Mother of the Civil Rights Movement" },
   { id: 2, name: "Socrates", era: "469-399 BCE", title: "Father of Western Philosophy" },
-  { id: 3, name: "Jesus Christ", era: "1st Century CE", title: "Teacher of Compassion" },
+  { id: 6, name: "Maria Montessori", era: "1870-1952 CE", title: "Revolutionary Educator" },
+  { id: 8, name: "Mary Wollstonecraft", era: "1759-1797 CE", title: "Mother of Feminism" },
+  { id: 7, name: "Bell Hooks", era: "1952-2021 CE", title: "Intersectional Feminist" },
+  { id: 1, name: "Simone de Beauvoir", era: "1908-1986 CE", title: "Existentialist Feminist" },
+  { id: 3, name: "Jesus of Nazareth", era: "c. 4 BCE - 30 CE", title: "Teacher of Compassion" },
+  { id: 5, name: "Rumi", era: "1207-1273 CE", title: "Sufi Mystic & Poet" },
 ];
 
 export default function AiDialogue() {
@@ -157,7 +162,12 @@ export default function AiDialogue() {
                 size="lg"
                 data-testid="button-start-dialogue"
               >
-                {isCreatingDialogue ? "Generating Conversation..." : "Start Conversation"}
+                {isCreatingDialogue ? (
+                  <>
+                    <span className="inline-block animate-spin mr-2">🔥</span>
+                    Kindling Conversation...
+                  </>
+                ) : "Start Conversation"}
               </Button>
             </div>
           </Card>

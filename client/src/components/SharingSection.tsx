@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Share2, Copy, Check, Twitter, Linkedin, Facebook } from "lucide-react";
+import { Share2, Copy, Check, Linkedin, Facebook } from "lucide-react";
+import { SiX } from "react-icons/si";
 
 function generateReferralCode(): string {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
@@ -56,18 +57,17 @@ export default function SharingSection() {
         <div className="text-center mb-12">
           <Share2 className="h-12 w-12 text-primary mx-auto mb-4" />
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Pass It Forward
+            Bridge the Centuries
           </h2>
           <p className="text-xl text-muted-foreground font-serif max-w-2xl mx-auto">
-            Join the movement of people choosing personal growth over productivity hacks. 
-            Share wisdom, not just content.
+            Bring others into timeless conversations. Share the wisdom voices that transcend eras and connect us across centuries.
           </p>
         </div>
 
         <Card className="p-8 mb-8">
           <h3 className="text-2xl font-semibold mb-4 text-center">Your Personal Share Link</h3>
           <p className="text-muted-foreground text-center mb-6">
-            When someone signs up through your link, you both get exclusive access to bonus wisdom sessions.
+            Share your unique link to invite others into conversations across time. When they join, you both unlock exclusive bonus dialogues and wisdom sessions.
           </p>
 
           <div className="flex gap-3 mb-6">
@@ -94,8 +94,8 @@ export default function SharingSection() {
               data-testid="button-share-twitter"
               className="flex-1 sm:flex-initial"
             >
-              <Twitter className="mr-2 h-4 w-4" />
-              Share on Twitter
+              <SiX className="mr-2 h-4 w-4" />
+              Share on X
             </Button>
             <Button
               variant="outline"

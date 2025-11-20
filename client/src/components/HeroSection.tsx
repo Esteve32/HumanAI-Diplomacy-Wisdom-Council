@@ -14,10 +14,10 @@ export default function HeroSection() {
       
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
         <h1 className="font-display text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight">
-          Ancient Wisdom<br />Modern Minds
+          Conversations Across Time
         </h1>
         <p className="text-2xl md:text-3xl mb-12 text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
-          Have conversations with AI embodiments of history's wisest figures—from Socrates to Simone de Beauvoir
+          Step into a fireside chat with history's greatest minds. Bridge centuries of wisdom through genuine dialogue, from ancient philosophers to modern visionaries.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 

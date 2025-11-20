@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
-import { Twitter, Linkedin, Github } from "lucide-react";
+import { Linkedin, Github } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
 import { useToast } from "@/hooks/use-toast";
@@ -68,16 +68,16 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
-              Wisdom from the past for growth in the future.
+              Bridging centuries of wisdom through intimate dialogue.
             </p>
             <div className="flex gap-3">
               <Button 
                 size="icon" 
                 variant="ghost"
-                data-testid="button-social-twitter"
-                onClick={() => console.log('Twitter clicked')}
+                data-testid="button-social-x"
+                onClick={() => console.log('X clicked')}
               >
-                <Twitter className="h-4 w-4" />
+                <span className="text-sm font-bold">𝕏</span>
               </Button>
               <Button 
                 size="icon" 
@@ -196,7 +196,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Stay Connected</h4>
             <p className="text-sm text-muted-foreground mb-4">
-              Get weekly wisdom insights in your inbox
+              Receive weekly wisdom conversations and insights across time
             </p>
             <div className="space-y-3">
               <Input
@@ -218,7 +218,7 @@ export default function Footer() {
                   htmlFor="newsletter-consent"
                   className="text-xs text-muted-foreground cursor-pointer leading-relaxed"
                 >
-                  I consent to receive emails about Wisdom Council
+                  I consent to receive emails with wisdom insights and conversations across time
                 </label>
               </div>
               <Button 

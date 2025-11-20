@@ -12,10 +12,10 @@ export default function PricingSection() {
             Early Access Pricing
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Join the Waitlist
+            Join the Wisdom Council
           </h2>
           <p className="text-xl text-muted-foreground font-serif max-w-2xl mx-auto">
-            Lock in early access pricing. No payment required until features are fully operational.
+            Reserve your place in this timeless movement. Lock in early access pricing—no payment required until we're ready to welcome you fully.
           </p>
         </div>
 
@@ -23,7 +23,7 @@ export default function PricingSection() {
           <Card className="p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-semibold mb-2">Free Access</h3>
-              <p className="text-muted-foreground">Perfect for personal growth</p>
+              <p className="text-muted-foreground">Wisdom across centuries awaits</p>
             </div>
 
             <div className="mb-6">
@@ -34,19 +34,19 @@ export default function PricingSection() {
             <ul className="space-y-3 mb-8">
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Access to growing library of AI wisdom figures</span>
+                <span>Fireside chats with 51+ historical wisdom figures</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Beta access to conversations (when available)</span>
+                <span>AI-to-AI dialogues across centuries</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>MCP workflow templates (in development)</span>
+                <span>Share wisdom conversations with others</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Community support</span>
+                <span>Community of wisdom seekers</span>
               </li>
             </ul>
 

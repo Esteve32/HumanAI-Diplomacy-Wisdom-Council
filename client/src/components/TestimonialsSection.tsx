@@ -32,10 +32,10 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Wisdom Across Time
+            Voices Bridge the Centuries
           </h2>
           <p className="text-xl text-muted-foreground font-serif max-w-2xl mx-auto">
-            Historical figures who could have benefited from timeless wisdom.
+            Historical figures discovering that wisdom transcends time—and that even the greatest minds benefit from dialogue across eras.
           </p>
         </div>
 

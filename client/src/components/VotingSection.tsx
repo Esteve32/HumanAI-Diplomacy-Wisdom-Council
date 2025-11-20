@@ -96,7 +96,8 @@ const wiseFigures = [
     bio: "Author of A Vindication of the Rights of Woman. Early advocate for women's education and equality.",
     votes: 19432,
     imageUrl: maryWImage,
-    chatReady: false,
+    chatReady: true,
+    chatUrl: "https://chatgpt.com/g/g-691f93eca0fc8191bf4dea29fb3d4aec-mary-wollstonecraft",
   },
   {
     id: "bell-hooks",
@@ -118,6 +119,7 @@ const wiseFigures = [
     votes: 24567,
     imageUrl: simoneImage,
     chatReady: true,
+    chatUrl: "https://chatgpt.com/g/g-691f88d1e4378191a9d7b74ef9d7c362-simone-de-beauvoir",
   },
   {
     id: "jesus-christ",
@@ -128,6 +130,7 @@ const wiseFigures = [
     votes: 23456,
     imageUrl: jesusImage,
     chatReady: true,
+    chatUrl: "https://chatgpt.com/g/g-691f846f74048191b7ebb5d5e9d2b141-jesus-of-nazareth",
   },
   {
     id: "rumi",
@@ -138,6 +141,7 @@ const wiseFigures = [
     votes: 20543,
     imageUrl: rumiImage,
     chatReady: true,
+    chatUrl: "https://chatgpt.com/g/g-691f7c9d5a1a8191a4e8f03c9d6e2a81-rumi",
   },
   {
     id: "virginia-woolf",

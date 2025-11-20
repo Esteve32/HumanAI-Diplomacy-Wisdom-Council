@@ -45,10 +45,10 @@ const chat = await wisdom.chat({
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="font-display text-5xl md:text-6xl font-bold mb-6">
-            Have Conversations with Wisdom
+            Three Pathways to Timeless Wisdom
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Engage with AI embodiments of famous wise historical personas. Have one-on-one conversations, stage dialogues between figures, or observe their interactions.
+            Engage in fireside chats with historical masters. Have one-on-one conversations, stage dialogues between epochs, or integrate wisdom into your workflows.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ const chat = await wisdom.chat({
               Free Conversations
             </h3>
             <p className="text-lg text-muted-foreground max-w-xl mb-8">
-              Start conversations with AI embodiments of famous wise historical figures. Try one-on-one dialogues or stage conversations between multiple personas. No setup, no cost—just explore.
+              Have immediate fireside chats with history's wisest minds. One-on-one conversations or dialogues between figures from different eras. No setup, no cost—just connect across centuries.
             </p>
             
             <Card className="p-8 w-full max-w-2xl">
@@ -124,7 +124,7 @@ const chat = await wisdom.chat({
                     Workflow Integration
                   </h3>
                   <p className="text-lg text-muted-foreground max-w-xl mb-8">
-                    Integrate wisdom conversations into your automation workflows with n8n, Zapier, Make, and other no-code platforms.
+                    Weave conversations across time into your workflows. Automate wisdom into daily practices with n8n, Zapier, Make, and other no-code platforms.
                   </p>
                   
                   <Card className="p-8 w-full max-w-2xl text-left">
@@ -218,7 +218,7 @@ const chat = await wisdom.chat({
                     Developer Access
                   </h3>
                   <p className="text-lg text-muted-foreground max-w-xl mb-8">
-                    Native API, MCP integration, and cloud deployment. Build wisdom conversations into your applications.
+                    Native API, MCP integration, and cloud deployment. Build timeless wisdom conversations directly into your applications and systems.
                   </p>
                   
                   <Card className="p-8 w-full max-w-2xl text-left">
