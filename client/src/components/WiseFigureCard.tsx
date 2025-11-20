@@ -47,7 +47,7 @@ export default function WiseFigureCard({
 
   const handleChat = () => {
     if (chatReady && chatUrl) {
-      window.open(chatUrl, '_blank');
+      window.open(chatUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -94,17 +94,19 @@ export default function WiseFigureCard({
             </Button>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button
-                  variant={chatReady ? "default" : "outline"}
-                  size="default"
-                  onClick={handleChat}
-                  disabled={!chatReady}
-                  className="flex-1 min-h-11"
-                  data-testid={`button-chat-${id}`}
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Chat
-                </Button>
+                <span className="flex-1">
+                  <Button
+                    variant={chatReady ? "default" : "outline"}
+                    size="default"
+                    onClick={handleChat}
+                    className={`w-full min-h-11 ${!chatReady ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    aria-disabled={!chatReady}
+                    data-testid={`button-chat-${id}`}
+                  >
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    Chat
+                  </Button>
+                </span>
               </TooltipTrigger>
               <TooltipContent>
                 <p>{chatReady ? `Start a conversation with ${name}` : 'GPT not yet ready'}</p>
