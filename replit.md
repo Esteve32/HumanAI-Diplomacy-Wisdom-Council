@@ -74,7 +74,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (November 20, 2025)
 
-### Domain & Branding Update (COMPLETE - Latest)
+### Suggest Persona Feature (COMPLETE - Latest)
+- ✅ Added "Suggest a New Wisdom Persona" call-to-action section
+- ✅ Positioned just before the final CTA in ConversationsSection
+- ✅ Opens pre-filled email to esteve@greenelephant.org
+- ✅ Email template includes:
+  - Subject: "New Wisdom Persona Suggestion"
+  - Pre-filled body with fields for: Name, Why valuable, What topics
+  - User can fill in details and send directly from their email client
+
+### Domain & Branding Update (COMPLETE)
 - ✅ Updated domain from wisdom.greenelephant.ai to **wisdom.greenelephant.org**
 - ✅ Renamed project from "Wisdom from the Past" to **"Wisdom Council"**
 - ✅ Implemented dynamic share link generation:

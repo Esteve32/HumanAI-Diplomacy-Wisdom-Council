@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Blocks, Cloud, MessageSquare, ExternalLink, Copy, Check, ChevronDown, ChevronUp } from "lucide-react";
+import { Sparkles, Blocks, Cloud, MessageSquare, ExternalLink, Copy, Check, ChevronDown, ChevronUp, Mail } from "lucide-react";
 import { useState } from "react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 import { useLocation } from "wouter";
@@ -324,8 +324,39 @@ const chat = await wisdom.chat({
           </Collapsible>
         </div>
 
-        {/* Bottom CTA - Clear about famous historical personas */}
+        {/* Suggest New Persona CTA */}
         <div className="mt-32 text-center">
+          <Card className="max-w-2xl mx-auto p-8">
+            <Mail className="h-10 w-10 text-primary mx-auto mb-4" />
+            <h3 className="font-display text-2xl font-bold mb-3">
+              Suggest a New Wisdom Persona
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Have an idea for a wise historical figure we should add? We'd love to hear your suggestion.
+            </p>
+            <Button 
+              size="lg"
+              className="min-h-11"
+              data-testid="button-suggest-persona"
+              onClick={() => {
+                const subject = encodeURIComponent("New Wisdom Persona Suggestion");
+                const body = encodeURIComponent(
+                  "I would love to suggest a new wisdom persona:\n\n" +
+                  "Name: [Please add the name here]\n\n" +
+                  "Why this person would be valuable:\n[Please explain why you think this person should be included]\n\n" +
+                  "What topics they could help with:\n[Optional: What areas of wisdom or questions would they be good for?]\n\n"
+                );
+                window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
+              }}
+            >
+              <Mail className="mr-2 h-5 w-5" />
+              Suggest a Persona
+            </Button>
+          </Card>
+        </div>
+
+        {/* Bottom CTA - Clear about famous historical personas */}
+        <div className="mt-16 text-center">
           <div className="max-w-3xl mx-auto p-8 bg-muted/30 rounded-lg">
             <h3 className="font-display text-3xl font-bold mb-4">
               Explore Conversations with Famous Wise Historical Personas
