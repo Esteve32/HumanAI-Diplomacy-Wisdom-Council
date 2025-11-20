@@ -4,11 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { ThumbsUp, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 interface WiseFigureCardProps {
   id: string;
@@ -82,39 +77,43 @@ export default function WiseFigureCard({
         </p>
         
         <div className="space-y-3 pt-2">
-          <div className="flex items-center gap-2">
+          {chatReady ? (
+            <div className="flex items-center gap-2">
+              <Button
+                variant={hasVoted ? "secondary" : "default"}
+                size="default"
+                onClick={handleVote}
+                disabled={hasVoted}
+                className="flex-1 min-h-11"
+                data-testid={`button-vote-${id}`}
+              >
+                <ThumbsUp className="mr-2 h-4 w-4" />
+                {hasVoted ? 'Voted' : 'Vote'}
+              </Button>
+              <Button
+                variant="default"
+                size="default"
+                onClick={handleChat}
+                className="flex-1 min-h-11"
+                data-testid={`button-chat-${id}`}
+              >
+                <MessageCircle className="mr-2 h-4 w-4" />
+                Chat
+              </Button>
+            </div>
+          ) : (
             <Button
               variant={hasVoted ? "secondary" : "default"}
               size="default"
               onClick={handleVote}
               disabled={hasVoted}
-              className="flex-1 min-h-11"
+              className="w-full min-h-11"
               data-testid={`button-vote-${id}`}
             >
               <ThumbsUp className="mr-2 h-4 w-4" />
               {hasVoted ? 'Voted' : 'Vote'}
             </Button>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="flex-1">
-                  <Button
-                    variant={chatReady ? "default" : "outline"}
-                    size="default"
-                    onClick={handleChat}
-                    className={`w-full min-h-11 ${!chatReady ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    aria-disabled={!chatReady}
-                    data-testid={`button-chat-${id}`}
-                  >
-                    <MessageCircle className="mr-2 h-4 w-4" />
-                    Chat
-                  </Button>
-                </span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{chatReady ? `Start a conversation with ${name}` : 'GPT not yet ready'}</p>
-              </TooltipContent>
-            </Tooltip>
-          </div>
+          )}
           <div className="flex items-center justify-center">
             <Badge variant="outline" className="px-3 py-1.5" data-testid={`text-votes-${id}`}>
               {votes.toLocaleString()} votes

@@ -65,7 +65,6 @@ const wiseFigures = [
     votes: 9654,
     imageUrl: rosaImage,
     chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
   },
   {
     id: "socrates",
@@ -76,7 +75,6 @@ const wiseFigures = [
     votes: 17234,
     imageUrl: socratesImage,
     chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
   },
   {
     id: "maria-montessori",
@@ -86,8 +84,7 @@ const wiseFigures = [
     bio: "The child is both a hope and a promise. First Italian female physician who revolutionized early childhood education.",
     votes: 4321,
     imageUrl: montessoriImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "mary-wollstonecraft",
@@ -97,8 +94,7 @@ const wiseFigures = [
     bio: "Author of A Vindication of the Rights of Woman. Early advocate for women's education and equality.",
     votes: 19432,
     imageUrl: maryWImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "bell-hooks",
@@ -108,8 +104,7 @@ const wiseFigures = [
     bio: "Love as the practice of freedom. Scholar who explored race, gender, and class in transformative ways.",
     votes: 18765,
     imageUrl: bellImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "simone-de-beauvoir",
@@ -120,18 +115,16 @@ const wiseFigures = [
     votes: 24567,
     imageUrl: simoneImage,
     chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
   },
   {
     id: "jesus-christ",
-    name: "Jesus Christ",
+    name: "Jesus of Nazareth",
     era: "c. 4 BCE - 30 CE",
     title: "Teacher of Compassion",
     bio: "Love your neighbor as yourself. Spiritual teacher whose message of love, forgiveness, and compassion transformed civilization.",
     votes: 23456,
     imageUrl: jesusImage,
     chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
   },
   {
     id: "rumi",
@@ -142,7 +135,6 @@ const wiseFigures = [
     votes: 20543,
     imageUrl: rumiImage,
     chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
   },
   {
     id: "virginia-woolf",
@@ -152,8 +144,7 @@ const wiseFigures = [
     bio: "A woman must have money and a room of her own. Pioneering feminist writer and stream-of-consciousness novelist.",
     votes: 22891,
     imageUrl: virginiaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "harriet-tubman",
@@ -163,8 +154,7 @@ const wiseFigures = [
     bio: "I never ran my train off the track. Led over 70 enslaved people to freedom via the Underground Railroad.",
     votes: 16543,
     imageUrl: harrietImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "marie-curie",
@@ -174,8 +164,7 @@ const wiseFigures = [
     bio: "First woman to win a Nobel Prize and only person to win in two different sciences. Discovered polonium and radium.",
     votes: 15987,
     imageUrl: marieImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "marcus-aurelius",
@@ -185,8 +174,7 @@ const wiseFigures = [
     bio: "Author of Meditations. Ruled Rome while practicing Stoic philosophy and self-discipline.",
     votes: 14123,
     imageUrl: marcusImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "joan-of-arc",
@@ -196,8 +184,7 @@ const wiseFigures = [
     bio: "I am not afraid. I was born to do this. Led French armies to victory during the Hundred Years' War.",
     votes: 13456,
     imageUrl: joanImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "martin-luther-king",
@@ -207,8 +194,7 @@ const wiseFigures = [
     bio: "I have a dream. Nonviolent leader who transformed America through moral courage and powerful oratory.",
     votes: 21876,
     imageUrl: mlkImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "susan-b-anthony",
@@ -218,8 +204,7 @@ const wiseFigures = [
     bio: "Failure is impossible. Dedicated her life to women's right to vote and gender equality in America.",
     votes: 12345,
     imageUrl: susanImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "lao-tzu",
@@ -229,8 +214,7 @@ const wiseFigures = [
     bio: "Author of the Tao Te Ching. Taught the way of water, effortless action, and natural harmony.",
     votes: 11234,
     imageUrl: laoTzuImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "eleanor-roosevelt",
@@ -240,8 +224,7 @@ const wiseFigures = [
     bio: "No one can make you feel inferior without your consent. Chaired the UN committee that drafted the Universal Declaration of Human Rights.",
     votes: 10876,
     imageUrl: eleanorImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "frida-kahlo",
@@ -251,8 +234,7 @@ const wiseFigures = [
     bio: "I paint myself because I am so often alone. Transformed pain into powerful self-portraits exploring identity and suffering.",
     votes: 18234,
     imageUrl: fridaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "mahatma-gandhi",
@@ -262,8 +244,7 @@ const wiseFigures = [
     bio: "Be the change you wish to see in the world. Led India to independence through peaceful civil disobedience.",
     votes: 8765,
     imageUrl: gandhiImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "maya-angelou",
@@ -273,8 +254,7 @@ const wiseFigures = [
     bio: "Still I rise. Poet, author, and civil rights activist who wrote I Know Why the Caged Bird Sings.",
     votes: 7432,
     imageUrl: mayaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "confucius",
@@ -284,8 +264,7 @@ const wiseFigures = [
     bio: "Chinese philosopher who taught virtue, filial piety, and harmony in relationships and society.",
     votes: 6891,
     imageUrl: confuciusImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "sojourner-truth",
@@ -295,8 +274,7 @@ const wiseFigures = [
     bio: "Ain't I a woman? Escaped slavery to become a powerful orator for abolition and women's rights.",
     votes: 5678,
     imageUrl: sojournerImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "leonardo-da-vinci",
@@ -306,8 +284,7 @@ const wiseFigures = [
     bio: "Learning never exhausts the mind. Artist, inventor, anatomist, engineer—the ultimate Renaissance genius.",
     votes: 16789,
     imageUrl: leonardoImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "audre-lorde",
@@ -317,8 +294,7 @@ const wiseFigures = [
     bio: "Your silence will not protect you. Poet and activist who spoke truth about intersecting oppressions.",
     votes: 4987,
     imageUrl: audreImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "nelson-mandela",
@@ -328,8 +304,7 @@ const wiseFigures = [
     bio: "It always seems impossible until it's done. Led South Africa from apartheid to democracy after 27 years in prison.",
     votes: 12654,
     imageUrl: mandelaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "buddha",
@@ -339,8 +314,7 @@ const wiseFigures = [
     bio: "Founder of Buddhism. Taught the Four Noble Truths and the path to end suffering through mindfulness and compassion.",
     votes: 19876,
     imageUrl: buddhaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "jane-austen",
@@ -350,8 +324,7 @@ const wiseFigures = [
     bio: "I declare after all there is no enjoyment like reading. Novelist who brilliantly satirized Georgian society in works like Pride and Prejudice.",
     votes: 11543,
     imageUrl: austenImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "albert-einstein",
@@ -361,8 +334,7 @@ const wiseFigures = [
     bio: "Imagination is more important than knowledge. Developed the theory of relativity and revolutionized physics.",
     votes: 15432,
     imageUrl: einsteinImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "hypatia",
@@ -372,8 +344,7 @@ const wiseFigures = [
     bio: "Reserve your right to think. Brilliant scholar and head of the Neoplatonist school in Alexandria.",
     votes: 3456,
     imageUrl: hypatiaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "aristotle",
@@ -383,8 +354,7 @@ const wiseFigures = [
     bio: "Student of Plato and teacher of Alexander the Great. Founded formal logic and pioneered empirical science.",
     votes: 9123,
     imageUrl: aristotleImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "teresa-of-avila",
@@ -394,8 +364,7 @@ const wiseFigures = [
     bio: "Let nothing disturb you. Spanish mystic who reformed the Carmelite order and wrote spiritual classics like The Interior Castle.",
     votes: 2987,
     imageUrl: teresaAvilaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "malcolm-x",
@@ -405,8 +374,7 @@ const wiseFigures = [
     bio: "By any means necessary. Transformed from street hustler to powerful advocate for Black liberation and self-determination.",
     votes: 8234,
     imageUrl: malcolmImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "carl-jung",
@@ -416,8 +384,7 @@ const wiseFigures = [
     bio: "Pioneered analytical psychology. Explored archetypes, the collective unconscious, and individuation process.",
     votes: 6543,
     imageUrl: jungImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "ada-lovelace",
@@ -427,8 +394,7 @@ const wiseFigures = [
     bio: "Wrote the first algorithm intended for machine processing. Visionary who saw computers' potential beyond calculation.",
     votes: 7654,
     imageUrl: adaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "frederick-douglass",
@@ -438,8 +404,7 @@ const wiseFigures = [
     bio: "Knowledge makes a man unfit to be a slave. Escaped slavery to become America's most powerful orator for freedom.",
     votes: 5432,
     imageUrl: douglassImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "cleopatra",
@@ -449,8 +414,7 @@ const wiseFigures = [
     bio: "Brilliant multilingual ruler who commanded armies and allied with Rome to preserve Egyptian independence.",
     votes: 14321,
     imageUrl: cleopatraImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "plato",
@@ -460,8 +424,7 @@ const wiseFigures = [
     bio: "Founded the Academy in Athens. Explored ideal forms of reality and justice in works like The Republic.",
     votes: 10234,
     imageUrl: platoImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "mother-teresa",
@@ -471,8 +434,7 @@ const wiseFigures = [
     bio: "Not all of us can do great things. But we can do small things with great love. Founded the Missionaries of Charity.",
     votes: 9876,
     imageUrl: motherTeresaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "hannah-arendt",
@@ -482,8 +444,7 @@ const wiseFigures = [
     bio: "The banality of evil. Explored totalitarianism, power, and the human condition in The Origins of Totalitarianism.",
     votes: 3765,
     imageUrl: arendtImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "nikola-tesla",
@@ -493,8 +454,7 @@ const wiseFigures = [
     bio: "The present is theirs; the future is mine. Pioneered alternating current and wireless technology.",
     votes: 13456,
     imageUrl: teslaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "sappho",
@@ -504,8 +464,7 @@ const wiseFigures = [
     bio: "Love shook my heart like wind on a mountain. Ancient Greek lyric poet whose fragments influenced Western poetry.",
     votes: 2543,
     imageUrl: sapphoImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "vincent-van-gogh",
@@ -515,8 +474,7 @@ const wiseFigures = [
     bio: "I feel there is nothing more truly artistic than to love people. Transformed suffering into luminous masterpieces like Starry Night.",
     votes: 17654,
     imageUrl: vanGoghImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "emily-dickinson",
@@ -526,8 +484,7 @@ const wiseFigures = [
     bio: "I dwell in Possibility. Innovative poet who explored death, immortality, and nature in nearly 1,800 poems.",
     votes: 6234,
     imageUrl: emilyImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "zora-neale-hurston",
@@ -537,8 +494,7 @@ const wiseFigures = [
     bio: "I have been in Sorrow's kitchen. Anthropologist and author who celebrated Black Southern culture in Their Eyes Were Watching God.",
     votes: 4123,
     imageUrl: zoraImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "avicenna",
@@ -548,8 +504,7 @@ const wiseFigures = [
     bio: "Father of early modern medicine. His Canon of Medicine was used in universities for over 500 years.",
     votes: 5234,
     imageUrl: avicennaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "dorothy-day",
@@ -559,8 +514,7 @@ const wiseFigures = [
     bio: "We have all known the long loneliness. Journalist and activist who founded the Catholic Worker movement to serve the poor.",
     votes: 1876,
     imageUrl: dorothyImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "sun-tzu",
@@ -570,8 +524,7 @@ const wiseFigures = [
     bio: "Supreme excellence consists in breaking the enemy's resistance without fighting. Author of The Art of War, timeless wisdom on strategy.",
     votes: 11987,
     imageUrl: sunTzuImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "pythagoras",
@@ -581,8 +534,7 @@ const wiseFigures = [
     bio: "Number rules the universe. Mystic philosopher who discovered mathematical harmony in music, geometry, and cosmos.",
     votes: 8901,
     imageUrl: pythagorasImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "moses",
@@ -592,8 +544,7 @@ const wiseFigures = [
     bio: "Let my people go. Led the Israelites from slavery to freedom and received the Ten Commandments on Mount Sinai.",
     votes: 16234,
     imageUrl: mosesImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "krishna",
@@ -603,8 +554,7 @@ const wiseFigures = [
     bio: "Perform your duty, but do not be attached to the fruits. Central figure of the Bhagavad Gita teaching dharma and devotion.",
     votes: 14987,
     imageUrl: krishnaImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
   {
     id: "hermes-trismegistus",
@@ -614,8 +564,7 @@ const wiseFigures = [
     bio: "As above, so below. Legendary wisdom keeper combining Egyptian and Greek mysteries, father of alchemy and hermetic philosophy.",
     votes: 7123,
     imageUrl: hermesImage,
-    chatReady: true,
-    chatUrl: "https://chatgpt.com/g/g-1vf04chMP-jesus-acim",
+    chatReady: false,
   },
 ];
 
