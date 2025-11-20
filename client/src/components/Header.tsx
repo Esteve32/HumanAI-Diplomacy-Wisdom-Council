@@ -30,14 +30,16 @@ export default function Header() {
 
           <div className="hidden md:flex items-center gap-8">
             <Button 
-              variant="ghost" 
+              variant="ghost"
+              className="min-h-11"
               onClick={() => scrollToSection('pathways')}
               data-testid="nav-pathways"
             >
               Pathways
             </Button>
             <Button 
-              variant="ghost" 
+              variant="ghost"
+              className="min-h-11"
               onClick={() => scrollToSection('pricing')}
               data-testid="nav-pricing"
             >
@@ -45,6 +47,7 @@ export default function Header() {
             </Button>
             <Button 
               variant="default"
+              className="min-h-11"
               data-testid="button-get-started"
               onClick={() => console.log('Get started clicked')}
             >
@@ -67,7 +70,7 @@ export default function Header() {
           <div className="md:hidden pt-4 pb-2 space-y-2">
             <Button 
               variant="ghost" 
-              className="w-full justify-start"
+              className="w-full justify-start min-h-11"
               onClick={() => scrollToSection('pathways')}
               data-testid="nav-mobile-pathways"
             >
@@ -75,7 +78,7 @@ export default function Header() {
             </Button>
             <Button 
               variant="ghost" 
-              className="w-full justify-start"
+              className="w-full justify-start min-h-11"
               onClick={() => scrollToSection('pricing')}
               data-testid="nav-mobile-pricing"
             >
@@ -83,7 +86,7 @@ export default function Header() {
             </Button>
             <Button 
               variant="default"
-              className="w-full"
+              className="w-full min-h-11"
               data-testid="button-mobile-get-started"
               onClick={() => console.log('Get started clicked')}
             >

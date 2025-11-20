@@ -200,7 +200,7 @@ const chat = await wisdom.chat({
                   </div>
                 </div>
 
-                <Button className="w-full" data-testid="button-workflow-templates">
+                <Button className="w-full min-h-11" data-testid="button-workflow-templates">
                   Download Workflow Templates
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
@@ -275,11 +275,11 @@ const chat = await wisdom.chat({
                 </div>
 
                 <div className="flex gap-3">
-                  <Button className="flex-1" data-testid="button-api-docs">
+                  <Button className="flex-1 min-h-11" data-testid="button-api-docs">
                     View Documentation
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" className="flex-1" data-testid="button-get-api-key">
+                  <Button variant="outline" className="flex-1 min-h-11" data-testid="button-get-api-key">
                     Get API Key
                   </Button>
                 </div>

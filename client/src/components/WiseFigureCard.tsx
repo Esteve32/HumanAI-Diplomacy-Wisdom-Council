@@ -70,7 +70,7 @@ export default function WiseFigureCard({
             size="default"
             onClick={handleVote}
             disabled={hasVoted}
-            className="flex-1"
+            className="flex-1 min-h-11"
             data-testid={`button-vote-${id}`}
           >
             <ThumbsUp className="mr-2 h-4 w-4" />

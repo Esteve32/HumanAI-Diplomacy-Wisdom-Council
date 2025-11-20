@@ -48,7 +48,7 @@ export default function PricingSection() {
 
             <Button 
               variant="outline" 
-              className="w-full" 
+              className="w-full min-h-11" 
               size="lg"
               data-testid="button-start-free"
               onClick={() => console.log('Start free clicked')}
@@ -103,7 +103,7 @@ export default function PricingSection() {
             </ul>
 
             <Button 
-              className="w-full" 
+              className="w-full min-h-11" 
               size="lg"
               data-testid="button-upgrade-api"
               onClick={() => console.log('Upgrade to API clicked')}
@@ -121,13 +121,14 @@ export default function PricingSection() {
           <p className="text-muted-foreground mb-4">
             Need custom enterprise solutions? Volume discounts available.
           </p>
-          <button 
-            className="text-primary hover:underline font-medium"
+          <Button 
+            variant="link"
+            className="min-h-11 font-medium"
             data-testid="button-contact-sales"
             onClick={() => console.log('Contact sales clicked')}
           >
             Contact Sales →
-          </button>
+          </Button>
         </div>
       </div>
     </section>
