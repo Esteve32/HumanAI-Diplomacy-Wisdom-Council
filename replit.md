@@ -71,4 +71,33 @@ Preferred communication style: Simple, everyday language.
 
 ### Asset Management
 - Static assets in `attached_assets` for wise figure portraits.
+
+## Recent Changes (November 20, 2025)
+
+### Domain & Branding Update (COMPLETE - Latest)
+- ✅ Updated domain from wisdom.greenelephant.ai to **wisdom.greenelephant.org**
+- ✅ Renamed project from "Wisdom from the Past" to **"Wisdom Council"**
+- ✅ Implemented dynamic share link generation:
+  - Each visitor gets a unique 8-character referral code stored in localStorage
+  - Share links format: `https://wisdom.greenelephant.org/share/[unique-code]`
+  - Actual social sharing buttons now functional (Twitter, LinkedIn, Facebook)
+- ✅ Updated HTML metadata and Open Graph tags for new branding
+- 📝 **Next step**: Configure DNS for wisdom.greenelephant.org in Replit Deployments after publishing
+
+### Navigation & Ordering Improvements (COMPLETE)
+- ✅ Reverted vintage/sepia image treatment - restored original portrait images
+- ✅ Fixed ConversationsSection buttons to link to internal pages instead of external ChatGPT URLs
+- ✅ Socrates button navigates to /chat/2 (working internal chat)
+- ✅ Rumi and Marcus Aurelius buttons scroll to voting section (backend support pending)
+- ✅ "+ 50 More" button scrolls to voting section
+- ✅ Reordered voting section to prioritize running GPTs at top:
+  1. Rosa Parks
+  2. Socrates
+  3. Maria Montessori
+  4. Mary Wollstonecraft
+  5. Bell Hooks
+  6. Simone de Beauvoir
+  7. Jesus Christ
+  8. Rumi
+- 📝 Note: Changed ExternalLink icons to MessageSquare for internal navigation buttons
 ```
