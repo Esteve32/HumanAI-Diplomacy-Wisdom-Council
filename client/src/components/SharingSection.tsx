@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Share2, Copy, Check, Linkedin, Facebook } from "lucide-react";
-import { SiX } from "react-icons/si";
+import { Share2, Copy, Check, Twitter, Linkedin, Facebook } from "lucide-react";
 
 function generateReferralCode(): string {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
@@ -94,7 +93,7 @@ export default function SharingSection() {
               data-testid="button-share-twitter"
               className="flex-1 sm:flex-initial"
             >
-              <SiX className="mr-2 h-4 w-4" />
+              <Twitter className="mr-2 h-4 w-4" />
               Share on X
             </Button>
             <Button
