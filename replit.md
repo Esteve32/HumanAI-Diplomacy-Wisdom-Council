@@ -1,7 +1,7 @@
-# Wisdom from the Past
+# Wisdom Council
 
 ## Overview
-**Wisdom from the Past** is a landing page application offering AI-powered conversations with historical wisdom figures. It aims to position AI as a tool for internal growth, providing "fireside chats" with personalities like Socrates and Rumi. The platform is a full-stack TypeScript monorepo with a React frontend and Express backend, showcasing ChatGPT integrations, low-code workflow tools (n8n/MCP), and API access for developers. The project's ambition is to create a unique engagement model for AI, focusing on philosophical and personal development rather than just productivity.
+**Wisdom Council** (formerly "Wisdom from the Past") is a landing page application offering AI-powered conversations with historical wisdom figures. It aims to position AI as a tool for internal growth, providing "fireside chats" with personalities like Socrates and Rumi. The platform is a full-stack TypeScript monorepo with a React frontend and Express backend, showcasing ChatGPT integrations, low-code workflow tools (n8n/MCP), and API access for developers. The project's ambition is to create a unique engagement model for AI, focusing on philosophical and personal development rather than just productivity.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -13,7 +13,8 @@ Preferred communication style: Simple, everyday language.
 - **Routing**: Wouter for client-side routing.
 - **UI Components**: shadcn/ui built on Radix UI with Tailwind CSS, using a "new-york" style variant and custom design tokens.
 - **State Management**: TanStack Query (React Query) for server state.
-- **Design Philosophy**: Inspired by Product Hunt, Linear, Stripe, and Medium, emphasizing clean typography (Inter for UI, serif for body) and a cohesive "Wisdom from the Past" aesthetic with harmonized vintage-style portraits.
+- **Design Philosophy**: Inspired by Product Hunt, Linear, Stripe, and Medium, emphasizing clean typography (Inter for UI, serif for body) and a cohesive "Wisdom Council" aesthetic.
+- **Domain**: wisdom.greenelephant.org (custom subdomain for Green Elephant organization)
 - **Key Sections**: Hero, voting/leaderboard for figures, three engagement pathway options (ChatGPT, Low-Code, API), social sharing, pricing (free tier + API access), and testimonials.
 - **Chat UI**: Individual chat pages (`/chat/:figureId`) with real-time messaging, avatars, and a multi-dimensional geometric "ThinkingAnimation" loading indicator.
 - **AI-to-AI Dialogue UI**: A dedicated page (`/ai-dialogue`) for staging and viewing conversations between two AI personas.

@@ -1,12 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Share2, Copy, Check, Twitter, Linkedin, Facebook } from "lucide-react";
 
+function generateReferralCode(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+  let code = '';
+  for (let i = 0; i < 8; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+
 export default function SharingSection() {
-  const [shareLink, setShareLink] = useState("https://wisdom.greenelephant.ai/share/abc123");
+  const [referralCode, setReferralCode] = useState("");
+  const [shareLink, setShareLink] = useState("");
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    let storedCode = localStorage.getItem('referralCode');
+    if (!storedCode) {
+      storedCode = generateReferralCode();
+      localStorage.setItem('referralCode', storedCode);
+    }
+    setReferralCode(storedCode);
+    setShareLink(`https://wisdom.greenelephant.org/share/${storedCode}`);
+  }, []);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(shareLink);
@@ -16,7 +36,18 @@ export default function SharingSection() {
   };
 
   const handleShare = (platform: string) => {
-    console.log(`Sharing to ${platform}`);
+    const text = encodeURIComponent("Join the Wisdom Council - Have conversations with AI embodiments of history's wisest minds");
+    const url = encodeURIComponent(shareLink);
+    
+    const urls = {
+      twitter: `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`
+    };
+    
+    if (urls[platform as keyof typeof urls]) {
+      window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400');
+    }
   };
 
   return (
