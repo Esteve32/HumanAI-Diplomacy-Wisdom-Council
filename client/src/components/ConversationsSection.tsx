@@ -9,6 +9,7 @@ export default function ConversationsSection() {
   const [, setLocation] = useLocation();
   const [copiedWorkflow, setCopiedWorkflow] = useState(false);
   const [copiedAPI, setCopiedAPI] = useState(false);
+  const [workflowSectionOpen, setWorkflowSectionOpen] = useState(false);
   const [devSectionOpen, setDevSectionOpen] = useState(false);
 
   const handleCopy = (text: string, type: 'workflow' | 'api') => {
@@ -65,82 +66,31 @@ const chat = await wisdom.chat({
             </p>
             
             <Card className="p-8 w-full max-w-2xl">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Button 
-                  variant="outline" 
-                  className="justify-start h-auto py-6 text-left"
-                  data-testid="button-chat-socrates"
-                  onClick={() => setLocation('/chat/2')}
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <MessageSquare className="h-5 w-5 shrink-0" />
-                    <div>
-                      <div className="font-semibold">Socrates</div>
-                      <div className="text-sm text-muted-foreground">Question everything</div>
-                    </div>
-                  </div>
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  className="justify-start h-auto py-6 text-left"
-                  data-testid="button-chat-marcus"
-                  onClick={() => {
-                    const element = document.getElementById('voting');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <MessageSquare className="h-5 w-5 shrink-0" />
-                    <div>
-                      <div className="font-semibold">Marcus Aurelius</div>
-                      <div className="text-sm text-muted-foreground">Build resilience</div>
-                    </div>
-                  </div>
-                </Button>
-
-                <Button 
-                  variant="outline" 
-                  className="justify-start h-auto py-6 text-left"
-                  data-testid="button-chat-rumi"
-                  onClick={() => {
-                    const element = document.getElementById('voting');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <MessageSquare className="h-5 w-5 shrink-0" />
-                    <div>
-                      <div className="font-semibold">Rumi</div>
-                      <div className="text-sm text-muted-foreground">Find meaning</div>
-                    </div>
-                  </div>
-                </Button>
-
-                <Button 
-                  variant="outline" 
-                  className="justify-start h-auto py-6 text-left"
-                  data-testid="button-chat-all"
-                  onClick={() => {
-                    const element = document.getElementById('voting');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <MessageSquare className="h-5 w-5 shrink-0" />
-                    <div>
-                      <div className="font-semibold">+ 50 More</div>
-                      <div className="text-sm text-muted-foreground">Explore all figures</div>
-                    </div>
-                  </div>
-                </Button>
-              </div>
+              <Mail className="h-10 w-10 text-primary mx-auto mb-4" />
+              <h3 className="font-display text-xl font-bold mb-3 text-center">
+                Suggest a New Wisdom Persona
+              </h3>
+              <p className="text-muted-foreground mb-6 text-center">
+                Have an idea for a wise historical figure we should add? We'd love to hear your suggestion.
+              </p>
+              <Button 
+                size="lg"
+                className="w-full min-h-11"
+                data-testid="button-suggest-persona"
+                onClick={() => {
+                  const subject = encodeURIComponent("New Wisdom Persona Suggestion");
+                  const body = encodeURIComponent(
+                    "I would love to suggest a new wisdom persona:\n\n" +
+                    "Name: [Please add the name here]\n\n" +
+                    "Why this person would be valuable:\n[Please explain why you think this person should be included]\n\n" +
+                    "What topics they could help with:\n[Optional: What areas of wisdom or questions would they be good for?]\n\n"
+                  );
+                  window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
+                }}
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                Suggest a Persona
+              </Button>
               
               <div className="mt-6 p-4 bg-muted/50 rounded-lg text-left">
                 <p className="text-sm text-muted-foreground">
@@ -150,19 +100,34 @@ const chat = await wisdom.chat({
             </Card>
           </div>
 
-          {/* Pathway 2: Workflow Builders */}
-          <div className="flex flex-col items-center text-center" id="pathway-workflow">
-            <div className="bg-primary/10 p-6 rounded-full mb-8">
-              <Blocks className="h-12 w-12 text-primary" />
-            </div>
-            <h3 className="font-display text-3xl font-bold mb-4">
-              Workflow Integration
-            </h3>
-            <p className="text-lg text-muted-foreground max-w-xl mb-8">
-              Integrate wisdom conversations into your automation workflows with n8n, Zapier, Make, and other no-code platforms.
-            </p>
-            
-            <Card className="p-8 w-full max-w-2xl text-left">
+          {/* Pathway 2: Workflow Builders (Collapsible) */}
+          <Collapsible open={workflowSectionOpen} onOpenChange={setWorkflowSectionOpen}>
+            <div className="flex flex-col items-center text-center" id="pathway-workflow">
+              <CollapsibleTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="mb-6 min-h-11"
+                  data-testid="button-toggle-workflow-section"
+                >
+                  <Blocks className="mr-2 h-5 w-5" />
+                  Workflow Integration
+                  {workflowSectionOpen ? <ChevronUp className="ml-2 h-4 w-4" /> : <ChevronDown className="ml-2 h-4 w-4" />}
+                </Button>
+              </CollapsibleTrigger>
+              
+              <CollapsibleContent className="w-full">
+                <div className="flex flex-col items-center text-center pt-6">
+                  <div className="bg-primary/10 p-6 rounded-full mb-8">
+                    <Blocks className="h-12 w-12 text-primary" />
+                  </div>
+                  <h3 className="font-display text-3xl font-bold mb-4">
+                    Workflow Integration
+                  </h3>
+                  <p className="text-lg text-muted-foreground max-w-xl mb-8">
+                    Integrate wisdom conversations into your automation workflows with n8n, Zapier, Make, and other no-code platforms.
+                  </p>
+                  
+                  <Card className="p-8 w-full max-w-2xl text-left">
               <div className="space-y-6">
                 <div>
                   <h4 className="font-semibold mb-3">Compatible Platforms</h4>
@@ -225,6 +190,9 @@ const chat = await wisdom.chat({
               </div>
             </Card>
           </div>
+        </CollapsibleContent>
+      </div>
+    </Collapsible>
 
           {/* Pathway 3: Developers (Collapsible) */}
           <Collapsible open={devSectionOpen} onOpenChange={setDevSectionOpen}>
@@ -324,39 +292,8 @@ const chat = await wisdom.chat({
           </Collapsible>
         </div>
 
-        {/* Suggest New Persona CTA */}
-        <div className="mt-32 text-center">
-          <Card className="max-w-2xl mx-auto p-8">
-            <Mail className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h3 className="font-display text-2xl font-bold mb-3">
-              Suggest a New Wisdom Persona
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Have an idea for a wise historical figure we should add? We'd love to hear your suggestion.
-            </p>
-            <Button 
-              size="lg"
-              className="min-h-11"
-              data-testid="button-suggest-persona"
-              onClick={() => {
-                const subject = encodeURIComponent("New Wisdom Persona Suggestion");
-                const body = encodeURIComponent(
-                  "I would love to suggest a new wisdom persona:\n\n" +
-                  "Name: [Please add the name here]\n\n" +
-                  "Why this person would be valuable:\n[Please explain why you think this person should be included]\n\n" +
-                  "What topics they could help with:\n[Optional: What areas of wisdom or questions would they be good for?]\n\n"
-                );
-                window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
-              }}
-            >
-              <Mail className="mr-2 h-5 w-5" />
-              Suggest a Persona
-            </Button>
-          </Card>
-        </div>
-
         {/* Bottom CTA - Clear about famous historical personas */}
-        <div className="mt-16 text-center">
+        <div className="mt-32 text-center">
           <div className="max-w-3xl mx-auto p-8 bg-muted/30 rounded-lg">
             <h3 className="font-display text-3xl font-bold mb-4">
               Explore Conversations with Famous Wise Historical Personas
