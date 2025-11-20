@@ -74,7 +74,31 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (November 20, 2025)
 
-### UI Reorganization & Collapsible Sections (COMPLETE - Latest)
+### GDPR Compliance & Site Expansion (COMPLETE - Latest)
+- ✅ **Ready Personas Gating**: Updated VotingSection to show Chat button ONLY for ready personas (5 of 51):
+  - rosa-parks, socrates, simone-de-beauvoir, jesus-christ, rumi have `chatReady: true`
+  - All other 46 personas display only Vote button (chatReady: false)
+- ✅ **GDPR Email Consent System**: Implemented explicit consent tracking for all email collection:
+  - Newsletter signup (Footer): Requires checkbox consent before submission
+  - Contact form: Requires checkbox consent before sending
+  - Both forms include consent confirmation in mailto body to esteve@greenelephant.org
+  - Submit buttons disabled until consent provided (better UX than toast errors)
+- ✅ **New Information Pages** created with proper routing:
+  - `/api-docs` - WIP page for API Documentation with early access request
+  - `/mcp-templates` - WIP page for MCP Templates with notification signup
+  - `/getting-started` - Comprehensive guide with 3-step onboarding process
+  - `/contact` - GDPR-compliant contact form with explicit consent
+- ✅ **Footer Redesign**: 
+  - Removed Blog link (not needed for beta)
+  - All links properly wired: Wisdom Library scrolls to voting, Resources link to new pages
+  - Newsletter signup with GDPR consent checkbox and validation
+- ✅ **Legal Pages Updated**:
+  - Privacy Policy: Updated contact to esteve@greenelephant.org, GDPR/CCPA compliant
+  - Terms of Service: Updated branding to "Wisdom Council", beta disclaimers, proper contact info
+- ✅ **E2E Testing**: All features verified via Playwright including:
+  - Navigation to all pages, GDPR consent enforcement, chat button gating, mailto flows
+
+### UI Reorganization & Collapsible Sections (COMPLETE)
 - ✅ Moved "Suggest a New Wisdom Persona" into the Free Conversations section
 - ✅ Replaced the 4 figure buttons (Socrates, Marcus Aurelius, Rumi, + 50 More) with suggest persona form
 - ✅ Made "Workflow Integration" section collapsible to reduce visual clutter
