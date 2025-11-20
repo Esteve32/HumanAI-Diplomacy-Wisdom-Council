@@ -1,16 +1,54 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { Twitter, Linkedin, Github } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const [newsletterConsent, setNewsletterConsent] = useState(false);
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
 
   const handleSubscribe = () => {
-    console.log('Subscribe:', email);
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!newsletterConsent) {
+      toast({
+        title: "Consent Required",
+        description: "Please confirm that you consent to receive our newsletter.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const subject = encodeURIComponent("Newsletter Subscription");
+    const body = encodeURIComponent(
+      `I would like to subscribe to the Wisdom Council newsletter.\n\n` +
+      `Email: ${email}\n` +
+      `Consent: Yes (explicitly provided)\n\n` +
+      `I consent to receive weekly wisdom insights and updates about Wisdom Council.`
+    );
+    
+    window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
+    
+    toast({
+      title: "Newsletter Subscription",
+      description: "Opening your email client to complete subscription.",
+    });
+    
     setEmail("");
+    setNewsletterConsent(false);
   };
 
   return (
@@ -64,22 +102,70 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Wisdom Library</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-all-figures">
+                <button 
+                  onClick={() => {
+                    setLocation('/');
+                    setTimeout(() => {
+                      const element = document.getElementById('voting');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-all-figures"
+                >
                   All Figures
                 </button>
               </li>
               <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-philosophers">
+                <button 
+                  onClick={() => {
+                    setLocation('/');
+                    setTimeout(() => {
+                      const element = document.getElementById('voting');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-philosophers"
+                >
                   Philosophers
                 </button>
               </li>
               <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-poets">
+                <button 
+                  onClick={() => {
+                    setLocation('/');
+                    setTimeout(() => {
+                      const element = document.getElementById('voting');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-poets"
+                >
                   Poets & Artists
                 </button>
               </li>
               <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-leaders">
+                <button 
+                  onClick={() => {
+                    setLocation('/');
+                    setTimeout(() => {
+                      const element = document.getElementById('voting');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-leaders"
+                >
                   Leaders & Activists
                 </button>
               </li>
@@ -90,24 +176,19 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-api-docs-footer">
+                <Link href="/api-docs" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-api-docs-footer">
                   API Documentation
-                </button>
+                </Link>
               </li>
               <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-mcp-templates">
+                <Link href="/mcp-templates" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-mcp-templates">
                   MCP Templates
-                </button>
+                </Link>
               </li>
               <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-guide">
+                <Link href="/getting-started" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-guide">
                   Getting Started Guide
-                </button>
-              </li>
-              <li>
-                <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-blog">
-                  Blog
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -117,17 +198,33 @@ export default function Footer() {
             <p className="text-sm text-muted-foreground mb-4">
               Get weekly wisdom insights in your inbox
             </p>
-            <div className="flex gap-2">
+            <div className="space-y-3">
               <Input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 data-testid="input-newsletter-email"
-                className="flex-1"
               />
+              <div className="flex items-start gap-2">
+                <Checkbox
+                  id="newsletter-consent"
+                  checked={newsletterConsent}
+                  onCheckedChange={(checked) => setNewsletterConsent(checked as boolean)}
+                  data-testid="checkbox-newsletter-consent"
+                  className="mt-0.5"
+                />
+                <label
+                  htmlFor="newsletter-consent"
+                  className="text-xs text-muted-foreground cursor-pointer leading-relaxed"
+                >
+                  I consent to receive emails about Wisdom Council
+                </label>
+              </div>
               <Button 
                 onClick={handleSubscribe}
+                disabled={!newsletterConsent || !email}
+                className="w-full"
                 data-testid="button-subscribe"
               >
                 Subscribe
@@ -147,9 +244,9 @@ export default function Footer() {
             <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-terms">
               Terms of Service
             </Link>
-            <button className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-contact">
+            <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-contact">
               Contact
-            </button>
+            </Link>
           </div>
         </div>
       </div>
