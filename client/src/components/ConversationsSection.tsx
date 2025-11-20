@@ -1,10 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Blocks, Cloud, ExternalLink, Copy, Check, ChevronDown, ChevronUp } from "lucide-react";
+import { Sparkles, Blocks, Cloud, MessageSquare, ExternalLink, Copy, Check, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
+import { useLocation } from "wouter";
 
 export default function ConversationsSection() {
+  const [, setLocation] = useLocation();
   const [copiedWorkflow, setCopiedWorkflow] = useState(false);
   const [copiedAPI, setCopiedAPI] = useState(false);
   const [devSectionOpen, setDevSectionOpen] = useState(false);
@@ -68,10 +70,10 @@ const chat = await wisdom.chat({
                   variant="outline" 
                   className="justify-start h-auto py-6 text-left"
                   data-testid="button-chat-socrates"
-                  onClick={() => window.open('https://chatgpt.com/g/g-1vf04chMP-jesus-acim', '_blank')}
+                  onClick={() => setLocation('/chat/2')}
                 >
                   <div className="flex items-center gap-3 w-full">
-                    <ExternalLink className="h-5 w-5 shrink-0" />
+                    <MessageSquare className="h-5 w-5 shrink-0" />
                     <div>
                       <div className="font-semibold">Socrates</div>
                       <div className="text-sm text-muted-foreground">Question everything</div>
@@ -83,10 +85,15 @@ const chat = await wisdom.chat({
                   variant="outline" 
                   className="justify-start h-auto py-6 text-left"
                   data-testid="button-chat-marcus"
-                  onClick={() => console.log('Open Marcus Aurelius')}
+                  onClick={() => {
+                    const element = document.getElementById('voting');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   <div className="flex items-center gap-3 w-full">
-                    <ExternalLink className="h-5 w-5 shrink-0" />
+                    <MessageSquare className="h-5 w-5 shrink-0" />
                     <div>
                       <div className="font-semibold">Marcus Aurelius</div>
                       <div className="text-sm text-muted-foreground">Build resilience</div>
@@ -98,10 +105,15 @@ const chat = await wisdom.chat({
                   variant="outline" 
                   className="justify-start h-auto py-6 text-left"
                   data-testid="button-chat-rumi"
-                  onClick={() => console.log('Open Rumi')}
+                  onClick={() => {
+                    const element = document.getElementById('voting');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   <div className="flex items-center gap-3 w-full">
-                    <ExternalLink className="h-5 w-5 shrink-0" />
+                    <MessageSquare className="h-5 w-5 shrink-0" />
                     <div>
                       <div className="font-semibold">Rumi</div>
                       <div className="text-sm text-muted-foreground">Find meaning</div>
@@ -113,10 +125,15 @@ const chat = await wisdom.chat({
                   variant="outline" 
                   className="justify-start h-auto py-6 text-left"
                   data-testid="button-chat-all"
-                  onClick={() => console.log('View all')}
+                  onClick={() => {
+                    const element = document.getElementById('voting');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   <div className="flex items-center gap-3 w-full">
-                    <ExternalLink className="h-5 w-5 shrink-0" />
+                    <MessageSquare className="h-5 w-5 shrink-0" />
                     <div>
                       <div className="font-semibold">+ 50 More</div>
                       <div className="text-sm text-muted-foreground">Explore all figures</div>
