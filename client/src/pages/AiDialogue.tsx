@@ -195,18 +195,24 @@ export default function AiDialogue() {
             {isLoadingMessages || isCreatingDialogue ? (
               <Card className="p-12 shadow-lg">
                 <div className="flex flex-col items-center justify-center space-y-6">
-                  <div className="relative w-24 h-24">
+                  <div className="relative w-32 h-32">
                     <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
-                    <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse'}} />
+                    <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}} />
+                    <div className="absolute inset-4 rounded-full border-3 border-transparent border-l-amber-500 opacity-30 animate-spin" style={{animationDuration: '2s'}} />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-4xl opacity-20">🔥</div>
+                      <div className="text-5xl opacity-30 animate-pulse">🌉</div>
                     </div>
                   </div>
-                  <div className="text-center">
-                    <p className="text-muted-foreground">
-                      Kindling a conversation between {persona1?.name} and {persona2?.name}...
+                  <div className="text-center max-w-lg">
+                    <p className="text-base font-medium text-foreground mb-2">
+                      Building a bridge across centuries of wisdom...
                     </p>
-                    <p className="text-xs text-muted-foreground mt-2">(This may take 30-60 seconds)</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      Connecting {persona1?.name} ({persona1?.era}) and {persona2?.name} ({persona2?.era})
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-3">
+                      ✨ We're orchestrating a meeting of minds separated by centuries. This transcendent conversation takes 30-60 seconds to kindle. Your patience bridges time itself!
+                    </p>
                   </div>
                 </div>
               </Card>

@@ -203,16 +203,20 @@ export default function Chat() {
               {isLoadingMessages ? (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="space-y-6 flex flex-col items-center">
-                    <div className="relative w-24 h-24">
+                    <div className="relative w-32 h-32">
                       <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
-                      <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse'}} />
+                      <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}} />
+                      <div className="absolute inset-4 rounded-full border-3 border-transparent border-l-amber-500 opacity-30 animate-spin" style={{animationDuration: '2s'}} />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-4xl opacity-20">🔥</div>
+                        <div className="text-5xl opacity-30 animate-pulse">🕰️</div>
                       </div>
                     </div>
-                    <div className="text-center">
-                      <p className="text-sm text-muted-foreground">
-                        Stoking the fires of wisdom...
+                    <div className="text-center max-w-md">
+                      <p className="text-base font-medium text-foreground mb-2">
+                        Bridging {Math.abs(new Date().getFullYear() - parseInt(persona.era.match(/\d+/)?.[0] || "0"))} years of space and time...
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Warming the fireside for your conversation across the centuries. This might take a moment! ✨
                       </p>
                     </div>
                   </div>

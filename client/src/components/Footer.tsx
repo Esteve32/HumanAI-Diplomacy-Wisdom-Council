@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
-import { Linkedin, Github } from "lucide-react";
+import { Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
 import { useToast } from "@/hooks/use-toast";
@@ -75,7 +75,7 @@ export default function Footer() {
                 size="icon" 
                 variant="ghost"
                 data-testid="button-social-x"
-                onClick={() => console.log('X clicked')}
+                onClick={() => window.open('https://x.com/GreenElephantOy', '_blank')}
               >
                 <span className="text-sm font-bold">𝕏</span>
               </Button>
@@ -83,17 +83,33 @@ export default function Footer() {
                 size="icon" 
                 variant="ghost"
                 data-testid="button-social-linkedin"
-                onClick={() => console.log('LinkedIn clicked')}
+                onClick={() => window.open('https://fi.linkedin.com/company/greenelephant-org', '_blank')}
               >
                 <Linkedin className="h-4 w-4" />
               </Button>
               <Button 
                 size="icon" 
                 variant="ghost"
-                data-testid="button-social-github"
-                onClick={() => console.log('GitHub clicked')}
+                data-testid="button-social-facebook"
+                onClick={() => window.open('https://www.facebook.com/GreenElephant.org/', '_blank')}
               >
-                <Github className="h-4 w-4" />
+                <Facebook className="h-4 w-4" />
+              </Button>
+              <Button 
+                size="icon" 
+                variant="ghost"
+                data-testid="button-social-instagram"
+                onClick={() => window.open('https://www.instagram.com/greenelephantorg/', '_blank')}
+              >
+                <Instagram className="h-4 w-4" />
+              </Button>
+              <Button 
+                size="icon" 
+                variant="ghost"
+                data-testid="button-social-youtube"
+                onClick={() => window.open('https://www.youtube.com/channel/UCXvLX3yhS8y_8vv4ltRClIg', '_blank')}
+              >
+                <Youtube className="h-4 w-4" />
               </Button>
             </div>
           </div>
