@@ -113,7 +113,18 @@ Preferred communication style: Simple, everyday language.
 - ✅ Integrated chat navigation from landing page WiseFigureCard components
 - ✅ End-to-end testing passed for complete chat flow
 
+### UX & Messaging Improvements (COMPLETE)
+- ✅ Renamed navigation "Pathways" → "Conversations" for clarity
+- ✅ Updated hero section to emphasize "AI embodiments of famous wise historical figures"
+- ✅ Changed hero CTA from "Begin Your Journey" → "Start a Conversation"
+- ✅ Renamed PathwaysSection → ConversationsSection with updated messaging
+- ✅ Made Developer Access section collapsible (hidden by default, expandable for technical users)
+- ✅ Updated all CTAs to emphasize conversations, staging dialogues, and observing interactions
+- ✅ Added prominent bottom CTA clarifying "famous wise historical personas" with specific examples
+- ✅ Improved non-technical user discoverability while maintaining developer resources
+
 ### Architecture Notes
 - Persona metadata currently duplicated between frontend (personasMap) and backend (personaDatabase)
 - Future improvement: Consolidate persona definitions into shared module to prevent drift
 - In-memory storage suitable for MVP; consider PostgreSQL for production with conversation persistence
+- Developer section uses Shadcn Collapsible component for progressive disclosure
