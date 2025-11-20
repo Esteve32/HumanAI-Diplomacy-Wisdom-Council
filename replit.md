@@ -51,12 +51,23 @@ Preferred communication style: Simple, everyday language.
 **Database Schema** (via Drizzle ORM):
 - **wise_figures table**: Stores historical figures with fields for id, name, era, title, bio, sample questions, ChatGPT links, vote counts, and image URLs
 - **votes table**: Tracks user votes with figure_id and session_id for vote deduplication
+- **conversations table**: Stores chat conversations with id, figureId (numeric 1-51), sessionId, and createdAt
+- **messages table**: Stores individual messages with id, conversationId, role (user/assistant), content, and createdAt
 
 **ORM**: Drizzle ORM configured for PostgreSQL with schema validation using Zod. The configuration expects a `DATABASE_URL` environment variable and outputs migrations to the `./migrations` directory.
 
 **Current Implementation**: The application uses an in-memory storage adapter during development, but the schema and Drizzle configuration indicate the architecture is prepared for PostgreSQL in production.
 
 **Session Management**: Uses `connect-pg-simple` for PostgreSQL-backed session storage (dependency present but not yet implemented in provided code).
+
+**Chat System (Phase 2 - COMPLETED)**:
+- **OpenAI Integration**: GPT-5 via Replit AI Integrations (no external API key required, billed to Replit credits)
+- **Persona Database**: Backend maintains personaDatabase mapping figureId to PersonaContext (name, era, title, bio)
+- **Dynamic Persona Responses**: Each wise figure generates AI responses in their unique voice and character
+- **Conversation Flow**: Users create conversations, send messages, receive persona-specific AI responses with conversation history
+- **Frontend Chat UI**: Individual chat pages per persona at /chat/:figureId with real-time messaging, avatars, and loading states
+- **Current Personas**: Simone de Beauvoir (1), Socrates (2), Jesus Christ (3) - verified multi-persona functionality
+- **Future Expansion**: 48 additional personas to be added to personaDatabase for complete 51-figure roster
 
 ### External Dependencies
 
@@ -80,10 +91,29 @@ Preferred communication style: Simple, everyday language.
 - TypeScript with strict mode enabled
 - ESBuild for server bundling
 
-**AI Integration Targets**: The application is designed to integrate with:
-- ChatGPT (via custom GPT links)
-- n8n (low-code workflow automation)
-- MCP (Model Context Protocol) workflows
-- Custom API access for developers
+**AI Integration**: 
+- **Phase 2 (Complete)**: Internal chat system using OpenAI GPT-5 via Replit AI Integrations
+- **Future Integration Pathways**: 
+  - ChatGPT custom GPTs (external links)
+  - n8n low-code workflow automation
+  - MCP (Model Context Protocol) workflows
+  - Developer API access for custom integrations
 
 **Asset Management**: Static assets stored in `attached_assets` directory with generated images for each wise figure portrait.
+
+## Recent Changes (November 20, 2025)
+
+### Phase 2: Chat System Implementation (COMPLETE)
+- ✅ Integrated OpenAI GPT-5 via Replit AI Integrations for persona-specific conversations
+- ✅ Extended data model with conversations and messages tables
+- ✅ Implemented full REST API for chat operations (create conversation, send messages, retrieve history)
+- ✅ Built frontend chat UI with persona headers, message bubbles, avatars, and loading states
+- ✅ Added dynamic persona selection - each figure responds in their unique voice
+- ✅ Verified multi-persona functionality (Simone de Beauvoir, Socrates, Jesus Christ)
+- ✅ Integrated chat navigation from landing page WiseFigureCard components
+- ✅ End-to-end testing passed for complete chat flow
+
+### Architecture Notes
+- Persona metadata currently duplicated between frontend (personasMap) and backend (personaDatabase)
+- Future improvement: Consolidate persona definitions into shared module to prevent drift
+- In-memory storage suitable for MVP; consider PostgreSQL for production with conversation persistence
