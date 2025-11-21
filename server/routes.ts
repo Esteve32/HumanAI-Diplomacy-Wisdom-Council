@@ -3,10 +3,10 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertConversationSchema, insertMessageSchema, insertAiDialogueSchema, insertActivityLogSchema } from "@shared/schema";
 import { generatePersonaResponse, generateDialogueResponse, PersonaContext } from "./openai";
+import type { Session } from "express-session";
 
 interface SessionRequest extends Request {
-  session: {
-    id: string;
+  session: Session & {
     isAdmin?: boolean;
   };
 }
@@ -75,7 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/conversations", async (req, res) => {
     const sessionReq = req as SessionRequest;
     try {
-      const sessionId = sessionReq.session?.id || "default-session";
+      const sessionId = sessionReq.sessionID || "default-session";
       const data = insertConversationSchema.omit({ sessionId: true }).parse(sessionReq.body);
       
       const conversation = await storage.createConversation({
@@ -93,7 +93,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/conversations", async (req, res) => {
     const sessionReq = req as SessionRequest;
     try {
-      const sessionId = sessionReq.session?.id || "default-session";
+      const sessionId = sessionReq.sessionID || "default-session";
       const conversations = await storage.getConversationsBySession(sessionId);
       res.json(conversations);
     } catch (error: any) {
@@ -174,7 +174,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai-dialogues", async (req, res) => {
     const sessionReq = req as SessionRequest;
     try {
-      const sessionId = sessionReq.session?.id || "default-session";
+      const sessionId = sessionReq.sessionID || "default-session";
       const data = insertAiDialogueSchema.omit({ sessionId: true }).parse(req.body);
       
       const dialogue = await storage.createAiDialogue({
@@ -235,7 +235,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const sessionReq = req as SessionRequest;
     try {
       const { email, cta, consentGiven } = req.body;
-      const sessionId = sessionReq.session?.id || "default-session";
+      const sessionId = sessionReq.sessionID || "default-session";
       
       await storage.createActivityLog({
         activityType: cta,
@@ -294,8 +294,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       if (password === adminPassword) {
-        sessionReq.session.isAdmin = true;
-        res.json({ success: true });
+        sessionReq.session.regenerate((err) => {
+          if (err) {
+            console.error("Session regeneration error:", err);
+            return res.status(500).json({ error: "Session error" });
+          }
+          sessionReq.session.isAdmin = true;
+          sessionReq.session.save((saveErr) => {
+            if (saveErr) {
+              console.error("Session save error:", saveErr);
+              return res.status(500).json({ error: "Session save error" });
+            }
+            res.json({ success: true });
+          });
+        });
       } else {
         res.status(401).json({ error: "Invalid password" });
       }

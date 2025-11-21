@@ -54,7 +54,7 @@ export default function AdminDashboard() {
   });
 
   const { data: dailyDigest } = useQuery<ActivityLog[]>({
-    queryKey: ["/api/admin/daily-digest", selectedDays],
+    queryKey: [`/api/admin/daily-digest?days=${selectedDays}`],
     enabled: authCheck?.isAdmin,
   });
 
