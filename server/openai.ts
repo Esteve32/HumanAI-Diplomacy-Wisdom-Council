@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { moderateContent, type ModerationResult } from "./perspective";
 
 // This is using Replit's AI Integrations service, which provides OpenAI-compatible API access without requiring your own OpenAI API key.
 // Charges are billed to your Replit credits.
@@ -7,13 +8,7 @@ const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY
 });
 
-export interface ModerationResult {
-  flagged: boolean;
-  categories: string[];
-  message?: string;
-}
-
-const HARMFUL_PATTERNS = {
+const HARMFUL_PATTERNS_LEGACY = {
   'hate-speech': [
     /\b(kill|murder|genocide|exterminate|eliminate)\s+(all\s+)?(jews|muslims|christians|blacks|whites|asians|lgbtq|gays|trans|immigrants|refugees)/i,
     /\b(n[i1!]gg[ae3]r|f[a4]gg[o0]t|ch[i1!]nk|sp[i1!]c|k[i1!]ke|r[e3]t[a4]rd|tr[a4]nn[y1!])\b/i,
@@ -43,24 +38,6 @@ const HARMFUL_PATTERNS = {
   ]
 };
 
-export async function moderateContent(text: string): Promise<ModerationResult> {
-  const lowerText = text.toLowerCase();
-  
-  for (const [category, patterns] of Object.entries(HARMFUL_PATTERNS)) {
-    for (const pattern of patterns) {
-      if (pattern.test(lowerText)) {
-        console.warn(`🛡️  Blocked harmful content - Category: ${category}`);
-        return {
-          flagged: true,
-          categories: [category],
-          message: `This message appears to contain harmful content related to ${category.replace('-', ' ')}. Our AI is designed to provide wisdom and personal growth support, not harmful information. If you're in crisis, please contact the Finland Mental Health Crisis Line at 09 2525 0111 (available 24/7).`
-        };
-      }
-    }
-  }
-  
-  return { flagged: false, categories: [] };
-}
 
 export interface PersonaContext {
   name: string;

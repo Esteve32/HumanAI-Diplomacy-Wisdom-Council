@@ -1,4 +1,8 @@
-# Content Moderation Test Cases
+# Content Moderation Test Cases - Perspective API
+
+## Implementation Status: ✅ Integrated (Pending API Key)
+
+The application uses Google Perspective API for production-grade content moderation.
 
 ## TODO: Implement automated tests before beta launch
 

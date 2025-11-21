@@ -6,6 +6,15 @@
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## Recent Updates (Nov 2025)
+- **Content Moderation**: Integrated Google Perspective API (free, ML-powered) for ACX compliance
+  - Screens all messages for toxicity, threats, hate speech, harmful content
+  - Replaces interim keyword-based filtering
+  - Production-ready (used by NYT, Reddit, WSJ)
+  - GDPR-compliant with `doNotStore` flag
+  - Requires `PERSPECTIVE_API_KEY` secret (see PERSPECTIVE_API_SETUP.md)
+  - Fallback: permissive mode if API unavailable (logs warning)
+
 ## System Architecture
 
 ### Frontend Architecture
