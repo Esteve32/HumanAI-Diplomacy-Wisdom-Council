@@ -13,7 +13,7 @@ export default function Footer() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     if (!email) {
       toast({
         title: "Email Required",
@@ -32,23 +32,42 @@ export default function Footer() {
       return;
     }
 
-    const subject = encodeURIComponent("Newsletter Subscription");
-    const body = encodeURIComponent(
-      `I would like to subscribe to the Wisdom Council newsletter.\n\n` +
-      `Email: ${email}\n` +
-      `Consent: Yes (explicitly provided)\n\n` +
-      `I consent to receive weekly wisdom insights and updates about Wisdom Council.`
-    );
-    
-    window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
-    
-    toast({
-      title: "Newsletter Subscription",
-      description: "Opening your email client to complete subscription.",
-    });
-    
-    setEmail("");
-    setNewsletterConsent(false);
+    try {
+      await fetch("/api/track-click", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          cta: "newsletter-subscribe",
+          consentGiven: true,
+        }),
+      });
+
+      const subject = encodeURIComponent("Newsletter Subscription");
+      const body = encodeURIComponent(
+        `I would like to subscribe to the Wisdom Council newsletter.\n\n` +
+        `Email: ${email}\n` +
+        `Consent: Yes (explicitly provided)\n\n` +
+        `I consent to receive weekly wisdom insights and updates about Wisdom Council.`
+      );
+      
+      window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
+      
+      toast({
+        title: "Newsletter Subscription",
+        description: "Opening your email client to complete subscription.",
+      });
+      
+      setEmail("");
+      setNewsletterConsent(false);
+    } catch (error) {
+      console.error("Error tracking subscription:", error);
+      toast({
+        title: "Error",
+        description: "There was an issue processing your subscription.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

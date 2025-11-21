@@ -196,10 +196,35 @@ export default function Chat() {
         </div>
       </header>
 
-      <div className="flex-1 overflow-hidden relative z-20">
-        <div className="container mx-auto px-4 h-full py-6">
-          <Card className="h-full flex flex-col shadow-lg">
-            <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
+      {isCreatingConversation ? (
+        <div className="flex-1 overflow-hidden relative z-20 flex items-center justify-center">
+          <div className="space-y-6 flex flex-col items-center">
+            <div className="relative w-32 h-32">
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
+              <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}} />
+              <div className="absolute inset-4 rounded-full border-3 border-transparent border-l-amber-500 opacity-30 animate-spin" style={{animationDuration: '2s'}} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-5xl opacity-30 animate-pulse">🕰️</div>
+              </div>
+            </div>
+            <div className="text-center max-w-md">
+              <p className="text-base font-medium text-foreground mb-2">
+                Kindling the conversation...
+              </p>
+              <p className="text-sm text-muted-foreground mb-1">
+                Preparing your fireside chat with {persona.name}
+              </p>
+              <p className="text-xs text-muted-foreground italic">
+                ✨ Bridging across centuries takes a moment—your patience transcends time!
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex-1 overflow-hidden relative z-20">
+          <div className="container mx-auto px-4 h-full py-6">
+            <Card className="h-full flex flex-col shadow-lg">
+              <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
               {isLoadingMessages ? (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="space-y-6 flex flex-col items-center">
@@ -303,8 +328,9 @@ export default function Chat() {
               </div>
             </div>
           </Card>
-        </div>
-      </div>
+            </div>
+          </div>
+        )}
     </div>
   );
 }

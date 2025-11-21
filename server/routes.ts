@@ -221,6 +221,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/track-click", async (req, res) => {
+    try {
+      const { email, cta, consentGiven } = req.body;
+      const timestamp = new Date().toISOString();
+      
+      const trackingData = {
+        email,
+        cta,
+        consentGiven,
+        timestamp,
+      };
+
+      console.log("📊 Click Tracking:", JSON.stringify(trackingData, null, 2));
+
+      try {
+        const sendgridApiKey = process.env.SENDGRID_API_KEY;
+        if (sendgridApiKey && email && cta) {
+          await fetch("https://api.sendgrid.com/v3/mail/send", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${sendgridApiKey}`,
+            },
+            body: JSON.stringify({
+              personalizations: [{
+                to: [{ email: "esteve@greenelephant.org" }],
+              }],
+              from: { email: "noreply@wisdomcouncil.org", name: "Wisdom Council" },
+              subject: `📊 Wisdom Council Click Tracking - ${cta}`,
+              html: `
+                <h3>User Action Tracked</h3>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Action:</strong> ${cta}</p>
+                <p><strong>GDPR Consent:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
+                <p><strong>Timestamp:</strong> ${timestamp}</p>
+              `,
+            }),
+          });
+          console.log("✅ Email sent to esteve@greenelephant.org");
+        }
+      } catch (emailError) {
+        console.log("📧 Email sending skipped (SendGrid not configured)");
+      }
+
+      res.json({ success: true, tracked: trackingData });
+    } catch (error: any) {
+      console.error("Error tracking click:", error);
+      res.status(400).json({ error: error.message });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
