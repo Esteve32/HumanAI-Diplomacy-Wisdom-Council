@@ -13,7 +13,7 @@ Preferred communication style: Simple, everyday language.
 - **Routing**: Wouter for client-side routing.
 - **UI Components**: shadcn/ui built on Radix UI with Tailwind CSS, using a "new-york" style variant and custom design tokens.
 - **State Management**: TanStack Query (React Query) for server state.
-- **Typography**: Archive font (display serif) for all headings with Georgia fallback; Lato (sans-serif) for body text with system font fallbacks. Font loading optimized with preload tags, font-display: swap, and custom CSS overrides for Tailwind Typography prose containers.
+- **Typography**: Inter font (bold sans-serif) for all headings with Georgia fallback; Lato (sans-serif) for body text with system font fallbacks. Font loading optimized with preload tags, font-display: swap, and custom CSS overrides for Tailwind Typography prose containers.
 - **Design Philosophy**: Inspired by Product Hunt, Linear, Stripe, and Medium, emphasizing clean typography and a cohesive "Wisdom Council" aesthetic with warm orange/amber gradients and fireside chat theme.
 - **Domain**: wisdom.greenelephant.org (custom subdomain for Green Elephant organization)
 - **Key Sections**: Hero, voting/leaderboard for figures, three engagement pathway options (ChatGPT, Low-Code, API), social sharing, pricing (free tier + API access), and testimonials.
@@ -75,6 +75,30 @@ Preferred communication style: Simple, everyday language.
 - Static assets in `attached_assets` for wise figure portraits.
 
 ## Recent Changes (November 21, 2025)
+
+### UI/UX Refinements & Filtering System (COMPLETE - Latest)
+- ✅ **Font Change**: Replaced Archive with Inter font for all headings
+  - Updated Google Fonts link to load Inter (400, 600, 700, 800, 900)
+  - Modified --font-display CSS variable to use Inter with Georgia fallback
+  - Matches estevepannetier.com aesthetic for brand consistency
+- ✅ **Logo Update**: Switched from white to black Green Elephant logo
+  - Header: Uses DashboardVersionOfficialLogo_LargeBlack@2x_1763744013740.png
+  - Footer: Same black logo for consistency
+  - Better visibility on light backgrounds
+- ✅ **Pricing CTA Fixes**:
+  - Contact Sales: Changed from ghost to primary/orange variant for better visibility
+  - Free Tier "Get Early Access": Now tracks click + opens mailto (previously only scrolled)
+  - API Tier "Join Waitlist": Added click tracking before mailto
+  - All buttons use async/await pattern: track → mailto with error handling
+- ✅ **Wisdom Library Filtering System**:
+  - Added `category` field to all 56 wise figures (philosopher/poet/leader)
+  - Categories: Philosophers (16), Poets & Artists (11), Leaders & Activists (29)
+  - Hash-based navigation: #filter-philosophers, #filter-poets, #filter-leaders, #filter-all
+  - Filter buttons display at top of voting section
+  - Footer Wisdom Library links update URL hash and scroll to voting
+  - Works alongside existing "Show All / Show Top 9" toggle
+- ✅ **E2E Testing**: All features verified via Playwright
+- 📝 **Impact**: Improved brand consistency, better CTA conversion tracking, shareable filtered URLs
 
 ### Admin System & Activity Tracking (COMPLETE - Latest)
 - ✅ **Activity Logging Database**: Created `activityLogs` table to track all user actions
