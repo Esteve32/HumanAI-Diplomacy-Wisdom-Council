@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertConversationSchema, insertMessageSchema, insertAiDialogueSchema, insertActivityLogSchema } from "@shared/schema";
 import { generatePersonaResponse, generateDialogueResponse, PersonaContext } from "./openai";
+import { sendActivityNotification } from "./email";
 import type { Session } from "express-session";
 
 interface SessionRequest extends Request {
@@ -81,6 +82,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const conversation = await storage.createConversation({
         ...data,
         sessionId,
+      });
+
+      // Send notification email
+      await sendActivityNotification("chat-created", null, {
+        "Figure ID": data.figureId,
+        "Conversation ID": conversation.id,
       });
       
       res.json(conversation);
@@ -189,6 +196,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ error: "One or both personas not found" });
       }
 
+      // Send notification email
+      await sendActivityNotification("ai-dialogue-created", null, {
+        "Persona 1": persona1.name,
+        "Persona 2": persona2.name,
+        "Topic": dialogue.topic,
+      });
+
       const conversationHistory: Array<{ personaId: number; content: string }> = [];
       
       for (let i = 0; i < 5; i++) {
@@ -246,35 +260,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("📊 Activity logged:", cta, email);
 
-      try {
-        const sendgridApiKey = process.env.SENDGRID_API_KEY;
-        if (sendgridApiKey && email && cta) {
-          await fetch("https://api.sendgrid.com/v3/mail/send", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${sendgridApiKey}`,
-            },
-            body: JSON.stringify({
-              personalizations: [{
-                to: [{ email: "esteve@greenelephant.org" }],
-              }],
-              from: { email: "noreply@wisdomcouncil.org", name: "Wisdom Council" },
-              subject: `📊 Wisdom Council Click Tracking - ${cta}`,
-              html: `
-                <h3>User Action Tracked</h3>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Action:</strong> ${cta}</p>
-                <p><strong>GDPR Consent:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
-                <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-              `,
-            }),
-          });
-          console.log("✅ Email sent to esteve@greenelephant.org");
-        }
-      } catch (emailError) {
-        console.log("📧 Email sending skipped (SendGrid not configured)");
-      }
+      // Send notification email via Resend
+      await sendActivityNotification(cta, email || null, {
+        "GDPR Consent": consentGiven ? "Yes" : "No",
+      });
 
       res.json({ success: true });
     } catch (error: any) {
