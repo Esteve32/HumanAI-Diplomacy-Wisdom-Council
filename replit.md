@@ -13,7 +13,8 @@ Preferred communication style: Simple, everyday language.
 - **Routing**: Wouter for client-side routing.
 - **UI Components**: shadcn/ui built on Radix UI with Tailwind CSS, using a "new-york" style variant and custom design tokens.
 - **State Management**: TanStack Query (React Query) for server state.
-- **Design Philosophy**: Inspired by Product Hunt, Linear, Stripe, and Medium, emphasizing clean typography (Inter for UI, serif for body) and a cohesive "Wisdom Council" aesthetic.
+- **Typography**: Archive font (display serif) for all headings with Georgia fallback; Lato (sans-serif) for body text with system font fallbacks. Font loading optimized with preload tags, font-display: swap, and custom CSS overrides for Tailwind Typography prose containers.
+- **Design Philosophy**: Inspired by Product Hunt, Linear, Stripe, and Medium, emphasizing clean typography and a cohesive "Wisdom Council" aesthetic with warm orange/amber gradients and fireside chat theme.
 - **Domain**: wisdom.greenelephant.org (custom subdomain for Green Elephant organization)
 - **Key Sections**: Hero, voting/leaderboard for figures, three engagement pathway options (ChatGPT, Low-Code, API), social sharing, pricing (free tier + API access), and testimonials.
 - **Chat UI**: Individual chat pages (`/chat/:figureId`) with real-time messaging, avatars, and a multi-dimensional geometric "ThinkingAnimation" loading indicator.
@@ -72,9 +73,18 @@ Preferred communication style: Simple, everyday language.
 ### Asset Management
 - Static assets in `attached_assets` for wise figure portraits.
 
-## Recent Changes (November 20, 2025)
+## Recent Changes (November 21, 2025)
 
-### GDPR Compliance & Site Expansion (COMPLETE - Latest)
+### Font Loading Optimization (COMPLETE - Latest)
+- ✅ **Font Preloading**: Added preload tags for Archive and Lato fonts in index.html for faster initial render
+- ✅ **Font Display Strategy**: Google Fonts URL includes `display=swap` parameter for immediate fallback text visibility
+- ✅ **Enhanced Fallbacks**: Improved font stacks with Georgia for Archive, system-ui for Lato
+- ✅ **Class Name Fix**: Corrected all instances of `font-heading` to `font-display` in Chat.tsx and AiDialogue.tsx
+- ✅ **Prose Typography Override**: Added CSS rule to apply Archive font to all Tailwind Typography `.prose` headings (h1-h6), fixing legal pages
+- ✅ **E2E Testing**: Verified all fonts load correctly across homepage, chat pages, legal pages, and AI dialogue
+- 📝 **Impact**: Eliminates Font Flash of Unstyled Text (FOUT), ensures consistent Archive display font on all headings including Privacy/Terms pages
+
+### GDPR Compliance & Site Expansion (COMPLETE - November 20, 2025)
 - ✅ **Ready Personas Gating**: Updated VotingSection to show Chat button ONLY for ready personas (5 of 51):
   - rosa-parks, socrates, simone-de-beauvoir, jesus-christ, rumi have `chatReady: true`
   - All other 46 personas display only Vote button (chatReady: false)
