@@ -97,6 +97,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/votes", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    try {
+      const { figureId } = req.body;
+      const sessionId = sessionReq.sessionID || "default-session";
+
+      // Log the vote activity
+      await storage.createActivityLog({
+        activityType: "vote-figure",
+        email: null,
+        data: JSON.stringify({ figureId }),
+        sessionId,
+      });
+
+      // Get figure name for email context
+      const figures = await storage.getWiseFigures();
+      const figure = figures.find(f => f.id === figureId);
+      const figureName = figure?.name || `Figure ${figureId}`;
+
+      // Send notification email
+      await sendActivityNotification("vote-figure", null, {
+        "Figure": figureName,
+        "Figure ID": figureId,
+      });
+
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Error recording vote:", error);
+      res.status(400).json({ error: error.message });
+    }
+  });
+
   app.get("/api/conversations", async (req, res) => {
     const sessionReq = req as SessionRequest;
     try {

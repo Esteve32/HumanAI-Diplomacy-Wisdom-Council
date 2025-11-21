@@ -51,7 +51,7 @@ async function getResendClient() {
 
 export async function sendActivityNotification(
   activityType: string,
-  userEmail: string | null,
+  userEmail: string | null | undefined,
   metadata: Record<string, any> = {}
 ) {
   try {

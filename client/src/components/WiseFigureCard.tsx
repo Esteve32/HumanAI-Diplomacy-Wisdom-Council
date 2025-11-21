@@ -34,11 +34,22 @@ export default function WiseFigureCard({
   const [hasVoted, setHasVoted] = useState(false);
   const [, setLocation] = useLocation();
 
-  const handleVote = () => {
+  const handleVote = async () => {
     if (!hasVoted) {
       setVotes(votes + 1);
       setHasVoted(true);
-      console.log(`Voted for ${name}`);
+      
+      // Send vote to backend (which triggers email notification)
+      try {
+        await fetch("/api/votes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ figureId: id }),
+        });
+        console.log(`✅ Voted for ${name} - Email notification sent`);
+      } catch (error) {
+        console.error(`❌ Error recording vote for ${name}:`, error);
+      }
     }
   };
 
