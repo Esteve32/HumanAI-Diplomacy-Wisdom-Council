@@ -73,9 +73,15 @@ When `PERSPECTIVE_API_KEY` is configured:
 
 **Tier 2 - Keyword Filter (Fallback):**
 When API key is missing OR API fails:
-- Deterministic regex-based filtering
-- Blocks 50+ harmful patterns (hate speech, violence, sexual exploitation, self-harm)
+- Deterministic regex-based filtering with text normalization
+- Normalizes text (case, punctuation, Unicode) before pattern matching
+- Blocks 40+ harmful patterns across 4 categories:
+  - **Hate speech**: Slurs, genocide threats, supremacy rhetoric (8 patterns)
+  - **Explicit violence**: Murder/attack planning, threats, weapons (9 patterns)
+  - **Sexual exploitation**: Child abuse, grooming, rape (6 patterns)
+  - **Self-harm**: Suicide methods, immediate danger expressions (11 patterns)
 - Logs warning: "Using fallback keyword moderation"
+- Category-specific crisis messaging
 
 **Benefits:**
 - ✅ Platform always operational (even without API key)

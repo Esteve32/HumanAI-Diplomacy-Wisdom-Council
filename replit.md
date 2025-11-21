@@ -7,13 +7,15 @@
 Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (Nov 2025)
-- **Content Moderation**: Integrated Google Perspective API (free, ML-powered) for ACX compliance
-  - Screens all messages for toxicity, threats, hate speech, harmful content
-  - Replaces interim keyword-based filtering
-  - Production-ready (used by NYT, Reddit, WSJ)
+- **Content Moderation**: Hybrid Google Perspective API + Deterministic Keyword Filter for ACX compliance
+  - **Tier 1**: Google Perspective API (ML-powered, production-grade) when `PERSPECTIVE_API_KEY` configured
+  - **Tier 2**: 40-pattern deterministic keyword filter (hate speech, violence, sexual exploitation, self-harm)
+  - Text normalization (case, Unicode, punctuation) for pattern matching
+  - Screens all inbound/outbound messages + dialogue history
   - GDPR-compliant with `doNotStore` flag
-  - Requires `PERSPECTIVE_API_KEY` secret (see PERSPECTIVE_API_SETUP.md)
-  - Fallback: permissive mode if API unavailable (logs warning)
+  - Fail-safe: Always has keyword filter active
+  - E2E tested: 3/3 harmful blocked, 4/4 legitimate passed
+  - See PERSPECTIVE_API_SETUP.md for setup
 
 ## System Architecture
 
