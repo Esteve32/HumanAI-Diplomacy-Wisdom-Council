@@ -70,6 +70,13 @@ export default function AiDialogue() {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setTopic("");
+    }
+  };
+
   const persona1 = availablePersonas.find(p => p.id === persona1Id);
   const persona2 = availablePersonas.find(p => p.id === persona2Id);
 
@@ -110,8 +117,9 @@ export default function AiDialogue() {
             <div className="space-y-6">
               <div>
                 <Label htmlFor="persona1">First Wise Figure</Label>
+                <p className="text-xs text-muted-foreground mb-2">Choose the first participant in this dialogue</p>
                 <Select onValueChange={(value) => setPersona1Id(parseInt(value))}>
-                  <SelectTrigger id="persona1" data-testid="select-persona1">
+                  <SelectTrigger id="persona1" data-testid="select-persona1" aria-label="Select first wise figure">
                     <SelectValue placeholder="Select a wise figure..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -128,8 +136,9 @@ export default function AiDialogue() {
 
               <div>
                 <Label htmlFor="persona2">Second Wise Figure</Label>
+                <p className="text-xs text-muted-foreground mb-2">Choose a different wise figure for contrast and insight</p>
                 <Select onValueChange={(value) => setPersona2Id(parseInt(value))}>
-                  <SelectTrigger id="persona2" data-testid="select-persona2">
+                  <SelectTrigger id="persona2" data-testid="select-persona2" aria-label="Select second wise figure">
                     <SelectValue placeholder="Select a wise figure..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -151,7 +160,10 @@ export default function AiDialogue() {
                   placeholder="What should they discuss? (e.g., The nature of freedom, Love vs. justice)"
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   data-testid="input-topic"
+                  aria-label="Enter the topic for this fireside dialogue"
+                  title="Press Escape to clear"
                 />
               </div>
 
@@ -161,6 +173,7 @@ export default function AiDialogue() {
                 className="w-full"
                 size="lg"
                 data-testid="button-start-dialogue"
+                aria-label={isCreatingDialogue ? "Creating dialogue..." : "Start fireside conversation"}
               >
                 {isCreatingDialogue ? (
                   <>

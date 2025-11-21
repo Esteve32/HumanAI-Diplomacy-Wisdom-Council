@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRoute } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,6 +29,7 @@ export default function Chat() {
   const [messageInput, setMessageInput] = useState("");
   const [optimisticMessage, setOptimisticMessage] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   const personasMap: Record<string, Persona> = {
     "rosa-parks": {
@@ -123,7 +125,7 @@ export default function Chat() {
       setMessageInput("");
       setOptimisticMessage(null);
     },
-    onError: () => {
+    onError: (error: any) => {
       setOptimisticMessage(null);
     },
   });
@@ -156,6 +158,11 @@ export default function Chat() {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
+    }
+    // Escape key to cancel optimistic message
+    if (e.key === "Escape" && optimisticMessage) {
+      e.preventDefault();
+      setOptimisticMessage(null);
     }
   };
 
@@ -335,6 +342,8 @@ export default function Chat() {
                     className="resize-none min-h-[60px]"
                     disabled={isSendingMessage}
                     data-testid="input-message"
+                    aria-label={`Message input for ${persona.name}`}
+                    title="Press Enter to send, Shift+Enter for new line"
                   />
                   <Button
                     onClick={handleSendMessage}
@@ -342,6 +351,8 @@ export default function Chat() {
                     size="icon"
                     className="h-[60px] w-[60px]"
                     data-testid="button-send-message"
+                    aria-label={isSendingMessage ? "Sending message..." : "Send message"}
+                    title="Send message (Enter key)"
                   >
                     <Send className="h-5 w-5" />
                   </Button>
