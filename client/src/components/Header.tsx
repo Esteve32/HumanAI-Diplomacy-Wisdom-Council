@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
+import { useLocation } from "wouter";
+import logoImage from "@assets/GE logo 512x512 transparent BG 2023 _1763685719997.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -22,7 +24,7 @@ export default function Header() {
             <img 
               src={logoImage} 
               alt="Green Elephant" 
-              className="h-8 w-8 rounded-full invert"
+              className="h-8 w-8 rounded-full"
               data-testid="logo-greenelephant"
             />
             <span className="text-xs text-muted-foreground">powered by Green Elephant</span>
@@ -49,7 +51,7 @@ export default function Header() {
               variant="default"
               className="min-h-11"
               data-testid="button-get-started"
-              onClick={() => console.log('Get started clicked')}
+              onClick={() => setLocation('/getting-started')}
             >
               Get Started
             </Button>
@@ -88,7 +90,10 @@ export default function Header() {
               variant="default"
               className="w-full min-h-11"
               data-testid="button-mobile-get-started"
-              onClick={() => console.log('Get started clicked')}
+              onClick={() => {
+                setLocation('/getting-started');
+                setMobileMenuOpen(false);
+              }}
             >
               Get Started
             </Button>

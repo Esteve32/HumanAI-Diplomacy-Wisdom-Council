@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import logoImage from "@assets/GE logo 512 512 black BG 2023_1762735898630.png";
+import logoImage from "@assets/GE logo 512x512 transparent BG 2023 _1763685719997.png";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Footer() {
@@ -79,7 +79,7 @@ export default function Footer() {
               <img 
                 src={logoImage} 
                 alt="Green Elephant" 
-                className="h-10 w-10 rounded-full invert"
+                className="h-10 w-10 rounded-full"
               />
               <div>
                 <div className="font-bold">Wisdom AI</div>
