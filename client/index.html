@@ -10,9 +10,13 @@
     <meta property="og:description" content="Have fireside chats with history's wisest minds. Connect with AI agents embodying Socrates, Marcus Aurelius, Rumi, and more." />
     <meta property="og:url" content="https://wisdom.greenelephant.org" />
     <meta property="og:type" content="website" />
+    
+    <!-- Font Loading Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archive:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- Preload critical fonts for faster rendering -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archive:wght@400;700&family=Lato:wght@300;400;700;900&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Archive:wght@400;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
