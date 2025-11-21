@@ -26,6 +26,7 @@ export default function Chat() {
   
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [messageInput, setMessageInput] = useState("");
+  const [optimisticMessage, setOptimisticMessage] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const personasMap: Record<string, Persona> = {
@@ -120,6 +121,10 @@ export default function Chat() {
         queryKey: ["/api/conversations", conversationId, "messages"] 
       });
       setMessageInput("");
+      setOptimisticMessage(null);
+    },
+    onError: () => {
+      setOptimisticMessage(null);
     },
   });
 
@@ -140,7 +145,10 @@ export default function Chat() {
 
   const handleSendMessage = () => {
     if (messageInput.trim() && !isSendingMessage) {
-      sendMessage(messageInput.trim());
+      const message = messageInput.trim();
+      setOptimisticMessage(message);
+      setMessageInput("");
+      sendMessage(message);
     }
   };
 
@@ -296,7 +304,19 @@ export default function Chat() {
                         )}
                       </div>
                     ))}
-                    {isSendingMessage && (
+                    {optimisticMessage && (
+                      <div className="flex gap-4 justify-end" data-testid="message-optimistic">
+                        <div className="rounded-lg px-4 py-3 max-w-[80%] bg-primary text-primary-foreground opacity-80 animate-pulse">
+                          <p className="whitespace-pre-wrap leading-relaxed">
+                            {optimisticMessage}
+                          </p>
+                        </div>
+                        <Avatar className="h-10 w-10 flex-shrink-0">
+                          <AvatarFallback>You</AvatarFallback>
+                        </Avatar>
+                      </div>
+                    )}
+                    {(isSendingMessage || optimisticMessage) && (
                       <div className="flex justify-center w-full">
                         <ThinkingAnimation />
                       </div>

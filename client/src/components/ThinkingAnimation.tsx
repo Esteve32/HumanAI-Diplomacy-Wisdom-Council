@@ -155,12 +155,17 @@ export default function ThinkingAnimation() {
       </div>
       
       <div className="mt-6 space-y-1 text-center">
-        <p className="text-sm font-medium text-muted-foreground animate-pulse">
-          {step === 0 && "Contemplating wisdom..."}
-          {step === 1 && "Channeling ancient knowledge..."}
-          {step === 2 && "Formulating thoughtful response..."}
+        <p className="text-sm font-medium text-foreground animate-pulse">
+          {step === 0 && "🕰️ Time-traveling through epochs..."}
+          {step === 1 && "✨ Channeling ancient wisdom..."}
+          {step === 2 && "🔮 Consulting the cosmic library..."}
         </p>
-        <div className="flex items-center justify-center gap-1.5">
+        <p className="text-xs text-muted-foreground italic">
+          {step === 0 && "Worth the wait, we promise!"}
+          {step === 1 && "Bridging centuries in real-time"}
+          {step === 2 && "Patience transcends time ✨"}
+        </p>
+        <div className="flex items-center justify-center gap-1.5 mt-2">
           <div
             className="w-1.5 h-1.5 rounded-full bg-primary"
             style={{
