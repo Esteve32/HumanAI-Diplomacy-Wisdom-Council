@@ -12,6 +12,8 @@ import Contact from "@/pages/Contact";
 import ApiDocs from "@/pages/ApiDocs";
 import McpTemplates from "@/pages/McpTemplates";
 import GettingStarted from "@/pages/GettingStarted";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminDashboard from "@/pages/AdminDashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +28,8 @@ function Router() {
       <Route path="/api-docs" component={ApiDocs} />
       <Route path="/mcp-templates" component={McpTemplates} />
       <Route path="/getting-started" component={GettingStarted} />
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin" component={AdminDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -10,7 +10,9 @@ import {
   type AiDialogue,
   type InsertAiDialogue,
   type DialogueMessage,
-  type InsertDialogueMessage
+  type InsertDialogueMessage,
+  type ActivityLog,
+  type InsertActivityLog
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -33,6 +35,10 @@ export interface IStorage {
   
   createDialogueMessage(message: InsertDialogueMessage): Promise<DialogueMessage>;
   getDialogueMessages(dialogueId: string): Promise<DialogueMessage[]>;
+  
+  createActivityLog(log: InsertActivityLog): Promise<ActivityLog>;
+  getActivityLogs(limit?: number): Promise<ActivityLog[]>;
+  getActivityLogsByDateRange(startDate: number, endDate: number): Promise<ActivityLog[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -42,6 +48,7 @@ export class MemStorage implements IStorage {
   private messages: Map<string, Message>;
   private aiDialogues: Map<string, AiDialogue>;
   private dialogueMessages: Map<string, DialogueMessage>;
+  private activityLogs: Map<string, ActivityLog>;
 
   constructor() {
     this.wiseFigures = new Map();
@@ -50,6 +57,7 @@ export class MemStorage implements IStorage {
     this.messages = new Map();
     this.aiDialogues = new Map();
     this.dialogueMessages = new Map();
+    this.activityLogs = new Map();
   }
 
   async getWiseFigures(): Promise<WiseFigure[]> {
@@ -139,6 +147,31 @@ export class MemStorage implements IStorage {
     return Array.from(this.dialogueMessages.values())
       .filter((msg) => msg.dialogueId === dialogueId)
       .sort((a, b) => a.createdAt - b.createdAt);
+  }
+
+  async createActivityLog(insertLog: InsertActivityLog): Promise<ActivityLog> {
+    const id = randomUUID();
+    const log: ActivityLog = { 
+      ...insertLog, 
+      id, 
+      createdAt: Date.now(),
+      sessionId: insertLog.sessionId || null,
+      email: insertLog.email || null
+    };
+    this.activityLogs.set(id, log);
+    return log;
+  }
+
+  async getActivityLogs(limit?: number): Promise<ActivityLog[]> {
+    const logs = Array.from(this.activityLogs.values())
+      .sort((a, b) => b.createdAt - a.createdAt);
+    return limit ? logs.slice(0, limit) : logs;
+  }
+
+  async getActivityLogsByDateRange(startDate: number, endDate: number): Promise<ActivityLog[]> {
+    return Array.from(this.activityLogs.values())
+      .filter((log) => log.createdAt >= startDate && log.createdAt <= endDate)
+      .sort((a, b) => b.createdAt - a.createdAt);
   }
 }
 

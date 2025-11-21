@@ -1,13 +1,23 @@
-import type { Express, Request } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertConversationSchema, insertMessageSchema, insertAiDialogueSchema } from "@shared/schema";
+import { insertConversationSchema, insertMessageSchema, insertAiDialogueSchema, insertActivityLogSchema } from "@shared/schema";
 import { generatePersonaResponse, generateDialogueResponse, PersonaContext } from "./openai";
 
 interface SessionRequest extends Request {
   session: {
     id: string;
+    isAdmin?: boolean;
   };
+}
+
+function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  const sessionReq = req as SessionRequest;
+  if (sessionReq.session?.isAdmin) {
+    next();
+  } else {
+    res.status(401).json({ error: "Unauthorized" });
+  }
 }
 
 const personaDatabase: Record<number, PersonaContext> = {
@@ -222,18 +232,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   app.post("/api/track-click", async (req, res) => {
+    const sessionReq = req as SessionRequest;
     try {
       const { email, cta, consentGiven } = req.body;
-      const timestamp = new Date().toISOString();
+      const sessionId = sessionReq.session?.id || "default-session";
       
-      const trackingData = {
-        email,
-        cta,
-        consentGiven,
-        timestamp,
-      };
+      await storage.createActivityLog({
+        activityType: cta,
+        email: email || null,
+        data: JSON.stringify({ consentGiven }),
+        sessionId,
+      });
 
-      console.log("📊 Click Tracking:", JSON.stringify(trackingData, null, 2));
+      console.log("📊 Activity logged:", cta, email);
 
       try {
         const sendgridApiKey = process.env.SENDGRID_API_KEY;
@@ -255,7 +266,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 <p><strong>Email:</strong> ${email}</p>
                 <p><strong>Action:</strong> ${cta}</p>
                 <p><strong>GDPR Consent:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
-                <p><strong>Timestamp:</strong> ${timestamp}</p>
+                <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
               `,
             }),
           });
@@ -265,10 +276,88 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.log("📧 Email sending skipped (SendGrid not configured)");
       }
 
-      res.json({ success: true, tracked: trackingData });
+      res.json({ success: true });
     } catch (error: any) {
       console.error("Error tracking click:", error);
       res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/login", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    try {
+      const { password } = req.body;
+      const adminPassword = process.env.ADMIN_PASSWORD;
+      
+      if (!adminPassword) {
+        return res.status(500).json({ error: "Admin password not configured" });
+      }
+      
+      if (password === adminPassword) {
+        sessionReq.session.isAdmin = true;
+        res.json({ success: true });
+      } else {
+        res.status(401).json({ error: "Invalid password" });
+      }
+    } catch (error: any) {
+      console.error("Error during admin login:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/admin/logout", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    sessionReq.session.isAdmin = false;
+    res.json({ success: true });
+  });
+
+  app.get("/api/admin/check", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    res.json({ isAdmin: !!sessionReq.session?.isAdmin });
+  });
+
+  app.get("/api/admin/activity-logs", requireAdmin, async (req, res) => {
+    try {
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 100;
+      const logs = await storage.getActivityLogs(limit);
+      res.json(logs);
+    } catch (error: any) {
+      console.error("Error fetching activity logs:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/admin/daily-digest", requireAdmin, async (req, res) => {
+    try {
+      const days = req.query.days ? parseInt(req.query.days as string) : 7;
+      const endDate = Date.now();
+      const startDate = endDate - (days * 24 * 60 * 60 * 1000);
+      
+      const logs = await storage.getActivityLogsByDateRange(startDate, endDate);
+      res.json(logs);
+    } catch (error: any) {
+      console.error("Error fetching daily digest:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/admin/stats", requireAdmin, async (req, res) => {
+    try {
+      const conversations = await storage.getConversationsBySession("all");
+      const activityLogs = await storage.getActivityLogs();
+      const wiseFigures = await storage.getWiseFigures();
+      
+      const stats = {
+        totalConversations: conversations.length,
+        totalActivities: activityLogs.length,
+        totalVotes: wiseFigures.reduce((sum, fig) => sum + fig.votes, 0),
+        uniqueEmails: new Set(activityLogs.filter(log => log.email).map(log => log.email)).size,
+      };
+      
+      res.json(stats);
+    } catch (error: any) {
+      console.error("Error fetching stats:", error);
+      res.status(500).json({ error: error.message });
     }
   });
 

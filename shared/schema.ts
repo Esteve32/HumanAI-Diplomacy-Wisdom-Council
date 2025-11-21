@@ -99,3 +99,20 @@ export const insertDialogueMessageSchema = createInsertSchema(dialogueMessages).
 
 export type InsertDialogueMessage = z.infer<typeof insertDialogueMessageSchema>;
 export type DialogueMessage = typeof dialogueMessages.$inferSelect;
+
+export const activityLogs = pgTable("activity_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  activityType: text("activity_type").notNull(),
+  email: text("email"),
+  data: text("data").notNull(),
+  sessionId: text("session_id"),
+  createdAt: integer("created_at").notNull().$defaultFn(() => Date.now()),
+});
+
+export const insertActivityLogSchema = createInsertSchema(activityLogs).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertActivityLog = z.infer<typeof insertActivityLogSchema>;
+export type ActivityLog = typeof activityLogs.$inferSelect;
