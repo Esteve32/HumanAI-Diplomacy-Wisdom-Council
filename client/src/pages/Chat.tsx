@@ -55,7 +55,7 @@ export default function Chat() {
       id: 7,
       name: "bell hooks",
       era: "1952-2021 CE",
-      title: "Intersectional Feminist",
+      title: "Intersectional Feminist (Ask me why I don't capitalize my name)",
       description: "Ask about love as practice, feminism, identity, and transformative engagement with the world."
     },
     "simone-de-beauvoir": {
