@@ -1,11 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Blocks, Cloud, ExternalLink, Copy, Check } from "lucide-react";
+import { Sparkles, Blocks, ExternalLink, Copy, Check, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export default function PathwaysSection() {
   const [copiedWorkflow, setCopiedWorkflow] = useState(false);
   const [copiedAPI, setCopiedAPI] = useState(false);
+  const [devExpanded, setDevExpanded] = useState(false);
 
   const handleCopy = (text: string, type: 'workflow' | 'api') => {
     navigator.clipboard.writeText(text);
@@ -30,10 +31,33 @@ export default function PathwaysSection() {
   apiKey: process.env.WISDOM_KEY
 });
 
-const chat = await wisdom.chat({
+const response = await wisdom.chat({
   figure: 'socrates',
-  message: 'Your question here'
+  message: 'Your question'
 });`;
+
+  const useCases = [
+    {
+      title: "AI Researchers & Educators",
+      description: "Build personalized tutoring agents that embody Socratic method, teaching through dialogue rather than rote instruction"
+    },
+    {
+      title: "Customer Service Teams",
+      description: "Add empathetic decision-making layers to chatbots—help support agents respond with wisdom, not just scripts"
+    },
+    {
+      title: "Workflow Automation Builders",
+      description: "Trigger wisdom-driven decisions in your n8n, Zapier, or Make workflows—automate the thinking, not just the clicking"
+    },
+    {
+      title: "AI Agent Frameworks",
+      description: "Plug wisdom into Claude, GPT, or local LLM agents as a tool they can call—make your agents philosophically grounded"
+    },
+    {
+      title: "Knowledge Management Systems",
+      description: "Build internal wikis that don't just store facts—add conversational wisdom that helps teams think through complex decisions"
+    }
+  ];
 
   return (
     <section className="py-32 px-6" id="pathways">
@@ -208,82 +232,112 @@ const chat = await wisdom.chat({
             </Card>
           </div>
 
-          {/* Pathway 3: Developers */}
+          {/* Pathway 3: Agentic AI (ACX3) */}
           <div className="flex flex-col items-center text-center" id="pathway-dev">
             <div className="bg-primary/10 p-6 rounded-full mb-8">
-              <Cloud className="h-12 w-12 text-primary" />
+              <Blocks className="h-12 w-12 text-primary" />
             </div>
             <h3 className="font-display text-3xl font-bold mb-4">
-              Developer Access
+              <a href="https://arbora.partners/nest" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                Agentic AI Level ACX3
+              </a>
             </h3>
             <p className="text-lg text-muted-foreground max-w-xl mb-8">
-              Native API, MCP integration, and cloud deployment. Build wisdom into your applications.
+              Superpower for your agents & workflows—wisdom on demand
             </p>
             
-            <Card className="p-8 w-full max-w-2xl text-left">
-              <div className="space-y-6">
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="font-bold text-2xl text-primary mb-1">REST API</div>
-                    <div className="text-xs text-muted-foreground">Full access</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-bold text-2xl text-primary mb-1">MCP</div>
-                    <div className="text-xs text-muted-foreground">Native support</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-bold text-2xl text-primary mb-1">Cloud</div>
-                    <div className="text-xs text-muted-foreground">Scalable</div>
-                  </div>
-                </div>
+            <Card className="p-8 w-full max-w-2xl">
+              <Button 
+                variant="outline" 
+                className="w-full justify-between items-center"
+                onClick={() => setDevExpanded(!devExpanded)}
+                data-testid="button-developer-expand"
+              >
+                <span className="font-semibold">Open Developer Access</span>
+                <ChevronDown className={`h-4 w-4 transition-transform ${devExpanded ? 'rotate-180' : ''}`} />
+              </Button>
 
-                <div className="bg-card-foreground/5 p-4 rounded-lg relative">
-                  <div className="text-xs text-muted-foreground mb-2">Quick Start</div>
-                  <pre className="text-sm overflow-x-auto">
-                    <code>{apiCode}</code>
-                  </pre>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="absolute top-2 right-2"
-                    onClick={() => handleCopy(apiCode, 'api')}
-                    data-testid="button-copy-api"
-                  >
-                    {copiedAPI ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  </Button>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-2">Features</h5>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>✓ WebSocket streaming</li>
-                      <li>✓ Context persistence</li>
-                      <li>✓ Rate limiting</li>
-                      <li>✓ 99.9% uptime SLA</li>
-                    </ul>
+              {devExpanded && (
+                <div className="mt-8 space-y-8">
+                  {/* Who is buying this */}
+                  <div>
+                    <h4 className="font-semibold mb-4 text-left">Who's using ACX3?</h4>
+                    <div className="space-y-3">
+                      {useCases.map((useCase, idx) => (
+                        <div key={idx} className="p-4 bg-muted/40 rounded-lg text-left">
+                          <div className="font-medium mb-1">{useCase.title}</div>
+                          <div className="text-sm text-muted-foreground">{useCase.description}</div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="p-4 bg-muted/50 rounded-lg">
-                    <h5 className="font-semibold mb-2">SDKs</h5>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>✓ JavaScript/TypeScript</li>
-                      <li>✓ Python</li>
-                      <li>✓ Go</li>
-                      <li>✓ Community libraries</li>
-                    </ul>
+
+                  {/* Simple API/MCP explanation */}
+                  <div className="bg-card-foreground/5 p-6 rounded-lg text-left">
+                    <h4 className="font-semibold mb-3">How to Connect</h4>
+                    <div className="space-y-4 text-sm text-muted-foreground">
+                      <div>
+                        <div className="font-medium text-foreground mb-1">REST API</div>
+                        <p>Like plugging into electricity—call our API directly from your code to chat with any wisdom figure, stream responses, and build custom integrations.</p>
+                      </div>
+                      <div>
+                        <div className="font-medium text-foreground mb-1">MCP (Model Context Protocol)</div>
+                        <p>A standard language that lets other AI tools (Claude, GPT, local LLMs) talk directly to your wisdom library. Think of it as a translator so any AI assistant can use wisdom without you writing code.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Code example */}
+                  <div className="bg-card-foreground/5 p-4 rounded-lg relative">
+                    <div className="text-xs text-muted-foreground mb-2 text-left">Quick Start Example</div>
+                    <pre className="text-sm overflow-x-auto text-left">
+                      <code>{apiCode}</code>
+                    </pre>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="absolute top-2 right-2"
+                      onClick={() => handleCopy(apiCode, 'api')}
+                      data-testid="button-copy-api"
+                    >
+                      {copiedAPI ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+
+                  {/* Features */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="p-4 bg-muted/50 rounded-lg text-left">
+                      <h5 className="font-semibold mb-2">Features</h5>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>✓ WebSocket streaming</li>
+                        <li>✓ Context persistence</li>
+                        <li>✓ Rate limiting & quotas</li>
+                        <li>✓ 99.9% uptime SLA</li>
+                      </ul>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg text-left">
+                      <h5 className="font-semibold mb-2">SDKs</h5>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>✓ JavaScript/TypeScript</li>
+                        <li>✓ Python</li>
+                        <li>✓ Go</li>
+                        <li>✓ Community libraries</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* CTAs */}
+                  <div className="flex gap-3 pt-4">
+                    <Button className="flex-1 min-h-11" data-testid="button-api-docs">
+                      View Documentation
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                    <Button variant="outline" className="flex-1 min-h-11" data-testid="button-get-api-key">
+                      Get API Key
+                    </Button>
                   </div>
                 </div>
-
-                <div className="flex gap-3">
-                  <Button className="flex-1 min-h-11" data-testid="button-api-docs">
-                    View Documentation
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" className="flex-1 min-h-11" data-testid="button-get-api-key">
-                    Get API Key
-                  </Button>
-                </div>
-              </div>
+              )}
             </Card>
           </div>
         </div>
