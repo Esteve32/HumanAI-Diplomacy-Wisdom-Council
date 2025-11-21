@@ -38,7 +38,8 @@ Preferred communication style: Simple, everyday language.
     - `messages`: Individual chat messages (`id`, `conversationId`, `role`, `content`, `createdAt`).
     - `aiDialogues`: AI-to-AI dialogue sessions (`id`, `persona1Id`, `persona2Id`, `topic`, `sessionId`, `createdAt`).
     - `dialogueMessages`: Individual AI-to-AI dialogue messages (`id`, `dialogueId`, `personaId`, `content`, `createdAt`).
-- **Session Management**: `connect-pg-simple` for PostgreSQL-backed sessions (planned).
+    - `activityLogs`: Comprehensive tracking of all user actions (`id`, `activityType`, `email`, `data`, `sessionId`, `createdAt`).
+- **Session Management**: express-session with MemoryStore, secured with required SESSION_SECRET environment variable.
 - **Current Storage**: In-memory adapter used during development, with Drizzle configured for PostgreSQL in production.
 
 ### System Design Choices
@@ -75,7 +76,33 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (November 21, 2025)
 
-### Font Loading Optimization (COMPLETE - Latest)
+### Admin System & Activity Tracking (COMPLETE - Latest)
+- ✅ **Activity Logging Database**: Created `activityLogs` table to track all user actions
+  - Tracks: newsletter subscriptions, contact form submissions, chat creation, click events
+  - Stores: activityType, email, data (JSON), sessionId, timestamp
+  - GDPR-compliant: only stores emails when explicit consent given
+- ✅ **Secure Admin Authentication**:
+  - Password-based login using ADMIN_PASSWORD secret
+  - SESSION_SECRET required (no fallback) to prevent session forgery
+  - Session configuration: httpOnly, sameSite: strict, 7-day expiry
+  - saveUninitialized: false for GDPR compliance
+- ✅ **Admin Dashboard** (`/admin`):
+  - Real-time stats: Total Activities, Unique Emails, Conversations, Total Votes
+  - Recent Activity tab: Last 100 events with timestamp, email, consent status
+  - Daily Digest tab: Activity grouped by day with 1/7/30-day filters
+  - Protected routes with middleware: redirects to login if not authenticated
+- ✅ **Admin Login Page** (`/admin/login`):
+  - Clean form with password input and submit button
+  - Proper session initialization: regenerate() → set isAdmin → save()
+  - Error handling for invalid credentials
+- ✅ **E2E Testing**: All admin flows verified including:
+  - Activity tracking from newsletter signups
+  - Login/logout with session persistence
+  - Dashboard stats and activity display
+  - Protected route authorization
+- 📝 **Security**: All admin routes require SESSION_SECRET env var (fails fast if missing)
+
+### Font Loading Optimization (COMPLETE)
 - ✅ **Font Preloading**: Added preload tags for Archive and Lato fonts in index.html for faster initial render
 - ✅ **Font Display Strategy**: Google Fonts URL includes `display=swap` parameter for immediate fallback text visibility
 - ✅ **Enhanced Fallbacks**: Improved font stacks with Georgia for Archive, system-ui for Lato
