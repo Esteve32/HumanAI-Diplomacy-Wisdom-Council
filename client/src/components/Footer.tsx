@@ -204,6 +204,23 @@ export default function Footer() {
                   Leaders & Activists
                 </button>
               </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    setLocation('/#filter-scientists');
+                    setTimeout(() => {
+                      const element = document.getElementById('voting');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors" 
+                  data-testid="link-scientists"
+                >
+                  Scientists & Innovators
+                </button>
+              </li>
             </ul>
           </div>
 
