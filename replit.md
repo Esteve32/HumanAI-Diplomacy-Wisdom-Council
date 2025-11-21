@@ -90,10 +90,14 @@ Preferred communication style: Simple, everyday language.
   - Free Tier "Get Early Access": Now tracks click + opens mailto (previously only scrolled)
   - API Tier "Join Waitlist": Added click tracking before mailto
   - All buttons use async/await pattern: track → mailto with error handling
-- ✅ **Wisdom Library Filtering System**:
-  - Added `category` field to all 56 wise figures (philosopher/poet/leader)
-  - Categories: Philosophers (16), Poets & Artists (11), Leaders & Activists (29)
-  - Hash-based navigation: #filter-philosophers, #filter-poets, #filter-leaders, #filter-all
+- ✅ **Wisdom Library Filtering System with Overlaps** (Latest Update - Scientists & Innovators):
+  - Changed from single `category: string` to `categories: string[]` array to support multi-category figures
+  - **4 Categories**: Philosophers (19 total), Poets & Artists (11), Leaders & Activists (17), Scientists & Innovators (8)
+  - **Overlap Support**: Polymaths appear in multiple filters (Pythagoras, Leonardo, Hypatia, Avicenna)
+  - **Historical Recategorization**: 
+    - Moved Jesus, Maria Montessori, Teresa of Ávila from Leaders → Philosophers (prophetic/educational/mystic philosophy)
+    - Created Scientists & Innovators with Marie Curie, Einstein, Tesla, Ada Lovelace + overlaps
+  - Hash-based navigation: #filter-philosophers, #filter-poets, #filter-leaders, #filter-scientists, #filter-all
   - Filter buttons display at top of voting section
   - Footer Wisdom Library links update URL hash and scroll to voting
   - Works alongside existing "Show All / Show Top 9" toggle
