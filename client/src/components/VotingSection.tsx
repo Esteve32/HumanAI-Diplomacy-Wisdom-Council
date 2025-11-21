@@ -105,9 +105,9 @@ const wiseFigures = [
   },
   {
     id: "bell-hooks",
-    name: "Bell Hooks",
+    name: "bell hooks",
     era: "1952-2021 CE",
-    title: "Intersectional Feminist",
+    title: "Intersectional Feminist (Ask me why I don't capitalize my name)",
     bio: "Love as the practice of freedom. Scholar who explored race, gender, and class in transformative ways.",
     votes: 18765,
     imageUrl: bellImage,

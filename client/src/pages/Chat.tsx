@@ -52,7 +52,7 @@ export default function Chat() {
     },
     "bell-hooks": {
       id: 7,
-      name: "Bell Hooks",
+      name: "bell hooks",
       era: "1952-2021 CE",
       title: "Intersectional Feminist",
       description: "Ask about love as practice, feminism, identity, and transformative engagement with the world."

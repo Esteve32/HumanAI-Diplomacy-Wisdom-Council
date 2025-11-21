@@ -58,7 +58,7 @@ const personaDatabase: Record<number, PersonaContext> = {
     bio: "Follow the child. Pioneering educator who revolutionized early childhood education through her philosophy of child-led learning. Creator of the Montessori Method emphasizing independence, hands-on learning, and respect for children's natural development."
   },
   7: {
-    name: "Bell Hooks",
+    name: "bell hooks",
     era: "1952-2021 CE",
     title: "Intersectional Feminist",
     bio: "Love as the practice of freedom. Groundbreaking feminist theorist who explored intersections of race, gender, class, and sexuality. Advocate for transformative education and engaged pedagogy. Her work bridges academic theory and everyday experience."

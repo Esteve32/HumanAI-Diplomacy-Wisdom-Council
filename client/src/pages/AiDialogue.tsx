@@ -23,7 +23,7 @@ const availablePersonas: Persona[] = [
   { id: 2, name: "Socrates", era: "469-399 BCE", title: "Father of Western Philosophy" },
   { id: 6, name: "Maria Montessori", era: "1870-1952 CE", title: "Revolutionary Educator" },
   { id: 8, name: "Mary Wollstonecraft", era: "1759-1797 CE", title: "Mother of Feminism" },
-  { id: 7, name: "Bell Hooks", era: "1952-2021 CE", title: "Intersectional Feminist" },
+  { id: 7, name: "bell hooks", era: "1952-2021 CE", title: "Intersectional Feminist" },
   { id: 1, name: "Simone de Beauvoir", era: "1908-1986 CE", title: "Existentialist Feminist" },
   { id: 3, name: "Jesus of Nazareth", era: "c. 4 BCE - 30 CE", title: "Teacher of Compassion" },
   { id: 5, name: "Rumi", era: "1207-1273 CE", title: "Sufi Mystic & Poet" },

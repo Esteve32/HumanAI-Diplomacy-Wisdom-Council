@@ -298,7 +298,7 @@ const chat = await wisdom.chat({
             <h3 className="font-display text-3xl font-bold mb-4">
               Explore Conversations with Famous Wise Historical Personas
             </h3>
-            <p className="text-lg text-muted-foreground mb-6">From ancient philosophers like Socrates and Confucius to modern thinkers like Simone de Beauvoir and Bell Hooks—engage with 51 of history's most influential minds through AI.</p>
+            <p className="text-lg text-muted-foreground mb-6">From ancient philosophers like Socrates and Confucius to modern thinkers like Simone de Beauvoir and bell hooks—engage with 51 of history's most influential minds through AI.</p>
             <Button 
               size="lg" 
               className="min-h-11"
