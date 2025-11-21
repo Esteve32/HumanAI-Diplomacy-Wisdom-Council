@@ -55,11 +55,26 @@ export default function PricingSection() {
               className="w-full min-h-11" 
               size="lg"
               data-testid="button-join-free-waitlist"
-              onClick={() => {
-                const element = document.getElementById('voting');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
+              onClick={async () => {
+                try {
+                  await fetch("/api/track-click", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      cta: "join-free-waitlist",
+                      consentGiven: false,
+                    }),
+                  });
+                } catch (error) {
+                  console.error("Error tracking free waitlist:", error);
                 }
+                
+                const subject = encodeURIComponent("Free Early Access Waitlist");
+                const body = encodeURIComponent(
+                  "I would like to join the Free Early Access waitlist for Wisdom Council.\n\n" +
+                  "Please notify me when the platform launches.\n\n"
+                );
+                window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
               }}
             >
               Get Early Access
@@ -121,7 +136,20 @@ export default function PricingSection() {
               className="w-full min-h-11" 
               size="lg"
               data-testid="button-join-api-waitlist"
-              onClick={() => {
+              onClick={async () => {
+                try {
+                  await fetch("/api/track-click", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      cta: "join-api-waitlist",
+                      consentGiven: false,
+                    }),
+                  });
+                } catch (error) {
+                  console.error("Error tracking API waitlist:", error);
+                }
+                
                 const subject = encodeURIComponent("API Access Waitlist");
                 const body = encodeURIComponent(
                   "I would like to join the API Access waitlist for Wisdom Council.\n\n" +
