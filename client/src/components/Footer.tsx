@@ -139,7 +139,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => {
-                    setLocation('/');
+                    setLocation('/#filter-all');
                     setTimeout(() => {
                       const element = document.getElementById('voting');
                       if (element) {
@@ -156,7 +156,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => {
-                    setLocation('/');
+                    setLocation('/#filter-philosophers');
                     setTimeout(() => {
                       const element = document.getElementById('voting');
                       if (element) {
@@ -173,7 +173,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => {
-                    setLocation('/');
+                    setLocation('/#filter-poets');
                     setTimeout(() => {
                       const element = document.getElementById('voting');
                       if (element) {
@@ -190,7 +190,7 @@ export default function Footer() {
               <li>
                 <button 
                   onClick={() => {
-                    setLocation('/');
+                    setLocation('/#filter-leaders');
                     setTimeout(() => {
                       const element = document.getElementById('voting');
                       if (element) {

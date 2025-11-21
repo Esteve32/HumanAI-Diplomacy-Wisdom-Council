@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WiseFigureCard from "./WiseFigureCard";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -65,6 +65,7 @@ const wiseFigures = [
     votes: 9654,
     imageUrl: rosaImage,
     chatReady: true,
+    category: "leader",
   },
   {
     id: "socrates",
@@ -76,6 +77,7 @@ const wiseFigures = [
     imageUrl: socratesImage,
     chatReady: true,
     chatUrl: "https://chatgpt.com/g/g-691f906a64888191aa0a6050f7bd862d-socrates",
+    category: "philosopher",
   },
   {
     id: "maria-montessori",
@@ -87,6 +89,7 @@ const wiseFigures = [
     imageUrl: montessoriImage,
     chatReady: true,
     chatUrl: "https://chatgpt.com/g/g-691f985c844c8191ae09982635082266-maria-montessori",
+    category: "leader",
   },
   {
     id: "mary-wollstonecraft",
@@ -98,6 +101,7 @@ const wiseFigures = [
     imageUrl: maryWImage,
     chatReady: true,
     chatUrl: "https://chatgpt.com/g/g-691f93eca0fc8191bf4dea29fb3d4aec-mary-wollstonecraft",
+    category: "philosopher",
   },
   {
     id: "bell-hooks",
@@ -109,6 +113,7 @@ const wiseFigures = [
     imageUrl: bellImage,
     chatReady: true,
     chatUrl: "https://chatgpt.com/g/g-691f97131c908191a64b36bc5d0c0181-bell-hooks",
+    category: "philosopher",
   },
   {
     id: "simone-de-beauvoir",
@@ -120,6 +125,7 @@ const wiseFigures = [
     imageUrl: simoneImage,
     chatReady: true,
     chatUrl: "https://chatgpt.com/g/g-691f88d1e4378191a9d7b74ef9d7c362-simone-de-beauvoir",
+    category: "philosopher",
   },
   {
     id: "jesus-christ",
@@ -131,6 +137,7 @@ const wiseFigures = [
     imageUrl: jesusImage,
     chatReady: true,
     chatUrl: "https://chatgpt.com/g/g-691f846f74048191b7ebb5d5e9d2b141-jesus-of-nazareth",
+    category: "leader",
   },
   {
     id: "rumi",
@@ -142,6 +149,7 @@ const wiseFigures = [
     imageUrl: rumiImage,
     chatReady: true,
     chatUrl: "https://chatgpt.com/g/g-691f7c9d5a1a8191a4e8f03c9d6e2a81-rumi",
+    category: "poet",
   },
   {
     id: "virginia-woolf",
@@ -152,6 +160,7 @@ const wiseFigures = [
     votes: 22891,
     imageUrl: virginiaImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "harriet-tubman",
@@ -162,6 +171,7 @@ const wiseFigures = [
     votes: 16543,
     imageUrl: harrietImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "marie-curie",
@@ -172,6 +182,7 @@ const wiseFigures = [
     votes: 15987,
     imageUrl: marieImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "marcus-aurelius",
@@ -182,6 +193,7 @@ const wiseFigures = [
     votes: 14123,
     imageUrl: marcusImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "joan-of-arc",
@@ -192,6 +204,7 @@ const wiseFigures = [
     votes: 13456,
     imageUrl: joanImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "martin-luther-king",
@@ -202,6 +215,7 @@ const wiseFigures = [
     votes: 21876,
     imageUrl: mlkImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "susan-b-anthony",
@@ -212,6 +226,7 @@ const wiseFigures = [
     votes: 12345,
     imageUrl: susanImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "lao-tzu",
@@ -222,6 +237,7 @@ const wiseFigures = [
     votes: 11234,
     imageUrl: laoTzuImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "eleanor-roosevelt",
@@ -232,6 +248,7 @@ const wiseFigures = [
     votes: 10876,
     imageUrl: eleanorImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "frida-kahlo",
@@ -242,6 +259,7 @@ const wiseFigures = [
     votes: 18234,
     imageUrl: fridaImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "mahatma-gandhi",
@@ -252,6 +270,7 @@ const wiseFigures = [
     votes: 8765,
     imageUrl: gandhiImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "maya-angelou",
@@ -262,6 +281,7 @@ const wiseFigures = [
     votes: 7432,
     imageUrl: mayaImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "confucius",
@@ -272,6 +292,7 @@ const wiseFigures = [
     votes: 6891,
     imageUrl: confuciusImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "sojourner-truth",
@@ -282,6 +303,7 @@ const wiseFigures = [
     votes: 5678,
     imageUrl: sojournerImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "leonardo-da-vinci",
@@ -292,6 +314,7 @@ const wiseFigures = [
     votes: 16789,
     imageUrl: leonardoImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "audre-lorde",
@@ -302,6 +325,7 @@ const wiseFigures = [
     votes: 4987,
     imageUrl: audreImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "nelson-mandela",
@@ -312,6 +336,7 @@ const wiseFigures = [
     votes: 12654,
     imageUrl: mandelaImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "buddha",
@@ -322,6 +347,7 @@ const wiseFigures = [
     votes: 19876,
     imageUrl: buddhaImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "jane-austen",
@@ -332,6 +358,7 @@ const wiseFigures = [
     votes: 11543,
     imageUrl: austenImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "albert-einstein",
@@ -342,6 +369,7 @@ const wiseFigures = [
     votes: 15432,
     imageUrl: einsteinImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "hypatia",
@@ -352,6 +380,7 @@ const wiseFigures = [
     votes: 3456,
     imageUrl: hypatiaImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "aristotle",
@@ -362,6 +391,7 @@ const wiseFigures = [
     votes: 9123,
     imageUrl: aristotleImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "teresa-of-avila",
@@ -372,6 +402,7 @@ const wiseFigures = [
     votes: 2987,
     imageUrl: teresaAvilaImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "malcolm-x",
@@ -382,6 +413,7 @@ const wiseFigures = [
     votes: 8234,
     imageUrl: malcolmImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "carl-jung",
@@ -392,6 +424,7 @@ const wiseFigures = [
     votes: 6543,
     imageUrl: jungImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "ada-lovelace",
@@ -402,6 +435,7 @@ const wiseFigures = [
     votes: 7654,
     imageUrl: adaImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "frederick-douglass",
@@ -412,6 +446,7 @@ const wiseFigures = [
     votes: 5432,
     imageUrl: douglassImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "cleopatra",
@@ -422,6 +457,7 @@ const wiseFigures = [
     votes: 14321,
     imageUrl: cleopatraImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "plato",
@@ -432,6 +468,7 @@ const wiseFigures = [
     votes: 10234,
     imageUrl: platoImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "mother-teresa",
@@ -442,6 +479,7 @@ const wiseFigures = [
     votes: 9876,
     imageUrl: motherTeresaImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "hannah-arendt",
@@ -452,6 +490,7 @@ const wiseFigures = [
     votes: 3765,
     imageUrl: arendtImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "nikola-tesla",
@@ -462,6 +501,7 @@ const wiseFigures = [
     votes: 13456,
     imageUrl: teslaImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "sappho",
@@ -472,6 +512,7 @@ const wiseFigures = [
     votes: 2543,
     imageUrl: sapphoImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "vincent-van-gogh",
@@ -482,6 +523,7 @@ const wiseFigures = [
     votes: 17654,
     imageUrl: vanGoghImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "emily-dickinson",
@@ -492,6 +534,7 @@ const wiseFigures = [
     votes: 6234,
     imageUrl: emilyImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "zora-neale-hurston",
@@ -502,6 +545,7 @@ const wiseFigures = [
     votes: 4123,
     imageUrl: zoraImage,
     chatReady: false,
+    category: "poet",
   },
   {
     id: "avicenna",
@@ -512,6 +556,7 @@ const wiseFigures = [
     votes: 5234,
     imageUrl: avicennaImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "dorothy-day",
@@ -522,6 +567,7 @@ const wiseFigures = [
     votes: 1876,
     imageUrl: dorothyImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "sun-tzu",
@@ -532,6 +578,7 @@ const wiseFigures = [
     votes: 11987,
     imageUrl: sunTzuImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "pythagoras",
@@ -542,6 +589,7 @@ const wiseFigures = [
     votes: 8901,
     imageUrl: pythagorasImage,
     chatReady: false,
+    category: "philosopher",
   },
   {
     id: "moses",
@@ -552,6 +600,7 @@ const wiseFigures = [
     votes: 16234,
     imageUrl: mosesImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "krishna",
@@ -562,6 +611,7 @@ const wiseFigures = [
     votes: 14987,
     imageUrl: krishnaImage,
     chatReady: false,
+    category: "leader",
   },
   {
     id: "hermes-trismegistus",
@@ -572,12 +622,38 @@ const wiseFigures = [
     votes: 7123,
     imageUrl: hermesImage,
     chatReady: false,
+    category: "philosopher",
   },
 ];
 
 export default function VotingSection() {
   const [showAll, setShowAll] = useState(false);
-  const displayedFigures = showAll ? wiseFigures : wiseFigures.slice(0, 9);
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'philosopher' | 'poet' | 'leader'>('all');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#filter-philosophers') {
+        setSelectedCategory('philosopher');
+      } else if (hash === '#filter-poets') {
+        setSelectedCategory('poet');
+      } else if (hash === '#filter-leaders') {
+        setSelectedCategory('leader');
+      } else if (hash === '#filter-all') {
+        setSelectedCategory('all');
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const filteredFigures = selectedCategory === 'all' 
+    ? wiseFigures 
+    : wiseFigures.filter(figure => figure.category === selectedCategory);
+
+  const displayedFigures = showAll ? filteredFigures : filteredFigures.slice(0, 9);
 
   return (
     <section className="py-20 px-6 bg-background" id="voting">
@@ -591,6 +667,49 @@ export default function VotingSection() {
           </p>
         </div>
 
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
+          <Button
+            variant={selectedCategory === 'all' ? 'default' : 'outline'}
+            onClick={() => {
+              setSelectedCategory('all');
+              window.location.hash = '#filter-all';
+            }}
+            data-testid="button-filter-all"
+          >
+            All Figures
+          </Button>
+          <Button
+            variant={selectedCategory === 'philosopher' ? 'default' : 'outline'}
+            onClick={() => {
+              setSelectedCategory('philosopher');
+              window.location.hash = '#filter-philosophers';
+            }}
+            data-testid="button-filter-philosophers"
+          >
+            Philosophers
+          </Button>
+          <Button
+            variant={selectedCategory === 'poet' ? 'default' : 'outline'}
+            onClick={() => {
+              setSelectedCategory('poet');
+              window.location.hash = '#filter-poets';
+            }}
+            data-testid="button-filter-poets"
+          >
+            Poets & Artists
+          </Button>
+          <Button
+            variant={selectedCategory === 'leader' ? 'default' : 'outline'}
+            onClick={() => {
+              setSelectedCategory('leader');
+              window.location.hash = '#filter-leaders';
+            }}
+            data-testid="button-filter-leaders"
+          >
+            Leaders & Activists
+          </Button>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {displayedFigures.map((figure, index) => (
             <WiseFigureCard
@@ -601,7 +720,7 @@ export default function VotingSection() {
           ))}
         </div>
 
-        {wiseFigures.length > 9 && (
+        {filteredFigures.length > 9 && (
           <div className="text-center">
             <Button
               variant="outline"
