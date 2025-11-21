@@ -91,7 +91,7 @@ export default function AiDialogue() {
             </Button>
           </Link>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold font-heading flex items-center gap-2">
+            <h1 className="text-2xl font-bold font-display flex items-center gap-2">
               <Sparkles className="h-6 w-6" />
               Fireside Dialogue
             </h1>
@@ -105,7 +105,7 @@ export default function AiDialogue() {
       <div className="container mx-auto px-4 py-8 max-w-4xl relative z-20">
         {!dialogueId ? (
           <Card className="p-8 shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 font-heading">Stage a Fireside Conversation</h2>
+            <h2 className="text-2xl font-bold mb-6 font-display">Stage a Fireside Conversation</h2>
             
             <div className="space-y-6">
               <div>
@@ -175,7 +175,7 @@ export default function AiDialogue() {
           <div className="space-y-6">
             <Card className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold font-heading">
+                <h2 className="text-xl font-bold font-display">
                   {persona1?.name} & {persona2?.name}
                 </h2>
                 <Button
@@ -232,7 +232,7 @@ export default function AiDialogue() {
                         </Avatar>
                         <div className="flex-1">
                           <div className="flex items-baseline gap-2 mb-2">
-                            <h3 className="font-bold font-heading">{speaker.name}</h3>
+                            <h3 className="font-bold font-display">{speaker.name}</h3>
                             <span className="text-xs text-muted-foreground">{speaker.era}</span>
                           </div>
                           <p className="text-foreground whitespace-pre-wrap font-serif leading-relaxed">

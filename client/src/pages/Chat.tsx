@@ -186,7 +186,7 @@ export default function Chat() {
             </Button>
           </Link>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold font-heading" data-testid="text-persona-name">
+            <h1 className="text-2xl font-bold font-display" data-testid="text-persona-name">
               {persona.name}
             </h1>
             <p className="text-sm text-muted-foreground" data-testid="text-persona-title">
@@ -256,7 +256,7 @@ export default function Chat() {
                         {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
                       </AvatarFallback>
                     </Avatar>
-                    <h2 className="text-2xl font-bold mb-2 font-heading">
+                    <h2 className="text-2xl font-bold mb-2 font-display">
                       A Fireside Chat with {persona.name}
                     </h2>
                     <p className="text-muted-foreground max-w-md">
