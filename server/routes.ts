@@ -1,10 +1,11 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertConversationSchema, insertMessageSchema, insertAiDialogueSchema, insertActivityLogSchema } from "@shared/schema";
+import { insertConversationSchema, insertMessageSchema, insertAiDialogueSchema, insertActivityLogSchema, insertMessageFeedbackSchema } from "@shared/schema";
 import { generatePersonaResponse, generateDialogueResponse, PersonaContext } from "./openai";
 import { sendActivityNotification } from "./email";
 import type { Session } from "express-session";
+import { rateLimiter } from "./middleware/rateLimiter";
 
 interface SessionRequest extends Request {
   session: Session & {
@@ -161,7 +162,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/conversations/:id/messages", async (req, res) => {
+  app.post("/api/conversations/:id/messages", rateLimiter, async (req, res) => {
     try {
       const conversationId = req.params.id;
       const conversation = await storage.getConversation(conversationId);
@@ -206,11 +207,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ userMessage, assistantMessage });
     } catch (error: any) {
       console.error("Error in message creation:", error);
+      
+      if (error.message && error.message.includes("safety guidelines")) {
+        return res.status(400).json({ 
+          error: "Content moderation failed",
+          message: error.message 
+        });
+      }
+      
       res.status(500).json({ error: error.message });
     }
   });
 
-  app.post("/api/ai-dialogues", async (req, res) => {
+  app.post("/api/ai-dialogues", rateLimiter, async (req, res) => {
     const sessionReq = req as SessionRequest;
     try {
       const sessionId = sessionReq.sessionID || "default-session";
@@ -390,6 +399,132 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(stats);
     } catch (error: any) {
       console.error("Error fetching stats:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.delete("/api/conversations/:id", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    try {
+      const conversationId = req.params.id;
+      const sessionId = sessionReq.sessionID || "default-session";
+      
+      const conversation = await storage.getConversation(conversationId);
+      if (!conversation) {
+        return res.status(404).json({ error: "Conversation not found" });
+      }
+      
+      if (conversation.sessionId !== sessionId) {
+        return res.status(403).json({ error: "Unauthorized to delete this conversation" });
+      }
+      
+      const deleted = await storage.deleteConversation(conversationId);
+      if (!deleted) {
+        return res.status(500).json({ error: "Failed to delete conversation" });
+      }
+      
+      await sendActivityNotification("conversation-deleted", null, {
+        "Conversation ID": conversationId,
+        "Figure ID": conversation.figureId,
+      });
+      
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Error deleting conversation:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/feedback", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    try {
+      const sessionId = sessionReq.sessionID || "default-session";
+      const data = insertMessageFeedbackSchema.omit({ sessionId: true }).parse({
+        ...req.body,
+        sessionId,
+      });
+      
+      const feedback = await storage.createMessageFeedback({
+        ...data,
+        sessionId,
+      });
+      
+      await storage.createActivityLog({
+        activityType: "message-feedback",
+        email: null,
+        data: JSON.stringify({ 
+          messageId: data.messageId, 
+          rating: data.rating,
+          conversationId: data.conversationId 
+        }),
+        sessionId,
+      });
+      
+      res.json(feedback);
+    } catch (error: any) {
+      console.error("Error creating feedback:", error);
+      res.status(400).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/user-data/export", async (req, res) => {
+    const sessionReq = req as SessionRequest;
+    try {
+      const sessionId = sessionReq.sessionID || "default-session";
+      
+      const conversations = await storage.getConversationsBySession(sessionId);
+      const conversationIds = conversations.map(c => c.id);
+      
+      const allMessages = await Promise.all(
+        conversationIds.map(id => storage.getMessagesByConversation(id))
+      );
+      const messages = allMessages.flat();
+      
+      const activityLogs = await storage.getActivityLogsBySession(sessionId);
+      
+      const exportData = {
+        exportDate: new Date().toISOString(),
+        sessionId,
+        conversations,
+        messages,
+        activityLogs,
+      };
+      
+      res.json(exportData);
+    } catch (error: any) {
+      console.error("Error exporting user data:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/analytics", requireAdmin, async (req, res) => {
+    try {
+      const activityLogs = await storage.getActivityLogs();
+      
+      const activityByType: Record<string, number> = {};
+      activityLogs.forEach(log => {
+        activityByType[log.activityType] = (activityByType[log.activityType] || 0) + 1;
+      });
+      
+      const allConversations = await storage.getConversationsBySession("all");
+      const conversationIds = allConversations.map(c => c.id);
+      
+      const allMessagesArrays = await Promise.all(
+        conversationIds.map(id => storage.getMessagesByConversation(id))
+      );
+      const totalMessages = allMessagesArrays.flat().length;
+      
+      const analytics = {
+        activityByType,
+        totalConversations: allConversations.length,
+        totalMessages,
+        totalActivityLogs: activityLogs.length,
+        uniqueSessions: new Set(activityLogs.filter(log => log.sessionId).map(log => log.sessionId)).size,
+      };
+      
+      res.json(analytics);
+    } catch (error: any) {
+      console.error("Error fetching analytics:", error);
       res.status(500).json({ error: error.message });
     }
   });

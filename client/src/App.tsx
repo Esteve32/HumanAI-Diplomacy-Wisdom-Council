@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import TosModal from "@/components/TosModal";
 import Home from "@/pages/Home";
 import Chat from "@/pages/Chat";
 import AiDialogue from "@/pages/AiDialogue";
@@ -12,6 +13,7 @@ import Contact from "@/pages/Contact";
 import ApiDocs from "@/pages/ApiDocs";
 import McpTemplates from "@/pages/McpTemplates";
 import GettingStarted from "@/pages/GettingStarted";
+import ResponsibleAi from "@/pages/ResponsibleAi";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
 import NotFound from "@/pages/not-found";
@@ -28,6 +30,7 @@ function Router() {
       <Route path="/api-docs" component={ApiDocs} />
       <Route path="/mcp-templates" component={McpTemplates} />
       <Route path="/getting-started" component={GettingStarted} />
+      <Route path="/responsible-ai" component={ResponsibleAi} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={AdminDashboard} />
       <Route component={NotFound} />
@@ -39,6 +42,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <TosModal />
         <Toaster />
         <Router />
       </TooltipProvider>

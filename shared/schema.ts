@@ -106,6 +106,8 @@ export const activityLogs = pgTable("activity_logs", {
   email: text("email"),
   data: text("data").notNull(),
   sessionId: text("session_id"),
+  tosAccepted: integer("tos_accepted").default(0),
+  ageVerified: integer("age_verified").default(0),
   createdAt: integer("created_at").notNull().$defaultFn(() => Date.now()),
 });
 
@@ -116,3 +118,37 @@ export const insertActivityLogSchema = createInsertSchema(activityLogs).omit({
 
 export type InsertActivityLog = z.infer<typeof insertActivityLogSchema>;
 export type ActivityLog = typeof activityLogs.$inferSelect;
+
+export const messageFeedback = pgTable("message_feedback", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  messageId: varchar("message_id").notNull(),
+  conversationId: varchar("conversation_id").notNull(),
+  sessionId: text("session_id").notNull(),
+  rating: integer("rating").notNull(),
+  createdAt: integer("created_at").notNull().$defaultFn(() => Date.now()),
+});
+
+export const insertMessageFeedbackSchema = createInsertSchema(messageFeedback).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertMessageFeedback = z.infer<typeof insertMessageFeedbackSchema>;
+export type MessageFeedback = typeof messageFeedback.$inferSelect;
+
+export const rateLimits = pgTable("rate_limits", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: text("session_id").notNull(),
+  endpoint: text("endpoint").notNull(),
+  requestCount: integer("request_count").notNull().default(1),
+  windowStart: integer("window_start").notNull().$defaultFn(() => Date.now()),
+});
+
+export const insertRateLimitSchema = createInsertSchema(rateLimits).omit({
+  id: true,
+  windowStart: true,
+  requestCount: true,
+});
+
+export type InsertRateLimit = z.infer<typeof insertRateLimitSchema>;
+export type RateLimit = typeof rateLimits.$inferSelect;

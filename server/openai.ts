@@ -7,6 +7,39 @@ const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY
 });
 
+export interface ModerationResult {
+  flagged: boolean;
+  categories: string[];
+  message?: string;
+}
+
+export async function moderateContent(text: string): Promise<ModerationResult> {
+  try {
+    const moderation = await openai.moderations.create({
+      input: text,
+    });
+
+    const result = moderation.results[0];
+    
+    if (result.flagged) {
+      const flaggedCategories = Object.entries(result.categories)
+        .filter(([_, flagged]) => flagged)
+        .map(([category, _]) => category);
+
+      return {
+        flagged: true,
+        categories: flaggedCategories,
+        message: `This message contains content that violates our safety guidelines: ${flaggedCategories.join(", ")}. Please rephrase your message.`
+      };
+    }
+
+    return { flagged: false, categories: [] };
+  } catch (error: any) {
+    console.error("Moderation API error:", error);
+    return { flagged: false, categories: [] };
+  }
+}
+
 export interface PersonaContext {
   name: string;
   era: string;
@@ -17,8 +50,16 @@ export interface PersonaContext {
 export async function generatePersonaResponse(
   persona: PersonaContext,
   userMessage: string,
-  conversationHistory: Array<{ role: "user" | "assistant"; content: string }>
+  conversationHistory: Array<{ role: "user" | "assistant"; content: string }>,
+  skipModeration: boolean = false
 ): Promise<string> {
+  if (!skipModeration) {
+    const modResult = await moderateContent(userMessage);
+    if (modResult.flagged) {
+      throw new Error(modResult.message || "Content moderation flagged this message");
+    }
+  }
+
   const systemPrompt = `You are ${persona.name}, ${persona.title} from ${persona.era}. 
 
 Bio: ${persona.bio}

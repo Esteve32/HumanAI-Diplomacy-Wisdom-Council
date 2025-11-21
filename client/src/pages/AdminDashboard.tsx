@@ -14,9 +14,11 @@ import {
   MessageSquare, 
   ThumbsUp,
   Calendar,
-  Mail
+  Mail,
+  BarChart3
 } from "lucide-react";
 import { format } from "date-fns";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 type ActivityLog = {
   id: string;
@@ -32,6 +34,14 @@ type Stats = {
   totalActivities: number;
   totalVotes: number;
   uniqueEmails: number;
+};
+
+type Analytics = {
+  activityByType: Record<string, number>;
+  totalConversations: number;
+  totalMessages: number;
+  totalActivityLogs: number;
+  uniqueSessions: number;
 };
 
 export default function AdminDashboard() {
@@ -55,6 +65,11 @@ export default function AdminDashboard() {
 
   const { data: dailyDigest } = useQuery<ActivityLog[]>({
     queryKey: [`/api/admin/daily-digest?days=${selectedDays}`],
+    enabled: authCheck?.isAdmin,
+  });
+
+  const { data: analytics } = useQuery<Analytics>({
+    queryKey: ["/api/analytics"],
     enabled: authCheck?.isAdmin,
   });
 
@@ -172,11 +187,106 @@ export default function AdminDashboard() {
           </Card>
         </div>
 
-        <Tabs defaultValue="recent" className="space-y-4">
+        <Tabs defaultValue="analytics" className="space-y-4">
           <TabsList>
+            <TabsTrigger value="analytics" data-testid="tab-analytics">Analytics</TabsTrigger>
             <TabsTrigger value="recent" data-testid="tab-recent">Recent Activity</TabsTrigger>
             <TabsTrigger value="digest" data-testid="tab-digest">Daily Digest</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="analytics" className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-3 mb-4">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Total Conversations</CardTitle>
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold" data-testid="text-total-conversations">
+                    {analytics?.totalConversations || 0}
+                  </div>
+                  <p className="text-xs text-muted-foreground">All chat sessions</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Total Messages</CardTitle>
+                  <MessageSquare className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold" data-testid="text-total-messages">
+                    {analytics?.totalMessages || 0}
+                  </div>
+                  <p className="text-xs text-muted-foreground">User & AI messages</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Unique Sessions</CardTitle>
+                  <Users className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold" data-testid="text-unique-sessions">
+                    {analytics?.uniqueSessions || 0}
+                  </div>
+                  <p className="text-xs text-muted-foreground">Active users</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5" />
+                  Activity Breakdown by Type
+                </CardTitle>
+                <CardDescription>
+                  Distribution of user activities across different categories
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {analytics?.activityByType && Object.keys(analytics.activityByType).length > 0 ? (
+                  <ResponsiveContainer width="100%" height={400}>
+                    <BarChart
+                      data={Object.entries(analytics.activityByType).map(([name, count]) => ({
+                        name: name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                        count,
+                      }))}
+                      margin={{ top: 5, right: 30, left: 20, bottom: 80 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                      <XAxis 
+                        dataKey="name" 
+                        angle={-45}
+                        textAnchor="end"
+                        height={100}
+                        className="text-xs"
+                      />
+                      <YAxis className="text-xs" />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '0.5rem'
+                        }}
+                      />
+                      <Bar 
+                        dataKey="count" 
+                        fill="hsl(var(--primary))" 
+                        radius={[8, 8, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="flex items-center justify-center h-[400px] text-muted-foreground">
+                    No activity data available yet
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           <TabsContent value="recent" className="space-y-4">
             <Card>

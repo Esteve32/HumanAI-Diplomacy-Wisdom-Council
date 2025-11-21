@@ -12,7 +12,11 @@ import {
   type DialogueMessage,
   type InsertDialogueMessage,
   type ActivityLog,
-  type InsertActivityLog
+  type InsertActivityLog,
+  type MessageFeedback,
+  type InsertMessageFeedback,
+  type RateLimit,
+  type InsertRateLimit
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -26,6 +30,7 @@ export interface IStorage {
   createConversation(conversation: InsertConversation): Promise<Conversation>;
   getConversation(id: string): Promise<Conversation | undefined>;
   getConversationsBySession(sessionId: string): Promise<Conversation[]>;
+  deleteConversation(id: string): Promise<boolean>;
   
   createMessage(message: InsertMessage): Promise<Message>;
   getMessagesByConversation(conversationId: string): Promise<Message[]>;
@@ -39,6 +44,13 @@ export interface IStorage {
   createActivityLog(log: InsertActivityLog): Promise<ActivityLog>;
   getActivityLogs(limit?: number): Promise<ActivityLog[]>;
   getActivityLogsByDateRange(startDate: number, endDate: number): Promise<ActivityLog[]>;
+  getActivityLogsBySession(sessionId: string): Promise<ActivityLog[]>;
+  
+  createMessageFeedback(feedback: InsertMessageFeedback): Promise<MessageFeedback>;
+  getMessageFeedback(messageId: string): Promise<MessageFeedback | undefined>;
+  
+  checkRateLimit(sessionId: string, endpoint: string, maxRequests: number, windowMs: number): Promise<boolean>;
+  incrementRateLimit(sessionId: string, endpoint: string): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -49,6 +61,8 @@ export class MemStorage implements IStorage {
   private aiDialogues: Map<string, AiDialogue>;
   private dialogueMessages: Map<string, DialogueMessage>;
   private activityLogs: Map<string, ActivityLog>;
+  private messageFeedback: Map<string, MessageFeedback>;
+  private rateLimits: Map<string, RateLimit>;
 
   constructor() {
     this.wiseFigures = new Map();
@@ -58,6 +72,8 @@ export class MemStorage implements IStorage {
     this.aiDialogues = new Map();
     this.dialogueMessages = new Map();
     this.activityLogs = new Map();
+    this.messageFeedback = new Map();
+    this.rateLimits = new Map();
   }
 
   async getWiseFigures(): Promise<WiseFigure[]> {
@@ -172,6 +188,76 @@ export class MemStorage implements IStorage {
     return Array.from(this.activityLogs.values())
       .filter((log) => log.createdAt >= startDate && log.createdAt <= endDate)
       .sort((a, b) => b.createdAt - a.createdAt);
+  }
+
+  async getActivityLogsBySession(sessionId: string): Promise<ActivityLog[]> {
+    return Array.from(this.activityLogs.values())
+      .filter((log) => log.sessionId === sessionId)
+      .sort((a, b) => b.createdAt - a.createdAt);
+  }
+
+  async deleteConversation(id: string): Promise<boolean> {
+    const conversation = this.conversations.get(id);
+    if (!conversation) return false;
+
+    const messagesToDelete = Array.from(this.messages.values())
+      .filter(msg => msg.conversationId === id)
+      .map(msg => msg.id);
+    
+    messagesToDelete.forEach(msgId => this.messages.delete(msgId));
+    this.conversations.delete(id);
+    return true;
+  }
+
+  async createMessageFeedback(insertFeedback: InsertMessageFeedback): Promise<MessageFeedback> {
+    const id = randomUUID();
+    const feedback: MessageFeedback = { ...insertFeedback, id, createdAt: Date.now() };
+    this.messageFeedback.set(id, feedback);
+    return feedback;
+  }
+
+  async getMessageFeedback(messageId: string): Promise<MessageFeedback | undefined> {
+    return Array.from(this.messageFeedback.values())
+      .find(feedback => feedback.messageId === messageId);
+  }
+
+  async checkRateLimit(sessionId: string, endpoint: string, maxRequests: number, windowMs: number): Promise<boolean> {
+    const now = Date.now();
+    const key = `${sessionId}:${endpoint}`;
+    const existingLimit = Array.from(this.rateLimits.values())
+      .find(limit => limit.sessionId === sessionId && limit.endpoint === endpoint);
+
+    if (!existingLimit) {
+      return true;
+    }
+
+    if (now - existingLimit.windowStart > windowMs) {
+      this.rateLimits.delete(existingLimit.id);
+      return true;
+    }
+
+    return existingLimit.requestCount < maxRequests;
+  }
+
+  async incrementRateLimit(sessionId: string, endpoint: string): Promise<void> {
+    const now = Date.now();
+    const existingLimit = Array.from(this.rateLimits.values())
+      .find(limit => limit.sessionId === sessionId && limit.endpoint === endpoint);
+
+    if (!existingLimit) {
+      const id = randomUUID();
+      const newLimit: RateLimit = {
+        id,
+        sessionId,
+        endpoint,
+        requestCount: 1,
+        windowStart: now,
+      };
+      this.rateLimits.set(id, newLimit);
+    } else {
+      existingLimit.requestCount += 1;
+      this.rateLimits.set(existingLimit.id, existingLimit);
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useRoute } from "wouter";
+import { useRoute, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -8,7 +8,18 @@ import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Loader2, Send, ArrowLeft } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Loader2, Send, ArrowLeft, ThumbsUp, ThumbsDown, Trash, Download, Square, AlertTriangle, Phone } from "lucide-react";
 import { Link } from "wouter";
 import ThinkingAnimation from "@/components/ThinkingAnimation";
 import type { Message } from "@shared/schema";
@@ -21,14 +32,24 @@ interface Persona {
   description: string;
 }
 
+const SENSITIVE_KEYWORDS = [
+  'suicide', 'suicidal', 'kill myself', 'end my life', 'self-harm', 'self harm',
+  'cutting', 'want to die', 'better off dead', 'no reason to live'
+];
+
 export default function Chat() {
   const [, params] = useRoute("/chat/:figureId");
+  const [, setLocation] = useLocation();
   const figureId = params?.figureId || null;
   
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [messageInput, setMessageInput] = useState("");
   const [optimisticMessage, setOptimisticMessage] = useState<string | null>(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showContentWarning, setShowContentWarning] = useState(false);
+  const [feedbackGiven, setFeedbackGiven] = useState<Set<string>>(new Set());
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const { toast } = useToast();
 
   const personasMap: Record<string, Persona> = {
@@ -85,6 +106,11 @@ export default function Chat() {
 
   const persona = figureId ? personasMap[figureId] : null;
 
+  const checkForSensitiveContent = (text: string) => {
+    const lowerText = text.toLowerCase();
+    return SENSITIVE_KEYWORDS.some(keyword => lowerText.includes(keyword));
+  };
+
   const { mutate: createConversation, isPending: isCreatingConversation } = useMutation({
     mutationFn: async () => {
       if (!figureId || !persona) throw new Error("No figure selected");
@@ -110,10 +136,12 @@ export default function Chat() {
   const { mutate: sendMessage, isPending: isSendingMessage } = useMutation({
     mutationFn: async (content: string) => {
       if (!conversationId) throw new Error("No conversation");
+      abortControllerRef.current = new AbortController();
       const response = await fetch(`/api/conversations/${conversationId}/messages`, {
         method: "POST",
         body: JSON.stringify({ content }),
         headers: { "Content-Type": "application/json" },
+        signal: abortControllerRef.current.signal,
       });
       if (!response.ok) throw new Error("Failed to send message");
       return await response.json();
@@ -124,11 +152,98 @@ export default function Chat() {
       });
       setMessageInput("");
       setOptimisticMessage(null);
+      abortControllerRef.current = null;
     },
     onError: (error: any) => {
       setOptimisticMessage(null);
+      abortControllerRef.current = null;
+      if (error.name !== 'AbortError') {
+        toast({
+          title: "Error",
+          description: error.message || "Failed to send message",
+          variant: "destructive",
+        });
+      }
     },
   });
+
+  const { mutate: submitFeedback } = useMutation({
+    mutationFn: async ({ messageId, rating }: { messageId: string; rating: number }) => {
+      await apiRequest("POST", "/api/feedback", {
+        messageId,
+        conversationId: conversationId!,
+        rating,
+      });
+    },
+    onSuccess: (_, variables) => {
+      setFeedbackGiven(prev => new Set(prev).add(variables.messageId));
+      toast({
+        title: "Feedback Received",
+        description: "Thank you for your feedback!",
+      });
+    },
+  });
+
+  const { mutate: deleteConversation, isPending: isDeletingConversation } = useMutation({
+    mutationFn: async () => {
+      if (!conversationId) throw new Error("No conversation to delete");
+      await apiRequest("DELETE", `/api/conversations/${conversationId}`);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Conversation Deleted",
+        description: "Your conversation has been permanently deleted.",
+      });
+      setLocation("/");
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to delete conversation",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleDownloadData = async () => {
+    try {
+      const response = await fetch("/api/user-data/export");
+      if (!response.ok) throw new Error("Failed to export data");
+      const data = await response.json();
+      
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `wisdom-council-data-${new Date().toISOString()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      toast({
+        title: "Data Downloaded",
+        description: "Your data has been exported successfully.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to download data",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleStopGenerating = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      setOptimisticMessage(null);
+      toast({
+        title: "Stopped",
+        description: "Message generation stopped.",
+      });
+    }
+  };
 
   useEffect(() => {
     if (figureId && !conversationId && !isCreatingConversation) {
@@ -145,6 +260,11 @@ export default function Chat() {
     }
   }, [messages]);
 
+  useEffect(() => {
+    const hasSensitiveContent = messages.some(msg => checkForSensitiveContent(msg.content));
+    setShowContentWarning(hasSensitiveContent);
+  }, [messages]);
+
   const handleSendMessage = () => {
     if (messageInput.trim() && !isSendingMessage) {
       const message = messageInput.trim();
@@ -159,10 +279,9 @@ export default function Chat() {
       e.preventDefault();
       handleSendMessage();
     }
-    // Escape key to cancel optimistic message
     if (e.key === "Escape" && optimisticMessage) {
       e.preventDefault();
-      setOptimisticMessage(null);
+      handleStopGenerating();
     }
   };
 
@@ -187,29 +306,77 @@ export default function Chat() {
 
   return (
     <div className="flex flex-col h-screen bg-background relative">
-      {/* Fireplace background */}
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
         backgroundImage: `radial-gradient(ellipse at 20% 80%, rgba(255, 140, 0, 0.3) 0%, transparent 50%),
                           radial-gradient(ellipse at 80% 20%, rgba(255, 69, 0, 0.2) 0%, transparent 50%)`,
       }} />
       
       <header className="border-b bg-card/95 backdrop-blur relative z-10">
-        <div className="container mx-auto px-4 py-4 flex items-center gap-4">
-          <Link href="/">
-            <Button variant="ghost" size="icon" data-testid="button-back">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
-          <div className="flex-1">
-            <h1 className="text-2xl font-bold font-display" data-testid="text-persona-name">
-              {persona.name}
-            </h1>
-            <p className="text-sm text-muted-foreground" data-testid="text-persona-title">
-              {persona.title} • {persona.era}
-            </p>
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center gap-4 mb-3">
+            <Link href="/">
+              <Button variant="ghost" size="icon" data-testid="button-back">
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+            </Link>
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold font-display" data-testid="text-persona-name">
+                {persona.name}
+              </h1>
+              <p className="text-sm text-muted-foreground" data-testid="text-persona-title">
+                {persona.title} • {persona.era}
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={handleDownloadData}
+                data-testid="button-download-data"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Download Data
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setShowDeleteDialog(true)}
+                disabled={!conversationId}
+                data-testid="button-delete-conversation"
+              >
+                <Trash className="h-4 w-4 mr-2" />
+                Delete
+              </Button>
+            </div>
           </div>
+
+          <Alert className="border-amber-500/50 bg-amber-50/50 dark:bg-amber-950/20">
+            <AlertDescription className="text-sm">
+              <strong>AI Disclaimer:</strong> AI responses are for educational purposes only. Not a substitute for professional advice.
+            </AlertDescription>
+          </Alert>
+
+          <Alert className="mt-2 border-blue-500/50 bg-blue-50/50 dark:bg-blue-950/20">
+            <Phone className="h-4 w-4" />
+            <AlertDescription className="text-sm">
+              <strong>In crisis?</strong> Call Finland Mental Health Crisis Line: <strong>09 2525 0111</strong> (24/7)
+            </AlertDescription>
+          </Alert>
         </div>
       </header>
+
+      {showContentWarning && (
+        <div className="bg-yellow-50 dark:bg-yellow-950/20 border-b border-yellow-500/50 relative z-10">
+          <div className="container mx-auto px-4 py-3">
+            <Alert className="border-yellow-500/50 bg-transparent">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertDescription className="text-sm">
+                <strong>Sensitive topic detected.</strong> If you're in crisis, please contact Finland Mental Health Crisis Line: <strong>09 2525 0111</strong> (24/7)
+              </AlertDescription>
+            </Alert>
+          </div>
+        </div>
+      )}
 
       <div className="flex-1 overflow-hidden relative z-20">
         {isCreatingConversation || !conversationId ? (
@@ -281,33 +448,58 @@ export default function Chat() {
                 ) : (
                   <div className="space-y-6">
                     {messages.map((message) => (
-                      <div
-                        key={message.id}
-                        className={`flex gap-4 ${message.role === "user" ? "justify-end" : ""}`}
-                        data-testid={`message-${message.role}-${message.id}`}
-                      >
-                        {message.role === "assistant" && (
-                          <Avatar className="h-10 w-10 flex-shrink-0">
-                            <AvatarFallback>
-                              {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                            </AvatarFallback>
-                          </Avatar>
-                        )}
+                      <div key={message.id}>
                         <div
-                          className={`rounded-lg px-4 py-3 max-w-[80%] ${
-                            message.role === "user"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted"
-                          }`}
+                          className={`flex gap-4 ${message.role === "user" ? "justify-end" : ""}`}
+                          data-testid={`message-${message.role}-${message.id}`}
                         >
-                          <p className="whitespace-pre-wrap leading-relaxed">
-                            {message.content}
-                          </p>
+                          {message.role === "assistant" && (
+                            <Avatar className="h-10 w-10 flex-shrink-0">
+                              <AvatarFallback>
+                                {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                              </AvatarFallback>
+                            </Avatar>
+                          )}
+                          <div
+                            className={`rounded-lg px-4 py-3 max-w-[80%] ${
+                              message.role === "user"
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-muted"
+                            }`}
+                          >
+                            <p className="whitespace-pre-wrap leading-relaxed">
+                              {message.content}
+                            </p>
+                          </div>
+                          {message.role === "user" && (
+                            <Avatar className="h-10 w-10 flex-shrink-0">
+                              <AvatarFallback>You</AvatarFallback>
+                            </Avatar>
+                          )}
                         </div>
-                        {message.role === "user" && (
-                          <Avatar className="h-10 w-10 flex-shrink-0">
-                            <AvatarFallback>You</AvatarFallback>
-                          </Avatar>
+                        {message.role === "assistant" && (
+                          <div className="flex gap-2 mt-2 ml-14">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => submitFeedback({ messageId: message.id, rating: 1 })}
+                              disabled={feedbackGiven.has(message.id)}
+                              data-testid={`button-feedback-up-${message.id}`}
+                              className="h-8"
+                            >
+                              <ThumbsUp className="h-3 w-3" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => submitFeedback({ messageId: message.id, rating: -1 })}
+                              disabled={feedbackGiven.has(message.id)}
+                              data-testid={`button-feedback-down-${message.id}`}
+                              className="h-8"
+                            >
+                              <ThumbsDown className="h-3 w-3" />
+                            </Button>
+                          </div>
                         )}
                       </div>
                     ))}
@@ -343,25 +535,62 @@ export default function Chat() {
                     disabled={isSendingMessage}
                     data-testid="input-message"
                     aria-label={`Message input for ${persona.name}`}
-                    title="Press Enter to send, Shift+Enter for new line"
+                    title="Press Enter to send, Shift+Enter for new line, Escape to stop"
                   />
-                  <Button
-                    onClick={handleSendMessage}
-                    disabled={!messageInput.trim() || isSendingMessage}
-                    size="icon"
-                    className="h-[60px] w-[60px]"
-                    data-testid="button-send-message"
-                    aria-label={isSendingMessage ? "Sending message..." : "Send message"}
-                    title="Send message (Enter key)"
-                  >
-                    <Send className="h-5 w-5" />
-                  </Button>
+                  {isSendingMessage ? (
+                    <Button
+                      onClick={handleStopGenerating}
+                      variant="destructive"
+                      size="icon"
+                      className="h-[60px] w-[60px]"
+                      data-testid="button-stop-generating"
+                      aria-label="Stop generating"
+                      title="Stop generating (Escape key)"
+                    >
+                      <Square className="h-5 w-5" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleSendMessage}
+                      disabled={!messageInput.trim()}
+                      size="icon"
+                      className="h-[60px] w-[60px]"
+                      data-testid="button-send-message"
+                      aria-label="Send message"
+                      title="Send message (Enter key)"
+                    >
+                      <Send className="h-5 w-5" />
+                    </Button>
+                  )}
                 </div>
               </div>
             </Card>
           </div>
         )}
       </div>
+
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Conversation?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete your conversation with {persona.name}. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                deleteConversation();
+                setShowDeleteDialog(false);
+              }}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isDeletingConversation ? "Deleting..." : "Delete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

@@ -296,6 +296,9 @@ export default function Footer() {
             <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-terms">
               Terms of Service
             </Link>
+            <Link href="/responsible-ai" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-responsible-ai">
+              Responsible AI
+            </Link>
             <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-contact">
               Contact
             </Link>
