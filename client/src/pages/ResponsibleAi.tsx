@@ -105,9 +105,9 @@ export default function ResponsibleAi() {
                     <span className="text-primary font-semibold text-sm">2</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-sm mb-1">Content Safety</h4>
+                    <h4 className="font-semibold text-sm mb-1">Content Safety (Interim Solution)</h4>
                     <p className="text-xs text-muted-foreground">
-                      Keyword-based filtering blocks harmful content (hate speech, extreme violence, explicit material) before processing. Combined with GPT-5's built-in safety features
+                      Keyword/regex filtering blocks harmful content (hate speech, explicit violence, sexual exploitation, extreme self-harm instructions) before processing. This interim solution will be upgraded to dedicated moderation API for beta launch. Combined with GPT-5's built-in safety
                     </p>
                   </div>
                 </div>

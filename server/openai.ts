@@ -20,10 +20,12 @@ const HARMFUL_PATTERNS = {
     /\b(jews|blacks|muslims|gays).{0,30}(control|rule|destroy|subhuman|inferior|deserve\s+to\s+die)/i,
   ],
   'explicit-violence': [
-    /\b(how\s+to|ways\s+to|steps\s+to|guide\s+to|want\s+to|going\s+to|will)\s+(kill|murder|harm|torture|assault|shoot|stab|beat)/i,
-    /\b(i\s+(want|will|gonna))\s+(kill|murder|hurt|harm)\s+(myself|you|him|her|them|everyone)/i,
-    /\b(build|make|create|buy).{0,20}(bomb|weapon|explosive|poison|gun)/i,
-    /\b(mass|school)\s+(shooting|stabbing|attack|murder)/i,
+    /\b(how\s+to|ways\s+to|steps\s+to|guide\s+to|want\s+to|going\s+to|will|planning|could|help\s+me)\s+(kill|murder|harm|torture|assault|shoot|stab|beat|attack|poison)/i,
+    /\b(i\s+(want|will|gonna|need|could|hate\s+you\s+so\s+much\s+i\s+could))\s+(kill|murder|hurt|harm|attack)\s+(myself|you|him|her|them|everyone|people|someone)/i,
+    /\b(i\s+want\s+to\s+hurt|help\s+me\s+poison)\s+(others|people|someone|myself|them)/i,
+    /\b(build|make|create|buy|get|help.{0,10}poison).{0,20}(bomb|weapon|explosive|poison|gun|rifle)/i,
+    /\b(mass|school)\s+(shooting|stabbing|attack|murder|killing)/i,
+    /\b(planning|going\s+to)\s+(shoot|stab|attack|kill)\s+(people|students|workers|someone)/i,
   ],
   'explicit-sexual': [
     /\b(child|minor|kid|kids|underage|young\s+girl|young\s+boy).{0,50}(sexual|porn|nude|naked|molest|rape|touch|abuse)/i,
@@ -31,10 +33,13 @@ const HARMFUL_PATTERNS = {
     /\b(incest|pedophile|pedo|loli|shota)/i,
   ],
   'self-harm-extreme': [
-    /\b(how\s+to|best\s+way\s+to|methods\s+to|want\s+to|going\s+to|will|gonna)\s+(kill\s+myself|commit\s+suicide|end\s+my\s+life|die|overdose)/i,
-    /\b(i\s+(want|will|gonna|should))\s+(die|kill\s+myself|end\s+it|commit\s+suicide)/i,
-    /\b(suicide|overdose|hanging|cutting|self\-?harm)\s+(method|technique|guide|plan|ways)/i,
-    /\b(life\s+is\s+not\s+worth|tired\s+of\s+living|ready\s+to\s+die|goodbye\s+world)/i,
+    /\b(how\s+to|best\s+way\s+to|methods\s+to|want\s+to|going\s+to|will|gonna|planning\s+to|should\s+just)\s+(kill\s+myself|commit\s+suicide|end\s+my\s+life|die|overdose|end\s+it\s+all)/i,
+    /\b(i\s+(want|will|gonna|should|need)\s+to)\s+(die|kill\s+myself|end\s+it|commit\s+suicide|hurt\s+myself)/i,
+    /\b(i'?m\s+going\s+to|i\s+should\s+just)\s+(end\s+it|kill\s+myself|die\s+tonight|overdose|hang\s+myself|end\s+it\s+all)/i,
+    /\b(end\s+it\s+all).{0,20}(tonight|today|now)/i,
+    /\b(suicide|overdose|hanging|cutting|self\-?harm)\s+(method|technique|guide|plan|ways|tonight|today)/i,
+    /\b(life\s+is\s+not\s+worth|tired\s+of\s+living|ready\s+to\s+die|goodbye\s+world|please\s+kill\s+me)/i,
+    /\b(can't\s+take\s+it|done\s+with\s+life|want\s+to\s+disappear|end\s+the\s+pain).{0,20}(anymore|forever|tonight|today)/i,
   ]
 };
 
@@ -107,7 +112,16 @@ You are having a "fireside chat" - an intimate, thoughtful conversation with som
       max_completion_tokens: 8192,
     });
 
-    return response.choices[0]?.message?.content || "I apologize, but I'm having trouble formulating my thoughts at the moment. Please try again.";
+    const aiResponse = response.choices[0]?.message?.content || "I apologize, but I'm having trouble formulating my thoughts at the moment. Please try again.";
+    
+    const outboundModResult = await moderateContent(aiResponse);
+    if (outboundModResult.flagged) {
+      console.error(`🛡️  CRITICAL: AI response contained harmful content - Category: ${outboundModResult.categories.join(", ")}`);
+      console.error(`🛡️  Blocked response: ${aiResponse.substring(0, 100)}...`);
+      return "I apologize, but I need to reconsider my response. If you're experiencing distress, please contact the Finland Mental Health Crisis Line at 09 2525 0111 (available 24/7).";
+    }
+    
+    return aiResponse;
   } catch (error: any) {
     console.error("OpenAI API error:", error);
     throw new Error("Failed to generate response from AI");
@@ -122,6 +136,20 @@ export async function generateDialogueResponse(
   topic: string,
   conversationHistory: Array<{ personaId: number; content: string }>
 ): Promise<string> {
+  const topicModResult = await moderateContent(topic);
+  if (topicModResult.flagged) {
+    throw new Error(topicModResult.message || "Dialogue topic contains harmful content");
+  }
+
+  const recentTurns = conversationHistory.slice(-3);
+  for (const turn of recentTurns) {
+    const turnModResult = await moderateContent(turn.content);
+    if (turnModResult.flagged) {
+      console.warn(`🛡️  Blocked harmful content in dialogue history from persona ${turn.personaId}`);
+      throw new Error("Dialogue contains harmful content in conversation history");
+    }
+  }
+
   const systemPrompt = `You are ${persona.name}, ${persona.title} from ${persona.era}. 
 
 Bio: ${persona.bio}
@@ -163,7 +191,16 @@ This is a philosophical dialogue - be intellectually curious and substantive whi
       max_completion_tokens: 8192,
     });
 
-    return response.choices[0]?.message?.content || "I apologize, but I'm having trouble formulating my thoughts at the moment.";
+    const aiResponse = response.choices[0]?.message?.content || "I apologize, but I'm having trouble formulating my thoughts at the moment.";
+    
+    const outboundModResult = await moderateContent(aiResponse);
+    if (outboundModResult.flagged) {
+      console.error(`🛡️  CRITICAL: AI dialogue response contained harmful content - Category: ${outboundModResult.categories.join(", ")}`);
+      console.error(`🛡️  Blocked dialogue response from persona ${personaId}`);
+      return "I must pause this dialogue as the discussion has taken a concerning turn. If you're experiencing distress, please contact the Finland Mental Health Crisis Line at 09 2525 0111.";
+    }
+    
+    return aiResponse;
   } catch (error: any) {
     console.error("OpenAI API error:", error);
     throw new Error("Failed to generate dialogue response from AI");
