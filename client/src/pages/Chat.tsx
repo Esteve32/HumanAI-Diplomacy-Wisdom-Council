@@ -196,141 +196,141 @@ export default function Chat() {
         </div>
       </header>
 
-      {isCreatingConversation ? (
-        <div className="flex-1 overflow-hidden relative z-20 flex items-center justify-center">
-          <div className="space-y-6 flex flex-col items-center">
-            <div className="relative w-32 h-32">
-              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
-              <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}} />
-              <div className="absolute inset-4 rounded-full border-3 border-transparent border-l-amber-500 opacity-30 animate-spin" style={{animationDuration: '2s'}} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-5xl opacity-30 animate-pulse">🕰️</div>
+      <div className="flex-1 overflow-hidden relative z-20">
+        {isCreatingConversation || !conversationId ? (
+          <div className="flex items-center justify-center h-full">
+            <div className="space-y-6 flex flex-col items-center">
+              <div className="relative w-32 h-32">
+                <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
+                <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}} />
+                <div className="absolute inset-4 rounded-full border-3 border-transparent border-l-amber-500 opacity-30 animate-spin" style={{animationDuration: '2s'}} />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-5xl opacity-30 animate-pulse">🕰️</div>
+                </div>
+              </div>
+              <div className="text-center max-w-md">
+                <p className="text-base font-medium text-foreground mb-2">
+                  Kindling the conversation...
+                </p>
+                <p className="text-sm text-muted-foreground mb-1">
+                  Preparing your fireside chat with {persona.name}
+                </p>
+                <p className="text-xs text-muted-foreground italic">
+                  ✨ Bridging across centuries takes a moment—your patience transcends time!
+                </p>
               </div>
             </div>
-            <div className="text-center max-w-md">
-              <p className="text-base font-medium text-foreground mb-2">
-                Kindling the conversation...
-              </p>
-              <p className="text-sm text-muted-foreground mb-1">
-                Preparing your fireside chat with {persona.name}
-              </p>
-              <p className="text-xs text-muted-foreground italic">
-                ✨ Bridging across centuries takes a moment—your patience transcends time!
-              </p>
-            </div>
           </div>
-        </div>
-      ) : (
-        <div className="flex-1 overflow-hidden relative z-20">
+        ) : (
           <div className="container mx-auto px-4 h-full py-6">
             <Card className="h-full flex flex-col shadow-lg">
               <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
-              {isLoadingMessages ? (
-                <div className="flex flex-col items-center justify-center h-full">
-                  <div className="space-y-6 flex flex-col items-center">
-                    <div className="relative w-32 h-32">
-                      <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
-                      <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}} />
-                      <div className="absolute inset-4 rounded-full border-3 border-transparent border-l-amber-500 opacity-30 animate-spin" style={{animationDuration: '2s'}} />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-5xl opacity-30 animate-pulse">🕰️</div>
+                {isLoadingMessages ? (
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <div className="space-y-6 flex flex-col items-center">
+                      <div className="relative w-32 h-32">
+                        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary border-r-primary opacity-60 animate-spin" />
+                        <div className="absolute inset-2 rounded-full border-4 border-transparent border-b-primary opacity-40 animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}} />
+                        <div className="absolute inset-4 rounded-full border-3 border-transparent border-l-amber-500 opacity-30 animate-spin" style={{animationDuration: '2s'}} />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-5xl opacity-30 animate-pulse">🕰️</div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-center max-w-md">
-                      <p className="text-base font-medium text-foreground mb-2">
-                        Temporal bridge warming...
-                      </p>
-                      <p className="text-sm text-muted-foreground mb-1">
-                        Preparing your fireside conversation with {persona.name}
-                      </p>
-                      <p className="text-xs text-muted-foreground italic">
-                        ✨ Bridging centuries takes a moment. Your patience transcends time!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ) : messages.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center px-4">
-                  <Avatar className="h-24 w-24 mb-4">
-                    <AvatarFallback className="text-3xl">
-                      {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <h2 className="text-2xl font-bold mb-2 font-heading">
-                    A Fireside Chat with {persona.name}
-                  </h2>
-                  <p className="text-muted-foreground max-w-md">
-                    {persona.description}
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  {messages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={`flex gap-4 ${message.role === "user" ? "justify-end" : ""}`}
-                      data-testid={`message-${message.role}-${message.id}`}
-                    >
-                      {message.role === "assistant" && (
-                        <Avatar className="h-10 w-10 flex-shrink-0">
-                          <AvatarFallback>
-                            {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                          </AvatarFallback>
-                        </Avatar>
-                      )}
-                      <div
-                        className={`rounded-lg px-4 py-3 max-w-[80%] ${
-                          message.role === "user"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted"
-                        }`}
-                      >
-                        <p className="whitespace-pre-wrap leading-relaxed">
-                          {message.content}
+                      <div className="text-center max-w-md">
+                        <p className="text-base font-medium text-foreground mb-2">
+                          Temporal bridge warming...
+                        </p>
+                        <p className="text-sm text-muted-foreground mb-1">
+                          Preparing your fireside conversation with {persona.name}
+                        </p>
+                        <p className="text-xs text-muted-foreground italic">
+                          ✨ This grand leap across time deserves patience. Wisdom awaits...
                         </p>
                       </div>
-                      {message.role === "user" && (
-                        <Avatar className="h-10 w-10 flex-shrink-0">
-                          <AvatarFallback>You</AvatarFallback>
-                        </Avatar>
-                      )}
                     </div>
-                  ))}
-                  {isSendingMessage && (
-                    <div className="flex justify-center w-full">
-                      <ThinkingAnimation />
-                    </div>
-                  )}
-                </div>
-              )}
-            </ScrollArea>
+                  </div>
+                ) : messages.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-full text-center px-4">
+                    <Avatar className="h-24 w-24 mb-4">
+                      <AvatarFallback className="text-3xl">
+                        {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <h2 className="text-2xl font-bold mb-2 font-heading">
+                      A Fireside Chat with {persona.name}
+                    </h2>
+                    <p className="text-muted-foreground max-w-md">
+                      {persona.description}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {messages.map((message) => (
+                      <div
+                        key={message.id}
+                        className={`flex gap-4 ${message.role === "user" ? "justify-end" : ""}`}
+                        data-testid={`message-${message.role}-${message.id}`}
+                      >
+                        {message.role === "assistant" && (
+                          <Avatar className="h-10 w-10 flex-shrink-0">
+                            <AvatarFallback>
+                              {persona.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                            </AvatarFallback>
+                          </Avatar>
+                        )}
+                        <div
+                          className={`rounded-lg px-4 py-3 max-w-[80%] ${
+                            message.role === "user"
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted"
+                          }`}
+                        >
+                          <p className="whitespace-pre-wrap leading-relaxed">
+                            {message.content}
+                          </p>
+                        </div>
+                        {message.role === "user" && (
+                          <Avatar className="h-10 w-10 flex-shrink-0">
+                            <AvatarFallback>You</AvatarFallback>
+                          </Avatar>
+                        )}
+                      </div>
+                    ))}
+                    {isSendingMessage && (
+                      <div className="flex justify-center w-full">
+                        <ThinkingAnimation />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </ScrollArea>
 
-            <div className="border-t p-4">
-              <div className="flex gap-2">
-                <Textarea
-                  placeholder={`Ask ${persona.name} anything...`}
-                  value={messageInput}
-                  onChange={(e) => setMessageInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="resize-none min-h-[60px]"
-                  disabled={isSendingMessage}
-                  data-testid="input-message"
-                />
-                <Button
-                  onClick={handleSendMessage}
-                  disabled={!messageInput.trim() || isSendingMessage}
-                  size="icon"
-                  className="h-[60px] w-[60px]"
-                  data-testid="button-send-message"
-                >
-                  <Send className="h-5 w-5" />
-                </Button>
+              <div className="border-t p-4">
+                <div className="flex gap-2">
+                  <Textarea
+                    placeholder={`Ask ${persona.name} anything...`}
+                    value={messageInput}
+                    onChange={(e) => setMessageInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    className="resize-none min-h-[60px]"
+                    disabled={isSendingMessage}
+                    data-testid="input-message"
+                  />
+                  <Button
+                    onClick={handleSendMessage}
+                    disabled={!messageInput.trim() || isSendingMessage}
+                    size="icon"
+                    className="h-[60px] w-[60px]"
+                    data-testid="button-send-message"
+                  >
+                    <Send className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
-            </div>
-          </Card>
-            </div>
+            </Card>
           </div>
         )}
+      </div>
     </div>
   );
 }
