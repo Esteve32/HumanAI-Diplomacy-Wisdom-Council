@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useLocation } from "wouter";
-import logoImage from "@assets/GE logo 512x512 transparent BG 2023 _1763685719997.png";
+import logoImage from "@assets/DashboardVersionOfficialLogo_LargeBlack@2x_1763744013740.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

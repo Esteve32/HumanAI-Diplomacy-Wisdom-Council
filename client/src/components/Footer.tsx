@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import logoImage from "@assets/GE logo 512x512 transparent BG 2023 _1763685719997.png";
+import logoImage from "@assets/DashboardVersionOfficialLogo_LargeBlack@2x_1763744013740.png";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Footer() {

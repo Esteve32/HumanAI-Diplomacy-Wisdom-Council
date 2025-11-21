@@ -55,7 +55,12 @@ export default function PricingSection() {
               className="w-full min-h-11" 
               size="lg"
               data-testid="button-join-free-waitlist"
-              onClick={() => console.log('Join free waitlist clicked')}
+              onClick={() => {
+                const element = document.getElementById('voting');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
             >
               Get Early Access
             </Button>
@@ -116,7 +121,14 @@ export default function PricingSection() {
               className="w-full min-h-11" 
               size="lg"
               data-testid="button-join-api-waitlist"
-              onClick={() => console.log('Join API waitlist clicked')}
+              onClick={() => {
+                const subject = encodeURIComponent("API Access Waitlist");
+                const body = encodeURIComponent(
+                  "I would like to join the API Access waitlist for Wisdom Council.\n\n" +
+                  "Please notify me when API access is available at the $29/month early access rate.\n\n"
+                );
+                window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
+              }}
             >
               Join Waitlist
             </Button>
@@ -137,10 +149,29 @@ export default function PricingSection() {
             Need custom enterprise solutions? Volume discounts available when we launch.
           </p>
           <Button 
-            variant="ghost"
+            variant="default"
             className="min-h-11 font-medium"
             data-testid="button-contact-sales"
-            onClick={() => console.log('Contact sales clicked')}
+            onClick={async () => {
+              await fetch("/api/track-click", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  cta: "contact-sales-enterprise",
+                  consentGiven: false,
+                }),
+              });
+              
+              const subject = encodeURIComponent("Enterprise Solutions Inquiry");
+              const body = encodeURIComponent(
+                "I am interested in enterprise solutions for Wisdom Council.\n\n" +
+                "Please contact me to discuss:\n" +
+                "- Custom volume pricing\n" +
+                "- Enterprise features\n" +
+                "- Team collaboration tools\n\n"
+              );
+              window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
+            }}
           >
             Contact Sales for Enterprise →
           </Button>
