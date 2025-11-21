@@ -409,12 +409,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const conversationId = req.params.id;
       const sessionId = sessionReq.sessionID || "default-session";
       
+      console.log("🗑️  DELETE request - Session ID:", sessionId);
+      
       const conversation = await storage.getConversation(conversationId);
       if (!conversation) {
         return res.status(404).json({ error: "Conversation not found" });
       }
       
+      console.log("🗑️  Conversation found - Owner session ID:", conversation.sessionId);
+      console.log("🗑️  Session match:", conversation.sessionId === sessionId);
+      
       if (conversation.sessionId !== sessionId) {
+        console.error("🗑️  Session mismatch! Conversation:", conversation.sessionId, "Request:", sessionId);
         return res.status(403).json({ error: "Unauthorized to delete this conversation" });
       }
       

@@ -13,31 +13,48 @@ export interface ModerationResult {
   message?: string;
 }
 
+const HARMFUL_PATTERNS = {
+  'hate-speech': [
+    /\b(kill|murder|genocide|exterminate|eliminate)\s+(all\s+)?(jews|muslims|christians|blacks|whites|asians|lgbtq|gays|trans|immigrants|refugees)/i,
+    /\b(n[i1!]gg[ae3]r|f[a4]gg[o0]t|ch[i1!]nk|sp[i1!]c|k[i1!]ke|r[e3]t[a4]rd|tr[a4]nn[y1!])\b/i,
+    /\b(jews|blacks|muslims|gays).{0,30}(control|rule|destroy|subhuman|inferior|deserve\s+to\s+die)/i,
+  ],
+  'explicit-violence': [
+    /\b(how\s+to|ways\s+to|steps\s+to|guide\s+to|want\s+to|going\s+to|will)\s+(kill|murder|harm|torture|assault|shoot|stab|beat)/i,
+    /\b(i\s+(want|will|gonna))\s+(kill|murder|hurt|harm)\s+(myself|you|him|her|them|everyone)/i,
+    /\b(build|make|create|buy).{0,20}(bomb|weapon|explosive|poison|gun)/i,
+    /\b(mass|school)\s+(shooting|stabbing|attack|murder)/i,
+  ],
+  'explicit-sexual': [
+    /\b(child|minor|kid|kids|underage|young\s+girl|young\s+boy).{0,50}(sexual|porn|nude|naked|molest|rape|touch|abuse)/i,
+    /\b(rape|molest|abuse|assault).{0,30}(how|guide|fantasy|story|want\s+to|going\s+to)/i,
+    /\b(incest|pedophile|pedo|loli|shota)/i,
+  ],
+  'self-harm-extreme': [
+    /\b(how\s+to|best\s+way\s+to|methods\s+to|want\s+to|going\s+to|will|gonna)\s+(kill\s+myself|commit\s+suicide|end\s+my\s+life|die|overdose)/i,
+    /\b(i\s+(want|will|gonna|should))\s+(die|kill\s+myself|end\s+it|commit\s+suicide)/i,
+    /\b(suicide|overdose|hanging|cutting|self\-?harm)\s+(method|technique|guide|plan|ways)/i,
+    /\b(life\s+is\s+not\s+worth|tired\s+of\s+living|ready\s+to\s+die|goodbye\s+world)/i,
+  ]
+};
+
 export async function moderateContent(text: string): Promise<ModerationResult> {
-  try {
-    const moderation = await openai.moderations.create({
-      input: text,
-    });
-
-    const result = moderation.results[0];
-    
-    if (result.flagged) {
-      const flaggedCategories = Object.entries(result.categories)
-        .filter(([_, flagged]) => flagged)
-        .map(([category, _]) => category);
-
-      return {
-        flagged: true,
-        categories: flaggedCategories,
-        message: `This message contains content that violates our safety guidelines: ${flaggedCategories.join(", ")}. Please rephrase your message.`
-      };
+  const lowerText = text.toLowerCase();
+  
+  for (const [category, patterns] of Object.entries(HARMFUL_PATTERNS)) {
+    for (const pattern of patterns) {
+      if (pattern.test(lowerText)) {
+        console.warn(`🛡️  Blocked harmful content - Category: ${category}`);
+        return {
+          flagged: true,
+          categories: [category],
+          message: `This message appears to contain harmful content related to ${category.replace('-', ' ')}. Our AI is designed to provide wisdom and personal growth support, not harmful information. If you're in crisis, please contact the Finland Mental Health Crisis Line at 09 2525 0111 (available 24/7).`
+        };
+      }
     }
-
-    return { flagged: false, categories: [] };
-  } catch (error: any) {
-    console.error("Moderation API error:", error);
-    return { flagged: false, categories: [] };
   }
+  
+  return { flagged: false, categories: [] };
 }
 
 export interface PersonaContext {
@@ -60,7 +77,11 @@ export async function generatePersonaResponse(
     }
   }
 
-  const systemPrompt = `You are ${persona.name}, ${persona.title} from ${persona.era}. 
+  const systemPrompt = `You are ${persona.name}, ${persona.title} from ${persona.era}.
+
+IMPORTANT SAFETY INSTRUCTION: If discussing sensitive topics like mental health struggles, depression, or difficult life circumstances, respond with compassion and understanding. Always mention the Finland Mental Health Crisis Line (09 2525 0111, available 24/7) when appropriate.
+
+REFUSAL PROTOCOL: If asked to provide harmful information, illegal advice, or explicit content, politely decline and explain you're here for philosophical wisdom and personal growth. 
 
 Bio: ${persona.bio}
 

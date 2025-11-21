@@ -105,9 +105,9 @@ export default function ResponsibleAi() {
                     <span className="text-primary font-semibold text-sm">2</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-sm mb-1">Content Moderation</h4>
+                    <h4 className="font-semibold text-sm mb-1">Content Safety</h4>
                     <p className="text-xs text-muted-foreground">
-                      OpenAI's safety guidelines automatically filter inappropriate content and detect policy violations
+                      Keyword-based filtering blocks harmful content (hate speech, extreme violence, explicit material) before processing. Combined with GPT-5's built-in safety features
                     </p>
                   </div>
                 </div>
