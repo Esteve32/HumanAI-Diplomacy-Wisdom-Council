@@ -1,5 +1,3 @@
-import { google } from 'googleapis';
-
 const HARMFUL_PATTERNS_FALLBACK = {
   'hate-speech': [
     /\b(kill|murder|genocide|exterminate|eliminate|gas)\s+(all|the|those)?\s*(jews|muslims|christians|blacks|whites|asians|lgbtq|gays|trans|immigrants|refugees|women|men)/i,
@@ -124,6 +122,7 @@ export interface ModerationResult {
 }
 
 const PERSPECTIVE_API_KEY = process.env.PERSPECTIVE_API_KEY;
+const PERSPECTIVE_API_ENDPOINT = 'https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze';
 
 const TOXICITY_THRESHOLDS = {
   SEVERE_TOXICITY: 0.6,
@@ -136,34 +135,14 @@ const TOXICITY_THRESHOLDS = {
 
 const CRISIS_MESSAGE = "If you're experiencing distress, please contact the Finland Mental Health Crisis Line at 09 2525 0111 (available 24/7).";
 
-let perspectiveClient: any = null;
-
-function initializePerspectiveClient() {
-  if (!PERSPECTIVE_API_KEY) {
-    console.warn('⚠️  PERSPECTIVE_API_KEY not set - moderation disabled');
-    return null;
-  }
-
-  if (!perspectiveClient) {
-    perspectiveClient = google.commentanalyzer({
-      version: 'v1alpha1',
-      auth: PERSPECTIVE_API_KEY
-    });
-  }
-
-  return perspectiveClient;
-}
-
 export async function moderateContent(text: string): Promise<ModerationResult> {
-  const client = initializePerspectiveClient();
-
-  if (!client) {
-    console.warn('⚠️  PERSPECTIVE_API_KEY not configured - using fallback keyword moderation');
-    return applyFallbackModeration(text);
-  }
-
   if (!text || text.trim().length === 0) {
     return { flagged: false, categories: [], scores: {} };
+  }
+
+  if (!PERSPECTIVE_API_KEY) {
+    console.warn('⚠️  PERSPECTIVE_API_KEY not configured - using fallback keyword moderation');
+    return applyFallbackModeration(text);
   }
 
   try {
@@ -181,12 +160,22 @@ export async function moderateContent(text: string): Promise<ModerationResult> {
       doNotStore: true
     };
 
-    const response = await (client.comments.analyze as any)({
-      key: PERSPECTIVE_API_KEY,
-      resource: analyzeRequest
+    const url = `${PERSPECTIVE_API_ENDPOINT}?key=${PERSPECTIVE_API_KEY}`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(analyzeRequest)
     });
 
-    const data: PerspectiveResponse = response.data;
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Perspective API returned ${response.status}: ${errorText}`);
+    }
+
+    const data: PerspectiveResponse = await response.json();
     const scores: Record<string, number> = {};
     const flaggedCategories: string[] = [];
 
@@ -219,12 +208,13 @@ export async function moderateContent(text: string): Promise<ModerationResult> {
       };
     }
 
+    console.log('✅ Perspective API: Content passed moderation');
     return { flagged: false, categories: [], scores };
 
   } catch (error: any) {
     console.error('❌ Perspective API error:', error.message);
     
-    if (error.code === 400 || error.message?.includes('API key')) {
+    if (error.message?.includes('400') || error.message?.includes('API key')) {
       console.error('❌ Invalid API key or quota exceeded - falling back to keyword moderation');
     }
 
