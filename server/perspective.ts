@@ -121,6 +121,13 @@ export interface ModerationResult {
   message?: string;
 }
 
+export class ModerationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ModerationError';
+  }
+}
+
 const PERSPECTIVE_API_KEY = process.env.PERSPECTIVE_API_KEY;
 const PERSPECTIVE_API_ENDPOINT = 'https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze';
 

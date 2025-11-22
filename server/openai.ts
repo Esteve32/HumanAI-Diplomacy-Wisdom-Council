@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { moderateContent, type ModerationResult } from "./perspective";
+import { moderateContent, ModerationError, type ModerationResult } from "./perspective";
 
 // This is using Replit's AI Integrations service, which provides OpenAI-compatible API access without requiring your own OpenAI API key.
 // Charges are billed to your Replit credits.
@@ -55,7 +55,7 @@ export async function generatePersonaResponse(
   if (!skipModeration) {
     const modResult = await moderateContent(userMessage);
     if (modResult.flagged) {
-      throw new Error(modResult.message || "Content moderation flagged this message");
+      throw new ModerationError(modResult.message || "Content moderation flagged this message");
     }
   }
 
@@ -115,7 +115,7 @@ export async function generateDialogueResponse(
 ): Promise<string> {
   const topicModResult = await moderateContent(topic);
   if (topicModResult.flagged) {
-    throw new Error(topicModResult.message || "Dialogue topic contains harmful content");
+    throw new ModerationError(topicModResult.message || "Dialogue topic contains harmful content");
   }
 
   const recentTurns = conversationHistory.slice(-3);
@@ -123,7 +123,7 @@ export async function generateDialogueResponse(
     const turnModResult = await moderateContent(turn.content);
     if (turnModResult.flagged) {
       console.warn(`🛡️  Blocked harmful content in dialogue history from persona ${turn.personaId}`);
-      throw new Error("Dialogue contains harmful content in conversation history");
+      throw new ModerationError("Dialogue contains harmful content in conversation history");
     }
   }
 

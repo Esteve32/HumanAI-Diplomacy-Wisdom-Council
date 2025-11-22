@@ -6,6 +6,7 @@ import { generatePersonaResponse, generateDialogueResponse, PersonaContext } fro
 import { sendActivityNotification } from "./email";
 import type { Session } from "express-session";
 import { rateLimiter } from "./middleware/rateLimiter";
+import { ModerationError } from "./perspective";
 
 interface SessionRequest extends Request {
   session: Session & {
@@ -171,13 +172,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ error: "Conversation not found" });
       }
 
-      const data = insertMessageSchema.parse({
-        conversationId,
-        role: "user",
-        content: req.body.content,
-      });
-
-      const userMessage = await storage.createMessage(data);
+      const personaContext = personaDatabase[conversation.figureId];
+      if (!personaContext) {
+        return res.status(404).json({ error: "Persona not found" });
+      }
 
       const messages = await storage.getMessagesByConversation(conversationId);
       const conversationHistory = messages
@@ -187,16 +185,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
           content: msg.content,
         }));
 
-      const personaContext = personaDatabase[conversation.figureId];
-      if (!personaContext) {
-        return res.status(404).json({ error: "Persona not found" });
-      }
-
       const aiResponse = await generatePersonaResponse(
         personaContext,
         req.body.content,
         conversationHistory
       );
+
+      const data = insertMessageSchema.parse({
+        conversationId,
+        role: "user",
+        content: req.body.content,
+      });
+
+      const userMessage = await storage.createMessage(data);
 
       const assistantMessage = await storage.createMessage({
         conversationId,
@@ -208,9 +209,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error("Error in message creation:", error);
       
-      if (error.message && error.message.includes("safety guidelines")) {
+      if (error instanceof ModerationError) {
         return res.status(400).json({ 
-          error: "Content moderation failed",
+          error: "Content moderation blocked this message",
           message: error.message 
         });
       }
@@ -273,6 +274,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(dialogue);
     } catch (error: any) {
       console.error("Error creating AI dialogue:", error);
+      
+      if (error instanceof ModerationError) {
+        return res.status(400).json({ 
+          error: "Content moderation blocked this dialogue",
+          message: error.message 
+        });
+      }
+      
       res.status(500).json({ error: error.message });
     }
   });
