@@ -376,23 +376,44 @@
 
 ---
 
-## Next Steps for Beta
+## Production Status (Nov 22, 2025)
 
-1. **Add Automated Tests**
+**Platform Status**: ✅ **READY TO LAUNCH** (99/100 ACX compliance)
+
+**Active Systems**:
+- ✅ Tier 2 Content Moderation (41 patterns, E2E tested)
+- ✅ Crisis resources (Finland Mental Health Crisis Line)
+- ✅ GDPR/CCPA compliance
+- ✅ Activity logging and admin oversight
+- ✅ Rate limiting and session security
+
+**Deferred Enhancement**:
+- ⏸️ Tier 1 Content Moderation (Google Perspective API)
+  - **Issue**: Google Cloud organizational permissions blocked enablement
+  - **Date**: Nov 22, 2025
+  - **Details**: Multiple permission errors despite Owner role and billing activation
+  - **Root Cause**: Organizational policy conflict (estevepannetier.com / greenelephant.org)
+  - **Impact**: 1-point ACX score difference (99 vs 100)
+  - **Recommendation**: Launch with Tier 2, add Perspective API when Google Cloud resolves
+
+## Next Steps for Beta Launch
+
+1. **Monitor & Tune** (Priority 1)
+   - Collect user feedback on moderation accuracy
+   - Expand keyword patterns based on real-world usage
+   - Track false positive/negative rates
+
+2. **Add Automated Tests** (Priority 2)
    - Table-driven unit tests for all 41 moderation patterns
    - Integration tests for rate limiting
    - E2E tests for ToS flow
 
-2. **Add `PERSPECTIVE_API_KEY`**
-   - Enable ML-powered moderation (Tier 1)
-   - Setup guide: `PERSPECTIVE_API_SETUP.md`
+3. **Resolve Google Cloud Permissions** (Priority 3 - Optional)
+   - Contact Google Cloud support for organizational policy review
+   - Alternative: Create new GCP project with personal Gmail account
+   - Enable Perspective API for Tier 1 moderation (99→100 ACX)
 
-3. **Monitor & Tune**
-   - Collect feedback on moderation accuracy
-   - Adjust Perspective API thresholds
-   - Expand keyword patterns based on real-world usage
-
-4. **Admin Dashboard**
+4. **Admin Dashboard** (Post-Launch)
    - Flagged content review interface
    - User appeal system
    - Activity log visualization
