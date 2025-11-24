@@ -9,19 +9,23 @@
 - Platform costs money to run—encourage thoughtful use, not entertainment
 
 ## Recent Updates (Nov 2025)
-- **Messaging Pivot (Nov 24, 2025)**: Complete reframing to "AI-human diplomacy"
+- **Messaging Pivot (Nov 24, 2025)**: Complete reframing to "AI-human diplomacy" with fireside chat warmth
   - **New About Page** (`/about`): Clear explanation of why platform exists, what AI-human diplomacy means, laboratory vs entertainment distinction, and federation agenda
   - **Header Navigation**: Added "About" link; changed "Get Started" to "Book a Call" (links to Calendly)
-  - **Hero Section**: Reframed from "Conversations Across Time" to "AI-Human Diplomacy" with partnership CTA
+  - **Hero Section**: Reframed to "AI-Human Diplomacy" with fireside chat opening ("Pull up a chair by the fire"); CTA changed from "Explore the Platform" to "Start a Conversation"
   - **All Copy Updated**: "Grandmother test" language throughout—no jargon, simple explanations
   - **Key Messaging Shifts**:
     - "Around time" not "across time" (philosophical shift)
     - Laboratory for learning, not entertainment
+    - Fireside chat imagery: warm, conversational tone that matches fireplace background
+    - Conversations ARE the diplomacy work—each dialogue teaches us about AI-human communication
+    - Clear explanation of HOW conversations help: "we learn what kinds of questions people ask, how AI responds, and where the communication breaks down or flows beautifully"
     - Public conversation emphasis (not just individual use)
     - Federation agenda: bringing together ethical organizations worldwide
     - Partnership focus: companies, universities, governments
   - **Calendly Integration**: https://calendly.com/greenelephant/discovery-call-with-esteve
-  - **Green Elephant Prominence**: Platform positioned as Green Elephant demonstration/initiative
+  - **Green Elephant Prominence**: Platform positioned as Green Elephant demonstration/initiative; links to greenelephant.org added under logo
+  - **Visual Identity**: Sage green color palette (HSL 152° 40% 45%) aligned with Green Elephant brand, replacing previous orange
 
 - **Content Moderation**: Production-ready Tier 2-only system for ACX compliance
   - **ACX Framework**: Based on Arbora Partners' AI-Human Experience (ACX) framework
