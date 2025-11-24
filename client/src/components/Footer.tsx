@@ -83,7 +83,18 @@ export default function Footer() {
               />
               <div>
                 <div className="font-bold">Wisdom AI</div>
-                <div className="text-xs text-muted-foreground">by Green Elephant</div>
+                <div className="text-xs text-muted-foreground">
+                  by{' '}
+                  <a 
+                    href="https://greenelephant.org" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                    data-testid="link-footer-greenelephant"
+                  >
+                    Green Elephant
+                  </a>
+                </div>
               </div>
             </div>
             <p className="text-sm text-muted-foreground mb-4">

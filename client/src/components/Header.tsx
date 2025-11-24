@@ -27,7 +27,18 @@ export default function Header() {
               className="h-8 w-8 rounded-full"
               data-testid="logo-greenelephant"
             />
-            <span className="text-xs text-muted-foreground">powered by Green Elephant</span>
+            <span className="text-xs text-muted-foreground">
+              powered by{' '}
+              <a 
+                href="https://greenelephant.org" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:underline"
+                data-testid="link-greenelephant"
+              >
+                Green Elephant
+              </a>
+            </span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
