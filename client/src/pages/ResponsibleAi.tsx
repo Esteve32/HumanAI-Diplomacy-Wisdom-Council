@@ -63,44 +63,44 @@ export default function ResponsibleAi() {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">1. Risk Assessment & Categorization</h4>
-                  <p className="text-xs text-muted-foreground">Low-risk educational AI application with transparent purpose and scope</p>
+                  <h4 className="font-semibold text-sm">1. Understanding Risks</h4>
+                  <p className="text-xs text-muted-foreground">We've classified this as a low-risk educational tool and clearly explain what it does and doesn't do</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">2. Data Governance</h4>
-                  <p className="text-xs text-muted-foreground">Minimal data collection, full user control, GDPR-compliant practices</p>
+                  <h4 className="font-semibold text-sm">2. Your Data</h4>
+                  <p className="text-xs text-muted-foreground">We collect only what's needed for conversations. You can download or delete your data anytime</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">3. Transparency & Explainability</h4>
-                  <p className="text-xs text-muted-foreground">Clear AI disclaimers, visible system limitations, documented behavior</p>
+                  <h4 className="font-semibold text-sm">3. Being Upfront</h4>
+                  <p className="text-xs text-muted-foreground">Every chat window is clearly labeled as AI, and we tell you exactly what it can and can't do</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">4. Human Oversight</h4>
-                  <p className="text-xs text-muted-foreground">Admin monitoring, feedback mechanisms, manual review capabilities</p>
+                  <h4 className="font-semibold text-sm">4. Human Review</h4>
+                  <p className="text-xs text-muted-foreground">Real people monitor the system and can step in if something goes wrong</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">5. Safety & Security</h4>
-                  <p className="text-xs text-muted-foreground">Rate limiting, pattern-based content moderation (41 patterns), crisis resources</p>
+                  <h4 className="font-semibold text-sm">5. Keeping You Safe</h4>
+                  <p className="text-xs text-muted-foreground">We block harmful content (41 specific patterns) and provide crisis helpline information if needed</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">6. Accountability</h4>
-                  <p className="text-xs text-muted-foreground">Activity logging, audit trails, clear responsibility structures</p>
+                  <h4 className="font-semibold text-sm">6. Taking Responsibility</h4>
+                  <p className="text-xs text-muted-foreground">We keep records of what happens and have clear processes for when things need fixing</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">7. Fairness & Non-Discrimination</h4>
-                  <p className="text-xs text-muted-foreground">Diverse historical perspectives, inclusive representation, bias awareness</p>
+                  <h4 className="font-semibold text-sm">7. Treating Everyone Fairly</h4>
+                  <p className="text-xs text-muted-foreground">We include diverse perspectives and actively work to avoid bias in the AI responses</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">8. Privacy Protection</h4>
-                  <p className="text-xs text-muted-foreground">Session-based tracking, no PII required, user data export rights</p>
+                  <h4 className="font-semibold text-sm">8. Protecting Privacy</h4>
+                  <p className="text-xs text-muted-foreground">We don't ask for personal information like your real name or address. Everything stays private</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">9. Continuous Monitoring</h4>
-                  <p className="text-xs text-muted-foreground">Feedback collection, activity tracking, iterative improvements</p>
+                  <h4 className="font-semibold text-sm">9. Ongoing Improvements</h4>
+                  <p className="text-xs text-muted-foreground">We listen to feedback and keep making the system better based on what we learn</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">10. Technical Documentation</h4>
-                  <p className="text-xs text-muted-foreground">Complete setup guides, testing documentation, compliance records</p>
+                  <h4 className="font-semibold text-sm">10. Writing It Down</h4>
+                  <p className="text-xs text-muted-foreground">We keep a plain-language guide that explains how everything works and how we built it</p>
                 </div>
               </div>
             </CardContent>
