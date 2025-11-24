@@ -14,16 +14,16 @@ export default function HeroSection() {
       
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
         <h1 className="font-display text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight">
-          Conversations Across Time
+          AI-Human Diplomacy
         </h1>
         <p className="text-2xl md:text-3xl mb-12 text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
-          Step into a fireside chat with history's greatest minds. Bridge centuries of wisdom through genuine dialogue, from ancient philosophers to modern visionaries.
+          A living demonstration of how AI systems and humans can understand each other better. Talk with wisdom from throughout history, explore ideas together, and help build a future where technology serves humanity.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 
             size="lg" 
             className="text-xl px-12 py-8 bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
-            data-testid="button-start-journey"
+            data-testid="button-explore-platform"
             onClick={() => {
               const element = document.getElementById('conversations');
               if (element) {
@@ -31,20 +31,19 @@ export default function HeroSection() {
               }
             }}
           >
-            Start a Conversation
+            Explore the Platform
             <ArrowRight className="ml-3 h-6 w-6" />
           </Button>
-          <Link href="/ai-dialogue">
-            <Button 
-              size="lg"
-              variant="outline"
-              className="text-xl px-12 py-8 bg-primary/10 backdrop-blur-md border-primary/30 text-white hover:bg-primary/20"
-              data-testid="button-watch-dialogue"
-            >
-              <Sparkles className="mr-3 h-6 w-6" />
-              Watch AI Dialogue
-            </Button>
-          </Link>
+          <Button 
+            size="lg"
+            variant="outline"
+            className="text-xl px-12 py-8 bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20"
+            data-testid="button-partner-with-us"
+            onClick={() => window.open('https://calendly.com/greenelephant/discovery-call-with-esteve', '_blank')}
+          >
+            <Sparkles className="mr-3 h-6 w-6" />
+            Partner with Us
+          </Button>
         </div>
       </div>
     </section>
