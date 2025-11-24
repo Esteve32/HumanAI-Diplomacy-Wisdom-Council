@@ -45,10 +45,10 @@ const chat = await wisdom.chat({
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="font-display text-5xl md:text-6xl font-bold mb-6">
-            Three Pathways to Timeless Wisdom
+            Three Ways to Get Involved
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Engage in fireside chats with historical masters. Have one-on-one conversations, stage dialogues between epochs, or integrate wisdom into your workflows.
+            Talk with great thinkers from history. Watch conversations unfold between minds from different eras. Build this wisdom into your own systems. All of it helps us learn how humans and AI can work together better.
           </p>
         </div>
 
@@ -59,19 +59,19 @@ const chat = await wisdom.chat({
               <Sparkles className="h-12 w-12 text-primary" />
             </div>
             <h3 className="font-display text-3xl font-bold mb-4">
-              Free Conversations
+              Free Access
             </h3>
             <p className="text-lg text-muted-foreground max-w-xl mb-8">
-              Have immediate fireside chats with history's wisest minds. One-on-one conversations or dialogues between figures from different eras. No setup, no cost—just connect across centuries.
+              Talk with thinkers from throughout history. Have one-on-one conversations or watch AI versions of these minds discuss ideas together. Free to use, but please use it thoughtfully—each conversation costs real money to run.
             </p>
             
             <Card className="p-8 w-full max-w-2xl">
               <Mail className="h-10 w-10 text-primary mx-auto mb-4" />
               <h3 className="font-display text-xl font-bold mb-3 text-center">
-                Suggest a New Wisdom Persona
+                Suggest a Historical Thinker
               </h3>
               <p className="text-muted-foreground mb-6 text-center">
-                Have an idea for a wise historical figure we should add? We'd love to hear your suggestion.
+                Know a historical thinker we should include? Let us know who and why they matter.
               </p>
               <Button 
                 size="lg"
@@ -94,7 +94,7 @@ const chat = await wisdom.chat({
               
               <div className="mt-6 p-4 bg-muted/50 rounded-lg text-left">
                 <p className="text-sm text-muted-foreground">
-                  <strong>Always free.</strong> Perfect for personal growth, philosophical exploration, creative dialogues, and learning from history's wisest minds.
+                  <strong>Always free.</strong> Use it for learning, exploring ideas, and understanding how AI systems can help us think more deeply about important questions.
                 </p>
               </div>
             </Card>
@@ -121,10 +121,10 @@ const chat = await wisdom.chat({
                     <Blocks className="h-12 w-12 text-primary" />
                   </div>
                   <h3 className="font-display text-3xl font-bold mb-4">
-                    Workflow Integration
+                    Workflow Tools
                   </h3>
                   <p className="text-lg text-muted-foreground max-w-xl mb-8">
-                    Weave conversations across time into your workflows. Automate wisdom into daily practices with n8n, Zapier, Make, and other no-code platforms.
+                    Build these conversations into your daily work. Use automation tools like n8n, Zapier, or Make to bring historical wisdom into your team's processes.
                   </p>
                   
                   <Card className="p-8 w-full max-w-2xl text-left">
@@ -215,10 +215,10 @@ const chat = await wisdom.chat({
                     <Cloud className="h-12 w-12 text-primary" />
                   </div>
                   <h3 className="font-display text-3xl font-bold mb-4">
-                    Developer Access
+                    Developer Tools
                   </h3>
                   <p className="text-lg text-muted-foreground max-w-xl mb-8">
-                    Native API, MCP integration, and cloud deployment. Build timeless wisdom conversations directly into your applications and systems.
+                    Full API access and cloud integration. Build these conversation capabilities directly into your own applications and systems.
                   </p>
                   
                   <Card className="p-8 w-full max-w-2xl text-left">
@@ -296,9 +296,9 @@ const chat = await wisdom.chat({
         <div className="mt-32 text-center">
           <div className="max-w-3xl mx-auto p-8 bg-muted/30 rounded-lg">
             <h3 className="font-display text-3xl font-bold mb-4">
-              Explore Conversations with Famous Wise Historical Personas
+              Talk with 51 Great Thinkers from History
             </h3>
-            <p className="text-lg text-muted-foreground mb-6">From ancient philosophers like Socrates and Confucius to modern thinkers like Simone de Beauvoir and bell hooks—engage with 51 of history's most influential minds through AI.</p>
+            <p className="text-lg text-muted-foreground mb-6">From ancient philosophers like Socrates and Confucius to modern voices like Simone de Beauvoir and bell hooks—all brought together through AI to help us explore ideas around time, not just across it.</p>
             <Button 
               size="lg" 
               className="min-h-11"
@@ -310,7 +310,7 @@ const chat = await wisdom.chat({
                 }
               }}
             >
-              Explore All 51 Personas
+              See All 51 Thinkers
             </Button>
           </div>
         </div>
