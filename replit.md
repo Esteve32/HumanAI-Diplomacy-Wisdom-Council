@@ -1,12 +1,28 @@
 # Wisdom Council
 
 ## Overview
-**Wisdom Council** is a landing page application enabling AI-powered conversations with historical wisdom figures. It aims to position AI as a tool for internal growth and philosophical development, offering "fireside chats" with personalities like Socrates and Rumi. The platform is a full-stack TypeScript monorepo with a React frontend and Express backend, featuring ChatGPT integrations and API access. The project emphasizes clean typography and a "Wisdom Council" aesthetic with warm orange/amber gradients.
+**Wisdom Council** is a demonstration platform for AI-human diplomacy principles. It's a laboratory (not entertainment) where users engage with AI versions of historical thinkers to explore how humans and AI systems can work together better. The platform showcases conversations "around time" (not just "across time"), positioning itself as a proof-of-concept for responsible AI development. Built as a full-stack TypeScript monorepo with React frontend and Express backend, it serves a deeper agenda: federating ethically-minded companies, universities, governments, and organizations worldwide around nurturing clarity in AI-human relationships.
 
 ## User Preferences
-Preferred communication style: Simple, everyday language.
+- Preferred communication style: Simple, everyday language ("grandmother test")
+- All copy must be jargon-free and accessible
+- Platform costs money to run—encourage thoughtful use, not entertainment
 
 ## Recent Updates (Nov 2025)
+- **Messaging Pivot (Nov 24, 2025)**: Complete reframing to "AI-human diplomacy"
+  - **New About Page** (`/about`): Clear explanation of why platform exists, what AI-human diplomacy means, laboratory vs entertainment distinction, and federation agenda
+  - **Header Navigation**: Added "About" link; changed "Get Started" to "Book a Call" (links to Calendly)
+  - **Hero Section**: Reframed from "Conversations Across Time" to "AI-Human Diplomacy" with partnership CTA
+  - **All Copy Updated**: "Grandmother test" language throughout—no jargon, simple explanations
+  - **Key Messaging Shifts**:
+    - "Around time" not "across time" (philosophical shift)
+    - Laboratory for learning, not entertainment
+    - Public conversation emphasis (not just individual use)
+    - Federation agenda: bringing together ethical organizations worldwide
+    - Partnership focus: companies, universities, governments
+  - **Calendly Integration**: https://calendly.com/greenelephant/discovery-call-with-esteve
+  - **Green Elephant Prominence**: Platform positioned as Green Elephant demonstration/initiative
+
 - **Content Moderation**: Production-ready Tier 2-only system for ACX compliance
   - **Tier 2 (Active)**: 41-pattern deterministic keyword filter
     - Categories: Hate speech (8), Violence (11), Sexual exploitation (6), Self-harm (16)
@@ -30,9 +46,14 @@ Preferred communication style: Simple, everyday language.
 - **State Management**: TanStack Query (React Query).
 - **Typography**: Inter font for headings, Lato for body text, with optimized loading.
 - **Design**: Inspired by Product Hunt, Linear, Stripe, and Medium, focusing on clean design and a "fireside chat" theme.
-- **Key Sections**: Hero, figure voting/leaderboard, engagement pathways (ChatGPT, Low-Code, API), social sharing, pricing, testimonials.
-- **Chat UI**: Individual chat pages (`/chat/:figureId`) with real-time messaging and a multi-dimensional geometric "ThinkingAnimation" loading indicator.
-- **AI-to-AI Dialogue UI**: Dedicated page (`/ai-dialogue`) for staging and viewing AI persona conversations.
+- **Key Pages**: 
+  - **Home** (`/`): Hero (AI-human diplomacy framing), voting, engagement pathways, sharing, pricing, testimonials
+  - **About** (`/about`): Mission statement, laboratory explanation, federation agenda, partnership invitation
+  - **Chat** (`/chat/:figureId`): One-on-one conversations with historical thinkers
+  - **AI Dialogue** (`/ai-dialogue`): AI-to-AI conversations between personas
+- **Navigation**: Header includes About, Conversations, Pricing, "Book a Call" (Calendly link)
+- **Messaging**: All copy passes "grandmother test"—simple, jargon-free language
+- **CTAs**: Partnership-focused, emphasizing collaboration over individual use
 
 ### Backend Architecture
 - **Server**: Express.js with Node.js and TypeScript.

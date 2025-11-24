@@ -66,7 +66,7 @@ export default function SharingSection() {
         <Card className="p-8 mb-8">
           <h3 className="text-2xl font-semibold mb-4 text-center">Share This Laboratory</h3>
           <p className="text-muted-foreground text-center mb-6">
-            Help us build a community of thoughtful people exploring AI-human relationships. Share your link with colleagues, students, researchers, or anyone interested in how AI can serve humanity better.
+            Help us build a network of thoughtful people exploring AI-human relationships. Share your link with colleagues, students, researchers, or organizations interested in how AI can serve humanity better.
           </p>
 
           <div className="flex gap-3 mb-6">

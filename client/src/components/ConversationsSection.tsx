@@ -66,37 +66,29 @@ const chat = await wisdom.chat({
             </p>
             
             <Card className="p-8 w-full max-w-2xl">
-              <Mail className="h-10 w-10 text-primary mx-auto mb-4" />
-              <h3 className="font-display text-xl font-bold mb-3 text-center">
-                Suggest a Historical Thinker
+              <h3 className="font-display text-2xl font-bold mb-4 text-center">
+                Please Use Thoughtfully
               </h3>
               <p className="text-muted-foreground mb-6 text-center">
-                Know a historical thinker we should include? Let us know who and why they matter.
+                Every conversation here costs real money to run. This isn't entertainment—it's a laboratory for learning how humans and AI can work together better. Your thoughtful participation helps us all.
               </p>
-              <Button 
-                size="lg"
-                className="w-full min-h-11"
-                data-testid="button-suggest-persona"
-                onClick={() => {
-                  const subject = encodeURIComponent("New Wisdom Persona Suggestion");
-                  const body = encodeURIComponent(
-                    "I would love to suggest a new wisdom persona:\n\n" +
-                    "Name: [Please add the name here]\n\n" +
-                    "Why this person would be valuable:\n[Please explain why you think this person should be included]\n\n" +
-                    "What topics they could help with:\n[Optional: What areas of wisdom or questions would they be good for?]\n\n"
-                  );
-                  window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
-                }}
-              >
-                <Mail className="mr-2 h-5 w-5" />
-                Suggest a Persona
-              </Button>
-              
-              <div className="mt-6 p-4 bg-muted/50 rounded-lg text-left">
+              <div className="p-4 bg-muted/50 rounded-lg text-left">
+                <p className="text-sm text-muted-foreground mb-3">
+                  <strong>Perfect for:</strong> Exploring ideas, learning from history, understanding AI systems, or helping your organization think about ethical AI development.
+                </p>
                 <p className="text-sm text-muted-foreground">
-                  <strong>Always free.</strong> Use it for learning, exploring ideas, and understanding how AI systems can help us think more deeply about important questions.
+                  <strong>Interested in partnering?</strong> If you represent a company, university, or organization working on ethical AI, we'd love to talk.
                 </p>
               </div>
+              <Button 
+                size="lg"
+                variant="outline"
+                className="w-full min-h-11 mt-4"
+                data-testid="button-partnership-inquiry"
+                onClick={() => window.open('https://calendly.com/greenelephant/discovery-call-with-esteve', '_blank')}
+              >
+                Book a Partnership Call
+              </Button>
             </Card>
           </div>
 

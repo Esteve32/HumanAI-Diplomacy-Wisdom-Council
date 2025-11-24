@@ -30,25 +30,25 @@ export default function PricingSection() {
 
             <div className="mb-6">
               <div className="text-4xl font-bold mb-2">$0</div>
-              <p className="text-muted-foreground">Forever free</p>
+              <p className="text-muted-foreground">No cost to participate</p>
             </div>
 
             <ul className="space-y-3 mb-8">
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Talk with 51+ historical thinkers</span>
+                <span>Engage with 51+ historical thinkers</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Watch AI conversations between different eras</span>
+                <span>Explore AI-to-AI conversations</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Share with your community</span>
+                <span>Learn from this laboratory</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Help build better AI systems</span>
+                <span>Contribute to ethical AI development</span>
               </li>
             </ul>
 
@@ -91,7 +91,7 @@ export default function PricingSection() {
               Get Early Access
             </Button>
             <p className="text-center text-xs text-muted-foreground mt-3">
-              No credit card required
+              Thoughtful use encouraged—each conversation costs us money to run
             </p>
           </Card>
 
