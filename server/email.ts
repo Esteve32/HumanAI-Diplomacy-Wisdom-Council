@@ -61,7 +61,8 @@ export async function sendActivityNotification(
       return;
     }
 
-    const { client, fromEmail: sender } = resendConfig;
+    const { client, fromEmail } = resendConfig;
+    const sender = fromEmail || "noreply@wisdomcouncil.org";
 
     const activityLabels: Record<string, string> = {
       "vote-figure": "Figure Vote",
@@ -107,7 +108,7 @@ export async function sendActivityNotification(
     await client.emails.send({
       from: sender,
       to: "esteve@greenelephant.org",
-      subject: `📊 [${label}] Wisdom Council Activity`,
+      subject: `📊 [${label}] from Wisdom.GreenElephant.org`,
       html: htmlContent,
     });
 
