@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Clock } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function PricingSection() {
+  const { toast } = useToast();
   return (
     <section className="py-20 px-6 bg-background" id="pricing">
       <div className="max-w-5xl mx-auto">
@@ -65,8 +67,17 @@ export default function PricingSection() {
                       consentGiven: false,
                     }),
                   });
+                  
+                  toast({
+                    title: "Thanks for your interest!",
+                    description: "Opening your email client to complete your Free Early Access waitlist request.",
+                  });
                 } catch (error) {
                   console.error("Error tracking free waitlist:", error);
+                  toast({
+                    title: "Request Tracked",
+                    description: "Opening your email client to complete your waitlist request.",
+                  });
                 }
                 
                 const subject = encodeURIComponent("Free Early Access Waitlist");
@@ -146,8 +157,17 @@ export default function PricingSection() {
                       consentGiven: false,
                     }),
                   });
+                  
+                  toast({
+                    title: "Thanks for your interest!",
+                    description: "Opening your email client to complete your API Access waitlist request.",
+                  });
                 } catch (error) {
                   console.error("Error tracking API waitlist:", error);
+                  toast({
+                    title: "Request Tracked",
+                    description: "Opening your email client to complete your waitlist request.",
+                  });
                 }
                 
                 const subject = encodeURIComponent("API Access Waitlist");
@@ -181,14 +201,27 @@ export default function PricingSection() {
             className="min-h-11 font-medium"
             data-testid="button-contact-sales"
             onClick={async () => {
-              await fetch("/api/track-click", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  cta: "contact-sales-enterprise",
-                  consentGiven: false,
-                }),
-              });
+              try {
+                await fetch("/api/track-click", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    cta: "contact-sales-enterprise",
+                    consentGiven: false,
+                  }),
+                });
+                
+                toast({
+                  title: "Thanks for your interest!",
+                  description: "Opening your email client to discuss enterprise solutions.",
+                });
+              } catch (error) {
+                console.error("Error tracking contact sales:", error);
+                toast({
+                  title: "Enterprise Inquiry",
+                  description: "Opening your email client to discuss enterprise solutions.",
+                });
+              }
               
               const subject = encodeURIComponent("Enterprise Solutions Inquiry");
               const body = encodeURIComponent(
