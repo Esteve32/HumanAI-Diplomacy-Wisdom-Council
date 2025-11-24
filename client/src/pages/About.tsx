@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, Users, Globe, Lightbulb, ArrowRight } from "lucide-react";
+import { Heart, Users, Globe, Lightbulb, ArrowRight, Shield, ExternalLink } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
@@ -98,12 +98,180 @@ export default function About() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
+                      <span>
+                        <a 
+                          href="https://en.wikipedia.org/wiki/Teal_organisation" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline inline-flex items-center gap-1"
+                          data-testid="link-teal-organizations"
+                        >
+                          TEAL organizations
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                        {" "}and other groups already thinking ahead about ethical business structures, culture, and human relationships
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
                       <span>Organizations working to make AI benefit everyone</span>
                     </li>
                   </ul>
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     Our goal is to create a worldwide conversation about making AI work for humanity, not against it. We call this "federation"—different groups working together toward shared values.
                   </p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-8 border-primary/30">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="bg-primary/10 p-3 rounded-lg shrink-0">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold mb-3">Safety First: How We Built This System</h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                    Because this platform involves AI conversations, we've built comprehensive safety systems to protect everyone who uses it. Here's exactly what we did and why it matters.
+                  </p>
+
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Content Safety Through the ACX Framework</h3>
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                        We developed our safety system using a framework called ACX (AI Compliance and eXcellence), which covers 10 different areas of responsible AI. Think of it as a checklist that makes sure we're doing AI the right way—protecting users, being transparent, and following regulations.
+                      </p>
+                      
+                      <div className="bg-muted/50 p-4 rounded-lg mb-4">
+                        <p className="text-sm font-semibold mb-2">Our Compliance Score:</p>
+                        <p className="text-2xl font-bold text-primary mb-1">99/100</p>
+                        <p className="text-sm text-muted-foreground">Across all 10 ACX framework categories</p>
+                      </div>
+
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                        We monitor every conversation for harmful content in four specific categories. Each category has carefully chosen patterns that we watch for:
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div className="bg-muted/30 p-4 rounded-lg">
+                          <p className="font-semibold mb-2">Hate Speech</p>
+                          <p className="text-sm text-muted-foreground">8 patterns monitoring for slurs and discriminatory language</p>
+                        </div>
+                        <div className="bg-muted/30 p-4 rounded-lg">
+                          <p className="font-semibold mb-2">Violence</p>
+                          <p className="text-sm text-muted-foreground">11 patterns watching for threats and violent content</p>
+                        </div>
+                        <div className="bg-muted/30 p-4 rounded-lg">
+                          <p className="font-semibold mb-2">Sexual Exploitation</p>
+                          <p className="text-sm text-muted-foreground">6 patterns protecting against harmful sexual content</p>
+                        </div>
+                        <div className="bg-muted/30 p-4 rounded-lg">
+                          <p className="font-semibold mb-2">Self-Harm</p>
+                          <p className="text-sm text-muted-foreground">16 patterns detecting discussions of suicide and self-harm</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">How We Learned What Works</h3>
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                        We tested two different approaches to content moderation:
+                      </p>
+                      <ul className="space-y-3 text-lg text-muted-foreground mb-4">
+                        <li className="flex items-start gap-3">
+                          <span className="text-primary mt-1 shrink-0">1.</span>
+                          <div>
+                            <span className="font-semibold">Machine Learning Approach (Google Perspective API)</span>
+                            <span className="block text-base mt-1">
+                              This AI-powered system was supposed to catch harmful content automatically. But when we tested it with real users—including therapists having philosophical conversations—it blocked too many legitimate discussions. Questions about emotions and difficult life topics were incorrectly flagged as harmful.
+                            </span>
+                          </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="text-primary mt-1 shrink-0">2.</span>
+                          <div>
+                            <span className="font-semibold">Pattern-Based Approach (Our Current System, Active Since Nov 2024)</span>
+                            <span className="block text-base mt-1">
+                              Instead, we built a system with 41 specific patterns that we know are harmful. This is more precise—it catches actual problems without blocking thoughtful conversations about difficult topics. We tested this with both harmful content (which was blocked) and legitimate therapeutic discussions (which were allowed through). See our{" "}
+                              <Link href="/responsible-ai">
+                                <a className="text-primary hover:underline" data-testid="link-testing-results">
+                                  compliance documentation
+                                </a>
+                              </Link>
+                              {" "}for more details, or contact us at esteve@greenelephant.org for specific questions about our moderation approach.
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                      <p className="text-lg text-muted-foreground leading-relaxed">
+                        This learning process is exactly what AI-human diplomacy looks like in practice: trying different approaches, listening to feedback, and choosing what actually works for real people.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Why You See Crisis Resources</h3>
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                        When our system detects someone might be in distress, you'll see contact information for mental health crisis support. This isn't just us being careful—it's required by the{" "}
+                        <a 
+                          href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline inline-flex items-center gap-1"
+                          data-testid="link-eu-ai-act"
+                        >
+                          European Union's AI Act
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                        , which sets rules for how AI systems should work.
+                      </p>
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                        The EU AI Act says that when AI systems interact with humans on sensitive topics, they must provide appropriate support resources. We include the Finland Mental Health Crisis Line (09 2525 0111) because we're based in Finland and follow EU regulations.
+                      </p>
+                      <p className="text-lg text-muted-foreground leading-relaxed">
+                        This is one of those places where regulation actually helps: it ensures platforms don't just filter content, but also connect people with real human support when they need it.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Complete Transparency</h3>
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                        Every decision we made about safety, privacy, and compliance is documented. We're not hiding how this works:
+                      </p>
+                      <ul className="space-y-2 text-lg text-muted-foreground">
+                        <li className="flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          <span>
+                            You can see our{" "}
+                            <Link href="/responsible-ai">
+                              <a className="text-primary hover:underline inline-flex items-center gap-1" data-testid="link-responsible-ai">
+                                full compliance documentation
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            </Link>
+                            {" "}with detailed ACX framework scorecard
+                          </span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          <span>All conversation data stays private—we never sell it or share it</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          <span>You can download your data anytime (required by GDPR)</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          <span>We follow EU privacy laws because we believe in strong data protection</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                      <p className="text-sm text-muted-foreground">
+                        <span className="font-semibold">Why This Matters:</span> AI-human diplomacy isn't just about making AI that's nice to talk to. It's about building AI systems that respect human dignity, follow clear rules, and can be trusted. Every safety feature here demonstrates that it's possible to build AI responsibly—if you're willing to do the work.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Card>
