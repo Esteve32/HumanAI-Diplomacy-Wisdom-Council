@@ -36,7 +36,7 @@ export default function SharingSection() {
   };
 
   const handleShare = (platform: string) => {
-    const text = encodeURIComponent("Join the Wisdom Council - Have conversations with AI embodiments of history's wisest minds");
+    const text = encodeURIComponent("Exploring AI-human diplomacy through conversations with historical thinkers - a laboratory for building better AI systems");
     const url = encodeURIComponent(shareLink);
     
     const urls = {
@@ -56,17 +56,17 @@ export default function SharingSection() {
         <div className="text-center mb-12">
           <Share2 className="h-12 w-12 text-primary mx-auto mb-4" />
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Bridge the Centuries
+            Join the Public Conversation
           </h2>
           <p className="text-xl text-muted-foreground font-serif max-w-2xl mx-auto">
-            Bring others into timeless conversations. Share the wisdom voices that transcend eras and connect us across centuries.
+            This isn't just about individual chats. It's about creating public dialogue around how humans and AI can work together. Share this platform with people who care about building better technology for everyone.
           </p>
         </div>
 
         <Card className="p-8 mb-8">
-          <h3 className="text-2xl font-semibold mb-4 text-center">Your Personal Share Link</h3>
+          <h3 className="text-2xl font-semibold mb-4 text-center">Share This Laboratory</h3>
           <p className="text-muted-foreground text-center mb-6">
-            Share your unique link to invite others into conversations across time. When they join, you both unlock exclusive bonus dialogues and wisdom sessions.
+            Help us build a community of thoughtful people exploring AI-human relationships. Share your link with colleagues, students, researchers, or anyone interested in how AI can serve humanity better.
           </p>
 
           <div className="flex gap-3 mb-6">
@@ -120,7 +120,7 @@ export default function SharingSection() {
         <div className="text-center">
           <div className="inline-flex items-center gap-2 bg-primary/10 px-6 py-3 rounded-full">
             <span className="text-2xl font-bold text-primary">12,847</span>
-            <span className="text-muted-foreground">people have shared this mission</span>
+            <span className="text-muted-foreground">people have joined this conversation</span>
           </div>
         </div>
       </div>
