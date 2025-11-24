@@ -139,13 +139,33 @@ export default function About() {
                     <div>
                       <h3 className="text-xl font-semibold mb-3">Content Safety Through the ACX Framework</h3>
                       <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                        We developed our safety system using a framework called ACX (AI Compliance and eXcellence), which covers 10 different areas of responsible AI. Think of it as a checklist that makes sure we're doing AI the right way—protecting users, being transparent, and following regulations.
+                        We developed our safety system using the{" "}
+                        <a 
+                          href="https://arbora.partners/nest" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-primary hover:underline font-semibold"
+                          data-testid="link-arbora-acx"
+                        >
+                          ACX (AI-Human Experience) Framework
+                        </a>
+                        {" "}from{" "}
+                        <a 
+                          href="https://arbora.partners" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-primary hover:underline"
+                          data-testid="link-arbora-partners"
+                        >
+                          Arbora Partners
+                        </a>
+                        , which covers 10 different areas of responsible AI. Think of it as a checklist that makes sure we're doing AI the right way—protecting users, being transparent, and following regulations.
                       </p>
                       
                       <div className="bg-muted/50 p-4 rounded-lg mb-4">
                         <p className="text-sm font-semibold mb-2">Our Compliance Score:</p>
                         <p className="text-2xl font-bold text-primary mb-1">99/100</p>
-                        <p className="text-sm text-muted-foreground">Across all 10 ACX framework categories</p>
+                        <p className="text-sm text-muted-foreground">Across all 10 ACX framework categories (Arbora Partners standard)</p>
                       </div>
 
                       <p className="text-lg text-muted-foreground leading-relaxed mb-4">

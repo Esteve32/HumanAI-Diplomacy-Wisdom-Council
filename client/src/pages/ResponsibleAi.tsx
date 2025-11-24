@@ -28,17 +28,37 @@ export default function ResponsibleAi() {
                 ACX Framework Compliance
               </CardTitle>
               <CardDescription>
-                Our commitment to responsible AI development
+                Our commitment to responsible AI development based on{" "}
+                <a 
+                  href="https://arbora.partners" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-primary hover:underline"
+                  data-testid="link-arbora-partners-header"
+                >
+                  Arbora Partners
+                </a>
+                ' standards
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Wisdom Council aligns with the ACX (AI Conformity Assessment) Framework, ensuring ethical and safe AI deployment across ten critical categories:
+              <p className="text-sm text-muted-foreground mb-2">
+                Wisdom Council aligns with the{" "}
+                <a 
+                  href="https://arbora.partners/nest" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-primary hover:underline font-semibold"
+                  data-testid="link-arbora-nest-content"
+                >
+                  ACX (AI-Human Experience) Framework
+                </a>
+                , a comprehensive standard developed by Arbora Partners for ethical and safe AI deployment. The framework emphasizes the human experience with AI across ten critical categories:
               </p>
               <div className="bg-muted/30 p-4 rounded-lg mb-4">
                 <p className="text-sm font-semibold mb-2">Compliance Score:</p>
                 <p className="text-3xl font-bold text-primary mb-1">99/100</p>
-                <p className="text-xs text-muted-foreground">Across all 10 ACX framework categories</p>
+                <p className="text-xs text-muted-foreground">Across all 10 ACX framework categories (Arbora Partners standard)</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">

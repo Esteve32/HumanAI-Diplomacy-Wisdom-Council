@@ -1,6 +1,8 @@
 # ACX Framework Compliance Scorecard
 **Wisdom Council - Before/After Implementation Comparison**
 
+**Framework Source**: [Arbora Partners ACX (AI-Human Experience) Framework](https://arbora.partners/nest)
+
 ---
 
 ## Scoring Methodology
@@ -8,6 +10,7 @@
 - **Before Score**: Initial state (alpha concept, no ACX features)
 - **After Score**: Current state (post-ACX implementation)
 - **Delta**: Improvement (+points)
+- **Framework**: Arbora Partners' ACX framework emphasizes human experience with AI systems across 10 categories
 
 ---
 

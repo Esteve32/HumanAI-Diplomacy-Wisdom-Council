@@ -1,5 +1,11 @@
 # ACX Framework Implementation - Detailed Changes by Heuristic
 
+**Framework Source**: [Arbora Partners ACX (AI-Human Experience) Framework](https://arbora.partners/nest)
+
+This document details our implementation of the Arbora Partners ACX framework, which provides comprehensive guidelines for responsible AI development with emphasis on the human experience with AI systems.
+
+---
+
 ## I. Risk Assessment & Categorization (3 changes)
 
 ### A1. System Classification

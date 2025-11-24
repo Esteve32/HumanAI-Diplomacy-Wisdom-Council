@@ -24,6 +24,10 @@
   - **Green Elephant Prominence**: Platform positioned as Green Elephant demonstration/initiative
 
 - **Content Moderation**: Production-ready Tier 2-only system for ACX compliance
+  - **ACX Framework**: Based on Arbora Partners' AI-Human Experience (ACX) framework
+    - Link: https://arbora.partners/nest
+    - 99/100 compliance score across 10 categories
+    - Framework emphasizes human experience with AI systems
   - **Tier 2 (Active)**: 41-pattern deterministic keyword filter
     - Categories: Hate speech (8), Violence (11), Sexual exploitation (6), Self-harm (16)
     - Text normalization (case, Unicode, punctuation) for pattern matching
