@@ -11,13 +11,13 @@ export default function PricingSection() {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-950/20 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-medium mb-4">
             <Clock className="h-4 w-4" />
-            Early Access Pricing
+            Early Access
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Join the Wisdom Council
+            Ways to Participate
           </h2>
           <p className="text-xl text-muted-foreground font-serif max-w-2xl mx-auto">
-            Reserve your place in this timeless movement. Lock in early access pricing—no payment required until we're ready to welcome you fully.
+            Whether you're an individual learner or representing an organization, there's a way to help us build better AI systems. Reserve your spot—no payment until we're fully ready.
           </p>
         </div>
 
@@ -25,7 +25,7 @@ export default function PricingSection() {
           <Card className="p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-semibold mb-2">Free Access</h3>
-              <p className="text-muted-foreground">Wisdom across centuries awaits</p>
+              <p className="text-muted-foreground">For individuals and explorers</p>
             </div>
 
             <div className="mb-6">
@@ -36,19 +36,19 @@ export default function PricingSection() {
             <ul className="space-y-3 mb-8">
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Fireside chats with 51+ historical wisdom figures</span>
+                <span>Talk with 51+ historical thinkers</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>AI-to-AI dialogues across centuries</span>
+                <span>Watch AI conversations between different eras</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Share wisdom conversations with others</span>
+                <span>Share with your community</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Community of wisdom seekers</span>
+                <span>Help build better AI systems</span>
               </li>
             </ul>
 
@@ -104,8 +104,8 @@ export default function PricingSection() {
             </div>
 
             <div className="mb-6">
-              <h3 className="text-2xl font-semibold mb-2">API Access</h3>
-              <p className="text-muted-foreground">For developers and teams</p>
+              <h3 className="text-2xl font-semibold mb-2">Developer Access</h3>
+              <p className="text-muted-foreground">For teams building with AI</p>
             </div>
 
             <div className="mb-6">
@@ -123,15 +123,15 @@ export default function PricingSection() {
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Full REST API access (in development)</span>
+                <span>Full API access (in development)</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>10,000 API calls/month (planned)</span>
+                <span>10,000 API calls/month</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>WebSocket streaming (coming soon)</span>
+                <span>Build this into your own systems</span>
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -139,7 +139,7 @@ export default function PricingSection() {
               </li>
               <li className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Team collaboration (planned)</span>
+                <span>Team collaboration tools</span>
               </li>
             </ul>
 
@@ -190,51 +190,53 @@ export default function PricingSection() {
         <div className="mt-12 text-center">
           <div className="bg-muted/50 rounded-lg p-6 max-w-2xl mx-auto mb-6">
             <p className="text-sm text-muted-foreground">
-              <strong className="text-foreground">Beta Notice:</strong> Features shown are in active development. By joining the waitlist, you'll be notified when features launch and have the option to subscribe at these early access rates. No payment will be collected until the service is fully operational.
+              <strong className="text-foreground">Development Notice:</strong> We're actively building these features. Join the waitlist to be notified when they're ready. No payment until everything works as promised.
             </p>
           </div>
           <p className="text-muted-foreground mb-4">
-            Need custom enterprise solutions? Volume discounts available when we launch.
+            Representing a company, university, or government organization interested in partnering?
           </p>
           <Button 
             variant="default"
             className="min-h-11 font-medium"
-            data-testid="button-contact-sales"
+            data-testid="button-contact-partnership"
             onClick={async () => {
               try {
                 await fetch("/api/track-click", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
-                    cta: "contact-sales-enterprise",
+                    cta: "contact-partnership",
                     consentGiven: false,
                   }),
                 });
                 
                 toast({
                   title: "Thanks for your interest!",
-                  description: "Opening your email client to discuss enterprise solutions.",
+                  description: "Opening your email client to discuss partnership opportunities.",
                 });
               } catch (error) {
-                console.error("Error tracking contact sales:", error);
+                console.error("Error tracking partnership inquiry:", error);
                 toast({
-                  title: "Enterprise Inquiry",
-                  description: "Opening your email client to discuss enterprise solutions.",
+                  title: "Partnership Inquiry",
+                  description: "Opening your email client to discuss partnership opportunities.",
                 });
               }
               
-              const subject = encodeURIComponent("Enterprise Solutions Inquiry");
+              const subject = encodeURIComponent("Partnership Inquiry - AI-Human Diplomacy");
               const body = encodeURIComponent(
-                "I am interested in enterprise solutions for Wisdom Council.\n\n" +
-                "Please contact me to discuss:\n" +
-                "- Custom volume pricing\n" +
-                "- Enterprise features\n" +
-                "- Team collaboration tools\n\n"
+                "I am interested in partnering with Green Elephant on AI-human diplomacy initiatives.\n\n" +
+                "Organization: [Your organization name]\n" +
+                "Interest area:\n" +
+                "- Ethical AI development\n" +
+                "- Research collaboration\n" +
+                "- Policy development\n" +
+                "- Other: [Please specify]\n\n"
               );
               window.location.href = `mailto:esteve@greenelephant.org?subject=${subject}&body=${body}`;
             }}
           >
-            Contact Sales for Enterprise →
+            Discuss Partnership Opportunities →
           </Button>
         </div>
       </div>
