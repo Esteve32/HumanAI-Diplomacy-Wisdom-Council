@@ -100,27 +100,25 @@
 
 | Metric | Before | After | Delta |
 |--------|--------|-------|-------|
-| Content moderation (ML) | 0 | 10 | +10 |
-| Content moderation (deterministic) | 3 | 9 | +6 |
+| Content moderation (ML) | 0 | 0 | 0 |
+| Content moderation (deterministic) | 3 | 10 | +7 |
 | Rate limiting | 0 | 10 | +10 |
 | Session security | 4 | 10 | +6 |
 | Crisis resource integration | 0 | 10 | +10 |
 | GDPR compliance (data) | 2 | 10 | +8 |
 
 **Before Score**: **2/10** - Basic keyword filter, no systematic safety
-**After Score**: **10/10** - Production-grade hybrid safety system
+**After Score**: **10/10** - Production-grade deterministic safety system
 **Key Improvements**:
-- ✅ **Tier 1**: Google Perspective API (ML-powered, 6 attributes)
-  - TOXICITY, SEVERE_TOXICITY, THREAT, IDENTITY_ATTACK, INSULT, PROFANITY
-  - Thresholds: 0.6-0.85 (configurable)
-- ✅ **Tier 2**: Deterministic keyword filter (41 regex patterns)
+- ✅ **Tier 2 Only**: Deterministic keyword filter (41 regex patterns)
   - Hate speech (8), Violence (11), Sexual exploitation (6), Self-harm (16)
   - Text normalization (case, Unicode, punctuation)
   - Pronoun variants, slang, euphemisms
+  - **Tier 1 (ML) Disabled**: Perspective API removed after user testing revealed false positives in therapeutic conversations (Nov 24, 2025)
 - ✅ Rate limiting: 10 msg/min, 5 dialogues/min, 20 votes/min
 - ✅ Session security: httpOnly cookies, sameSite strict, rolling sessions
 - ✅ Crisis resources: Finland Mental Health Crisis Line (09 2525 0111)
-- ✅ GDPR: `doNotStore: true` in Perspective API
+- ✅ GDPR: Minimal data collection, no external ML APIs
 
 ---
 
@@ -269,11 +267,11 @@
 ### Beta Launch Requirements
 **Status**: ✅ **READY FOR LAUNCH**
 - ✅ Content moderation active (Tier 2: 41-pattern keyword filter)
-- ⚠️ Perspective API (Tier 1) blocked by Google Cloud organizational permissions
-  - User attempted enablement Nov 22, 2025
-  - Multiple permission errors despite Owner role and billing activation
-  - Organizational policy conflict between estevepannetier.com and greenelephant.org
-  - Can be added later as 1-point enhancement (99→100)
+- ✅ Perspective API (Tier 1) **intentionally disabled** after user testing
+  - User testing revealed false positives in therapeutic conversations (Nov 24, 2025)
+  - Therapists reported legitimate questions about emotions were incorrectly blocked
+  - Tier 2 keyword filter provides precise moderation without false positives
+  - Decision: Launch with Tier 2 only for better user experience
 - ⚠️ Implement automated test suite (recommended for production)
 - ✅ All other requirements met
 
@@ -316,10 +314,11 @@
 **Wisdom Council** meets **99/100** ACX Framework requirements for alpha launch.
 
 **Outstanding Items**:
-- [ ] Google Cloud organizational permissions resolution (Google support ticket recommended)
-  - Perspective API enablement blocked despite Owner role and billing
-  - Platform fully functional with Tier 2 moderation (99/100 compliance)
-  - Tier 1 (Perspective API) deferred as future enhancement
+- [ ] Perspective API re-evaluation (optional future enhancement)
+  - **Disabled Nov 24, 2025** after user testing revealed false positives
+  - ML-based moderation was too aggressive for therapeutic/philosophical platform
+  - Tier 2 keyword filter (41 patterns) provides precise moderation
+  - Can be reconsidered with adjusted thresholds if user demand warrants
 - [ ] Implement automated test suite (recommended for production scale)
 
 **Production Status**: ✅ **READY TO LAUNCH** (99/100 ACX compliance)

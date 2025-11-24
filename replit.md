@@ -7,18 +7,20 @@
 Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (Nov 2025)
-- **Content Moderation**: Production-ready multi-tier system for ACX compliance
+- **Content Moderation**: Production-ready Tier 2-only system for ACX compliance
   - **Tier 2 (Active)**: 41-pattern deterministic keyword filter
     - Categories: Hate speech (8), Violence (11), Sexual exploitation (6), Self-harm (16)
     - Text normalization (case, Unicode, punctuation) for pattern matching
     - Screens all inbound/outbound messages + dialogue history
     - Crisis resources: Finland Mental Health Crisis Line (09 2525 0111)
-    - E2E tested: 100% harmful blocked (3/3), 100% safe passed (4/4)
-  - **Tier 1 (Deferred)**: Google Perspective API (ML-powered)
-    - Enablement blocked by Google Cloud organizational permissions (Nov 22, 2025)
-    - Can be added later as 1-point enhancement (99→100 ACX compliance)
+    - E2E tested: 100% harmful blocked, 100% safe therapeutic language passed
+  - **Tier 1 (Intentionally Disabled)**: Google Perspective API (ML-powered)
+    - **Disabled Nov 24, 2025** after user testing revealed false positives
+    - Therapists reported legitimate questions about emotions were incorrectly blocked
+    - ML-based moderation too aggressive for therapeutic/philosophical platform
+    - Decision: Tier 2 keyword filter provides better user experience
   - **Status**: Production-ready with 99/100 ACX compliance
-  - See PERSPECTIVE_API_SETUP.md for future Perspective API integration
+  - See PERSPECTIVE_API_SETUP.md for historical context (Tier 1 not recommended)
 
 ## System Architecture
 

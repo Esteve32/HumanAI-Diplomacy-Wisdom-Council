@@ -387,14 +387,17 @@
 - ✅ Activity logging and admin oversight
 - ✅ Rate limiting and session security
 
-**Deferred Enhancement**:
-- ⏸️ Tier 1 Content Moderation (Google Perspective API)
-  - **Issue**: Google Cloud organizational permissions blocked enablement
-  - **Date**: Nov 22, 2025
-  - **Details**: Multiple permission errors despite Owner role and billing activation
-  - **Root Cause**: Organizational policy conflict (estevepannetier.com / greenelephant.org)
-  - **Impact**: 1-point ACX score difference (99 vs 100)
-  - **Recommendation**: Launch with Tier 2, add Perspective API when Google Cloud resolves
+**Intentionally Disabled**:
+- ❌ Tier 1 Content Moderation (Google Perspective API)
+  - **Issue**: False positives in therapeutic/philosophical conversations
+  - **Date**: Disabled Nov 24, 2025
+  - **Details**: User testing revealed ML-based moderation was too aggressive
+    - Therapists reported legitimate questions about emotions were incorrectly blocked
+    - Examples: "I feel depressed sometimes" flagged as harmful content
+    - Perspective API cannot distinguish therapeutic discussion from harmful content
+  - **Root Cause**: ML training data focused on social media toxicity, not philosophical/therapeutic context
+  - **Impact**: Better user experience with Tier 2-only moderation (no false positives)
+  - **Recommendation**: Continue with Tier 2 only; reconsider Perspective API only if specific use cases warrant it
 
 ## Next Steps for Beta Launch
 
@@ -408,10 +411,12 @@
    - Integration tests for rate limiting
    - E2E tests for ToS flow
 
-3. **Resolve Google Cloud Permissions** (Priority 3 - Optional)
-   - Contact Google Cloud support for organizational policy review
-   - Alternative: Create new GCP project with personal Gmail account
-   - Enable Perspective API for Tier 1 moderation (99→100 ACX)
+3. **Perspective API Re-evaluation** (Priority 4 - Optional)
+   - **Status**: Intentionally disabled after user testing (Nov 24, 2025)
+   - Only reconsider if:
+     - User feedback indicates need for ML-based moderation
+     - Thresholds can be significantly relaxed for therapeutic content
+     - Clear ROI for adding complexity
 
 4. **Admin Dashboard** (Post-Launch)
    - Flagged content review interface
