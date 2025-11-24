@@ -16,7 +16,7 @@ export default function HeroSection() {
         <h1 className="font-display text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight">
           AI-Human Diplomacy
         </h1>
-        <p className="text-2xl md:text-3xl mb-12 text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
+        <p className="text-xl md:text-2xl mb-12 text-white font-normal leading-relaxed max-w-3xl mx-auto">
           Pull up a chair by the fire. Have deep conversations with wisdom from throughout history. Each dialogue helps us understand how AI and humans can communicate better—building a future where technology truly serves humanity.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
