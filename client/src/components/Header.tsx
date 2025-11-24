@@ -34,6 +34,14 @@ export default function Header() {
             <Button 
               variant="ghost"
               className="min-h-11"
+              onClick={() => setLocation('/about')}
+              data-testid="nav-about"
+            >
+              About
+            </Button>
+            <Button 
+              variant="ghost"
+              className="min-h-11"
               onClick={() => scrollToSection('conversations')}
               data-testid="nav-conversations"
             >
@@ -50,10 +58,10 @@ export default function Header() {
             <Button 
               variant="default"
               className="min-h-11"
-              data-testid="button-get-started"
-              onClick={() => setLocation('/getting-started')}
+              data-testid="button-contact-greenelephant"
+              onClick={() => window.open('https://calendly.com/greenelephant/discovery-call-with-esteve', '_blank')}
             >
-              Get Started
+              Book a Call
             </Button>
           </div>
 
@@ -73,6 +81,17 @@ export default function Header() {
             <Button 
               variant="ghost" 
               className="w-full justify-start min-h-11"
+              onClick={() => {
+                setLocation('/about');
+                setMobileMenuOpen(false);
+              }}
+              data-testid="nav-mobile-about"
+            >
+              About
+            </Button>
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start min-h-11"
               onClick={() => scrollToSection('conversations')}
               data-testid="nav-mobile-conversations"
             >
@@ -89,13 +108,13 @@ export default function Header() {
             <Button 
               variant="default"
               className="w-full min-h-11"
-              data-testid="button-mobile-get-started"
+              data-testid="button-mobile-contact-greenelephant"
               onClick={() => {
-                setLocation('/getting-started');
+                window.open('https://calendly.com/greenelephant/discovery-call-with-esteve', '_blank');
                 setMobileMenuOpen(false);
               }}
             >
-              Get Started
+              Book a Call
             </Button>
           </div>
         )}
