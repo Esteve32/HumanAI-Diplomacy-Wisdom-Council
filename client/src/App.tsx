@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import TosModal from "@/components/TosModal";
 import Home from "@/pages/Home";
+import About from "@/pages/About";
 import Chat from "@/pages/Chat";
 import AiDialogue from "@/pages/AiDialogue";
 import Terms from "@/pages/Terms";
@@ -22,6 +23,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/chat/:figureId" component={Chat} />
       <Route path="/ai-dialogue" component={AiDialogue} />
       <Route path="/terms" component={Terms} />
