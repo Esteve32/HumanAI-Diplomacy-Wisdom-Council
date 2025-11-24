@@ -17,13 +17,13 @@ export default function HeroSection() {
           AI-Human Diplomacy
         </h1>
         <p className="text-2xl md:text-3xl mb-12 text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
-          A living demonstration of how AI systems and humans can understand each other better. Talk with wisdom from throughout history, explore ideas together, and help build a future where technology serves humanity.
+          Pull up a chair by the fire. Have deep conversations with wisdom from throughout history. Each dialogue helps us understand how AI and humans can communicate better—building a future where technology truly serves humanity.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 
             size="lg" 
             className="text-xl px-12 py-8 bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
-            data-testid="button-explore-platform"
+            data-testid="button-start-conversation"
             onClick={() => {
               const element = document.getElementById('conversations');
               if (element) {
@@ -31,7 +31,7 @@ export default function HeroSection() {
               }
             }}
           >
-            Explore the Platform
+            Start a Conversation
             <ArrowRight className="ml-3 h-6 w-6" />
           </Button>
           <Button 

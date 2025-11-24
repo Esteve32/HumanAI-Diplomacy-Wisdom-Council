@@ -48,7 +48,7 @@ const chat = await wisdom.chat({
             Three Ways to Get Involved
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Talk with great thinkers from history. Watch conversations unfold between minds from different eras. Build this wisdom into your own systems. All of it helps us learn how humans and AI can work together better.
+            Have thoughtful conversations with wisdom from throughout history. Watch dialogues unfold between minds from different eras. Build these insights into your work. Each conversation teaches us something new about how humans and AI can communicate and collaborate.
           </p>
         </div>
 

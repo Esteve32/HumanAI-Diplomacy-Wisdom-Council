@@ -33,7 +33,7 @@ export default function About() {
                     Every conversation here costs real money to run. We're not building a game or a toy. We're building a testing ground for something more important: figuring out how humans and AI systems can work together in ways that benefit everyone.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    When you talk with historical wisdom figures here, you're helping us learn what works and what doesn't when AI systems try to have meaningful conversations with humans. Your thoughtful use helps us build better systems for everyone.
+                    When you have a thoughtful conversation with Socrates or bell hooks, we learn what kinds of questions people ask, how AI responds, and where the communication breaks down or flows beautifully. Each dialogue teaches us how to build AI systems that truly listen and respond in ways that feel meaningful. Your conversations become part of a larger study in human-AI communication.
                   </p>
                 </div>
               </div>
@@ -47,10 +47,10 @@ export default function About() {
                 <div>
                   <h2 className="text-2xl font-bold mb-3">AI-Human Diplomacy</h2>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                    Think of "diplomacy" the way countries use it: finding ways to understand each other, communicate clearly, and work together despite differences. That's what we're doing with AI.
+                    Think of "diplomacy" the way countries use it: finding ways to understand each other, communicate clearly, and work together despite differences. That's what we're doing with AI—one conversation at a time.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    AI systems are complex. Most people don't understand how they work or what they can do. This creates confusion and mistrust. We're using conversations with historical thinkers to make AI more approachable and understandable, while also learning how to build AI that truly serves human needs.
+                    AI systems are complex. Most people don't understand how they work or what they can do. This creates confusion and mistrust. By sitting down for a fireside chat with historical thinkers, you experience AI in a human way. These conversations make AI approachable while teaching us how to build systems that truly understand and serve human needs.
                   </p>
                 </div>
               </div>
