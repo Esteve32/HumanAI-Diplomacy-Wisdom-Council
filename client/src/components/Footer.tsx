@@ -87,7 +87,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
-              Bridging centuries of wisdom through intimate dialogue.
+              A laboratory for AI-human diplomacy. We're building a worldwide conversation about making AI work for humanity, bringing together ethical organizations to create better technology for everyone.
             </p>
             <div className="flex gap-3">
               <Button 
@@ -248,7 +248,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Stay Connected</h4>
             <p className="text-sm text-muted-foreground mb-4">
-              Receive weekly wisdom conversations and insights across time
+              Get updates on AI-human diplomacy, partnership opportunities, and new features
             </p>
             <div className="space-y-3">
               <Input
@@ -270,7 +270,7 @@ export default function Footer() {
                   htmlFor="newsletter-consent"
                   className="text-xs text-muted-foreground cursor-pointer leading-relaxed"
                 >
-                  I consent to receive emails with wisdom insights and conversations across time
+                  I consent to receive updates about AI-human diplomacy and platform developments
                 </label>
               </div>
               <Button 
