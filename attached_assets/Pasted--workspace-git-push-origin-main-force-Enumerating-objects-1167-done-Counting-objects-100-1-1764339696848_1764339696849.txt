@@ -1,0 +1,45 @@
+~/workspace$ git push origin main --force
+Enumerating objects: 1167, done.
+Counting objects: 100% (1167/1167), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (1154/1154), done.
+Writing objects: 100% (1167/1167), 129.17 MiB | 5.71 MiB/s, done.
+Total 1167 (delta 788), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (788/788), done.
+remote: error: GH013: Repository rule violations found for refs/heads/main.
+remote: 
+remote: - GITHUB PUSH PROTECTION
+remote:   —————————————————————————————————————————
+remote:     Resolve the following violations before pushing again
+remote: 
+remote:     - Push cannot contain secrets
+remote: 
+remote:     
+remote:      (?) Learn how to resolve a blocked push
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
+remote:     
+remote:     
+remote:       —— Stripe Live API Restricted Key ————————————————————
+remote:        locations:
+remote:          - blob id: 162a0642bc77004a7c15cbdbce982f94673cec28
+remote:          - blob id: 49c8848b588eeb08726e56e9f6c595cfa4407155
+remote:          - blob id: 7a1eacb9a6c9863df75c8728cfad5fc601600ae4
+remote:          - blob id: 72ff29ce29bfcae3237b65b89c06404e94b0e42f
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/Esteve32/HumanAI-Diplomacy-Wisdom-Council/security/secret-scanning/unblock-secret/366sGrbvBy7YwEZ0GTVAFQM97Vi
+remote:     
+remote:     
+remote:     ——[ WARNING ]—————————————————————————————————————————
+remote:      Scan incomplete: This push was large and we didn't finish on time.
+remote:      It can still contain undetected secrets.
+remote:     
+remote:      (?) Use the following command to find the path of the detected secret(s):
+remote:          git rev-list --objects --all | grep blobid
+remote:     ——————————————————————————————————————————————————————
+remote: 
+remote: 
+To https://github.com/Esteve32/HumanAI-Diplomacy-Wisdom-Council
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/Esteve32/HumanAI-Diplomacy-Wisdom-Council'
+~/workspace$ 
